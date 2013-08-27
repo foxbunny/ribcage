@@ -1,0 +1,19 @@
+{
+  "name" : "ribcage",
+  "description" : "Give your Backbone App some Ribcage with Models, Views and Validation.",
+  "url" : "http://example.com",
+  "keywords" : ["model", "view", "validation", "backbone", "client", "browser"],
+  "author" : "Branko Vukelic <branko@brankovukelic.com>",
+  "dependencies" : {
+    "jquery": ">= 1.8.0",
+    "underscore" : ">=1.4.3",
+    "backbone": ">= 1.0.0",
+    "jquery-xml2json": ">= 1.3",
+    "jquery.soap": ">= 1.2"
+  },
+  "devDependencies": {
+    "coffee-script": "1.6.1"
+  },
+  "main" : "ribcage/ribcage.js",
+  "version" : "0.0.1"
+}
