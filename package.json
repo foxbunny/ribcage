@@ -27,7 +27,14 @@
       "jquery": "jquery",
       "underscore": "underscore",
       "backbone": "backbone"
-    }
+    },
+    "ignore": [
+      ".gitignore",
+      "README.md",
+      "LICENSE",
+      "volofile",
+      "src"
+    ]
   },
   "version" : "0.0.1"
 }
