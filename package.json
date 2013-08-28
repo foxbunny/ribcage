@@ -1,6 +1,6 @@
 {
   "name" : "ribcage",
-  "description" : "Give your Backbone App some Ribcage with Models, Views and Validation.",
+  "description" : "Give your Backbone app some Ribcage with Models, Views and Validation.",
   "url" : "http://example.com",
   "keywords" : ["model", "view", "validation", "backbone", "client", "browser"],
   "author" : "Branko Vukelic <branko@brankovukelic.com>",
