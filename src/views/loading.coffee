@@ -19,7 +19,7 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when 'ribcage/views/base' then @ribcage.views.baseView
+        when './base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -32,7 +32,7 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
   $ = require 'jquery'
   _ = require 'underscore'
-  baseView = require 'ribcage/views/base'
+  baseView = require './base'
 
   # ## `OVERLAY_FADE_SPEED`
   #

@@ -12,13 +12,19 @@
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
+  @require = (dep) =>
+    (() =>
+      switch dep
+        when './helpers' then @ribcage.validators.helper
+        else null
+    )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
     (@ribcage or= {}).validators or= {}
-    @ribcage.validators.methods = factory()
+    @ribcage.validators.methods = factory(@require)
 
 define (require) ->
 
-  {notRequired, mustPass} = require 'ribcage/validators/helpers'
+  {notRequired, mustPass} = require './helpers'
 
   required: mustPass (s) ->
     if s? and s isnt '' then s else undefined

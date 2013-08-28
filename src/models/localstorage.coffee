@@ -16,7 +16,7 @@ if typeof define isnt 'function' or not define.amd
     (() =>
       switch dep
         when 'backbone' then @Backbone
-        when 'ribcage/utils/localstorage' then @ribcage.utils.LocalStorage
+        when '../utils/localstorage' then @ribcage.utils.LocalStorage
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -25,7 +25,7 @@ if typeof define isnt 'function' or not define.amd
 
 define (require) ->
   Backbone = require 'backbone'
-  LocalStorage = require 'ribcage/utils/localstorage'
+  LocalStorage = require '../utils/localstorage'
 
   # The `LocalStorageModel` model uses  `LocalStorage` utiltiy class as an
   # abstraction layer for `localStorage` API.

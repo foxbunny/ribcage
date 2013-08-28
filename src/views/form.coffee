@@ -18,10 +18,10 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when 'ribcage/utils/searializeobject' then @ribcage.utils.serializeObject
-        when 'ribcage/utils/deserializeform' then @ribcage.utils.deserializeForm
-        when 'ribcage/validation/mixins' then @ribcage.validation.mixins
-        when 'ribcage/views/base' then @ribcage.views.baseView
+        when '../utils/searializeobject' then @ribcage.utils.serializeObject
+        when '../utils/deserializeform' then @ribcage.utils.deserializeForm
+        when '../validation/mixins' then @ribcage.validation.mixins
+        when './base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -34,10 +34,10 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
   $ = require 'jquery'
   _ = require 'underscore'
-  serializeObject = require 'ribcage/utils/serializeobject'
-  deserializeForm = require 'ribcage/utils/deserializeform'
-  validationMixins = require 'ribcage/validators/mixins'
-  baseView = require 'ribcage/views/base'
+  serializeObject = require '../utils/serializeobject'
+  deserializeForm = require '../utils/deserializeform'
+  validationMixins = require '../validators/mixins'
+  baseView = require './base'
 
   # ## `baseFormViewMixin`
   #

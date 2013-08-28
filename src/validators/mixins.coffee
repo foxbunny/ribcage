@@ -16,7 +16,7 @@ if typeof define isnt 'function' or not define.amd
     (() =>
       switch dep
         when 'underscore' then @_
-        when 'ribcage/validators/methods' then @ribcage.validators.methods
+        when './methods' then @ribcage.validators.methods
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -26,7 +26,7 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
 
   _ = require 'underscore'
-  methods = require 'ribcage/validators/methods'
+  methods = require './methods'
 
   validatingMixin =
     ###

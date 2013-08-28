@@ -20,7 +20,7 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when 'ribcage/views/form' then @ribcage.views.baseFormView
+        when './form' then @ribcage.views.baseFormView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -33,7 +33,7 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
   $ = require 'jquery'
   _ = require 'underscore'
-  baseForm = require 'ribcage/views/form'
+  baseForm = require './form'
 
   # ## `modelFormViewMixin`
   #

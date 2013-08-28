@@ -16,7 +16,7 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'ribcage/views/base' then @ribcage.views.baseView
+        when './base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -27,7 +27,7 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.viewMixins.RedirectView = @ribcage.views.redirectView.mixin
 
 define (require) ->
-  baseView = require 'ribcage/views/base'
+  baseView = require './base'
 
   # ## `redirectViewMixin`
   #

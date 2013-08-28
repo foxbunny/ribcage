@@ -24,25 +24,25 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
 
   # Models
-  SoapModel = require 'ribcage/models/soap'
-  LocalStorageModel = require 'ribcage/models/localstorage'
+  SoapModel = require './models/soap'
+  LocalStorageModel = require './models/localstorage'
 
   # Views
-  baseFormView = require 'ribcage/views/form'
-  modelFormView = require 'ribcage/views/modelform'
-  createView = require 'ribcage/views/create'
-  templateView = require 'ribcage/views/template'
-  modelView = require 'ribcage/views/model'
-  redirectView = require 'ribcage/views/redirect'
-  loadingView = require 'ribcage/views/loading'
+  baseFormView = require './views/form'
+  modelFormView = require './views/modelform'
+  createView = require './views/create'
+  templateView = require './views/template'
+  modelView = require './views/model'
+  redirectView = require './views/redirect'
+  loadingView = require './views/loading'
 
   # Validators
-  methods = require 'ribcage/validators/methods'
-  mixins = require 'ribcage/validators/mixins'
+  methods = require './validators/methods'
+  mixins = require './validators/mixins'
 
   # Utils
-  serializeObject = require 'ribcage/utils/serializeobject'
-  deserializeForm = require 'ribcage/utils/deserializeForm'
+  serializeObject = require './utils/serializeobject'
+  deserializeForm = require './utils/deserializeForm'
 
 
   models:

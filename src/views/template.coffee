@@ -16,7 +16,9 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'ribcage/views/base' then @ribcage.views.baseView
+        when 'backbone' then @Backbone
+        when 'underscore' then @_
+        when './base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -29,6 +31,7 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
   Backbone = require 'backbone'
   _ = require 'underscore'
+  baseView = require './base'
 
   # ## `templateViewMixin`
   #
@@ -101,7 +104,7 @@ define (require) ->
   #
   # Please see the documentation for the `templateViewMixin` for more
   # information on the API that this view provides.
-  TemplateView = Backbone.View.extend templateViewMixin
+  TemplateView = baseView.View.extend templateViewMixin
 
   mixin: templateViewMixin
   View: TemplateView
