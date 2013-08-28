@@ -36,4 +36,5 @@ from them anyway. :)
 
 ## Reporting bugs
 
-Please report bugs to Ribcage's GitHub issue tracker. TODO
+Please report bugs to 
+[Ribcage's GitHub issue tracker](https://github.com/foxbunny/ribcage/issues).
