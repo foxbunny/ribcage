@@ -29,6 +29,7 @@
       "backbone": "backbone"
     },
     "ignore": [
+      "package.json",
       ".gitignore",
       "README.md",
       "LICENSE",
