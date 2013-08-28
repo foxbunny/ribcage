@@ -10,7 +10,11 @@ var useConsole = function(namedArgs) {
 module.exports = {
     clean: {
         run: [
-            'v.rm dist',
+            'v.rm models',
+            'v.rm utils',
+            'v.rm validators',
+            'v.rm views',
+            'v.rm all.js'
         ]
     },
     compile: {
@@ -18,7 +22,7 @@ module.exports = {
         run: function(d, v, namedArgs) {
             d.resolve(v.spawn(
                 'node',
-                ['node_modules/coffee-script/bin/coffee', '-o', 'lib', 
+                ['node_modules/coffee-script/bin/coffee', '-o', '.', 
                 '-bc', 'src'], 
                 useConsole(namedArgs)
             ));
@@ -29,7 +33,7 @@ module.exports = {
         run: function(d, v, namedArgs) {
             d.resolve(v.spawn(
                 'node', 
-                ['node_modules/coffee-script/bin/coffee', '-o', 'lib', 
+                ['node_modules/coffee-script/bin/coffee', '-o', '.', 
                 '-bcw', 'src'], 
                 useConsole(namedArgs)
             ));

@@ -13,14 +13,13 @@
     "volo": "*",
     "coffee-script": "1.6.3"
   },
-  "main": "lib/all.js",
+  "main": "ribcage.js",
   "volo": {
     "dependencies": {
       "jquery": "jquery",
       "underscore": "underscore",
       "backbone": "backbone"
-    },
-    "baseUrl": "lib"
+    }
   },
   "version" : "0.0.1"
 }
