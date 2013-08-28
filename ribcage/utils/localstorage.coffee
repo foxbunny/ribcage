@@ -3,13 +3,13 @@
 # This is a simple `localStorage` API interface that falls back on memory
 # storage.
 #
-# This module is in UMD format and will return a `Ribcage.utils.LocalStorage`
+# This module is in UMD format and will return a `ribcage.utils.LocalStorage`
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
-    (@Ribcage or= {}).utils or= {}
-    @Ribcage.utils.LocalStorage = factory()
+    (@ribcage or= {}).utils or= {}
+    @ribcage.utils.LocalStorage = factory()
 
 define () ->
 

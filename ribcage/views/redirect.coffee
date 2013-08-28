@@ -3,23 +3,23 @@
 # This view simply redirects to another location and provides hooks for
 # executing code while doing so.
 #
-# This module is in UMD format and creates `Ribcage.views.redirectView`,
-# `Ribcage.views.RedirectView` and `Ribcage.viewMixins.RedirectView` globals if
+# This module is in UMD format and creates `ribcage.views.redirectView`,
+# `ribcage.views.RedirectView` and `ribcage.viewMixins.RedirectView` globals if
 # not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'ribcage/views/base' then @Ribcage.views.baseView
+        when 'ribcage/views/base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).views or= {}
-    @Ribcage.viewMixins or= {}
-    @Ribcage.views.redirectView = factory @require
-    @Ribcage.views.RedirectView = @Ribcage.views.redirectView.View
-    @Ribcage.viewMixins.RedirectView = @Ribcage.views.redirectView.mixin
+    (@ribcage or= {}).views or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.views.redirectView = factory @require
+    @ribcage.views.RedirectView = @ribcage.views.redirectView.View
+    @ribcage.viewMixins.RedirectView = @ribcage.views.redirectView.mixin
 
 define (require) ->
   baseView = require 'ribcage/views/base'

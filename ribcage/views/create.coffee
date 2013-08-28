@@ -7,23 +7,23 @@
 # form and the model, and the goal of form submission is creation of a model
 # and its persistence on the server.
 #
-# This module is in UDM format, and will create `Ribcage.views.createView`,
-# `Ribcage.views.CreateView`, and `Ribcage.viewMixins.CreateView` globals if
+# This module is in UDM format, and will create `ribcage.views.createView`,
+# `ribcage.views.CreateView`, and `ribcage.viewMixins.CreateView` globals if
 # not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'ribcage/views/modelform' then @Ribcage.views.modelForm
+        when 'ribcage/views/modelform' then @ribcage.views.modelForm
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).views or= {}
-    @Ribcage.viewMixins or= {}
-    @Ribcage.views.createView = factory @require
-    @Ribcage.views.CreateView = @Ribcage.views.createView.View
-    @Ribcage.viewMixins.CreateView = @Ribcage.views.createView.mixin
+    (@ribcage or= {}).views or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.views.createView = factory @require
+    @ribcage.views.CreateView = @ribcage.views.createView.View
+    @ribcage.viewMixins.CreateView = @ribcage.views.createView.mixin
 
 define (require) ->
   modelForm = require 'ribcage/views/modelform'

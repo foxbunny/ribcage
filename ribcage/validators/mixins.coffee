@@ -3,7 +3,7 @@
 # This module defines two mixin objects that expose the validation methods and
 # provide a simplified API for their consumption in views and models.
 #
-# This module is in UMD format, and will create a `Ribcage.validators.mixins`
+# This module is in UMD format, and will create a `ribcage.validators.mixins`
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -11,12 +11,12 @@ if typeof define isnt 'function' or not define.amd
     (() =>
       switch dep
         when 'underscore' then @_
-        when 'ribcage/validators/methods' then @Ribcage.validators.methods
+        when 'ribcage/validators/methods' then @ribcage.validators.methods
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).validators or= {}
-    @Ribcage.validators.mixins = factory(@require)
+    (@ribcage or= {}).validators or= {}
+    @ribcage.validators.mixins = factory(@require)
 
 define (require) ->
 

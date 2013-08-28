@@ -8,7 +8,7 @@
 #  + [jquery.soap](http://plugins.jquery.com/soap/)
 #  + [jquery.xml2json](http://code.google.com/p/jquery-xml2json-plugin/)
 #
-# This model is in UMD format, and will create a `Ribcage.models.SoapModel`
+# This model is in UMD format, and will create a `ribcage.models.SoapModel`
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -21,8 +21,8 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).models or= {}
-    @Ribcage.models.SoapModel = factory @require
+    (@ribcage or= {}).models or= {}
+    @ribcage.models.SoapModel = factory @require
 
 define (require) ->
   Backbone = require 'backbone'

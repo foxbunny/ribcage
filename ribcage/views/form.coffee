@@ -3,8 +3,8 @@
 # This view provides the basic form-handling functionality. It handles the
 # form's submit method, and provides hooks for validation and error display.
 #
-# This module is in UMD format and will create `Ribcage.views.baseFormView`,
-# `Ribcage.views.BaseFormView`, and `Ribcage.viewMixins.BaseFormView` globals
+# This module is in UMD format and will create `ribcage.views.baseFormView`,
+# `ribcage.views.BaseFormView`, and `ribcage.viewMixins.BaseFormView` globals
 # if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -13,18 +13,18 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when 'ribcage/utils/searializeobject' then @Ribcage.utils.serializeObject
-        when 'ribcage/utils/deserializeform' then @Ribcage.utils.deserializeForm
-        when 'ribcage/validation/mixins' then @Ribcage.validation.mixins
-        when 'ribcage/views/base' then @Ribcage.views.baseView
+        when 'ribcage/utils/searializeobject' then @ribcage.utils.serializeObject
+        when 'ribcage/utils/deserializeform' then @ribcage.utils.deserializeForm
+        when 'ribcage/validation/mixins' then @ribcage.validation.mixins
+        when 'ribcage/views/base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).views or= {}
-    @Ribcage.viewMixins or= {}
-    @Ribcage.views.createView = factory @require
-    @Ribcage.views.CreateView = @Ribcage.views.createView.View
-    @Ribcage.viewMixins.CreateView = @Ribcage.views.createView.mixin
+    (@ribcage or= {}).views or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.views.createView = factory @require
+    @ribcage.views.CreateView = @ribcage.views.createView.View
+    @ribcage.viewMixins.CreateView = @ribcage.views.createView.mixin
 
 define (require) ->
   $ = require 'jquery'

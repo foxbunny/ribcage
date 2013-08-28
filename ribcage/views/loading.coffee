@@ -4,8 +4,8 @@
 # spinning loader icon. This view is best used as an omni-present view whose
 # methods are triggered though events.
 #
-# This module is in UMD format and will create `Ribcage.views.loadingView`,
-# `Ribcage.views.LoadingView`, and `Ribcage.viewMixins.LoadingView` if not used
+# This module is in UMD format and will create `ribcage.views.loadingView`,
+# `ribcage.views.LoadingView`, and `ribcage.viewMixins.LoadingView` if not used
 # with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -14,15 +14,15 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when 'ribcage/views/base' then @Ribcage.views.baseView
+        when 'ribcage/views/base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).views or= {}
-    @Ribcage.viewMixins or= {}
-    @Ribcage.views.loadingView = factory @require
-    @Ribcage.views.LoadingView = @Ribcage.views.loadingView.View
-    @Ribcage.viewMixins.LoadingView = @Ribcage.views.loadingView.mixin
+    (@ribcage or= {}).views or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.views.loadingView = factory @require
+    @ribcage.views.LoadingView = @ribcage.views.loadingView.View
+    @ribcage.viewMixins.LoadingView = @ribcage.views.loadingView.mixin
 
 define (require) ->
   $ = require 'jquery'

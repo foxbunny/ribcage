@@ -3,13 +3,13 @@
 # This module defines a few validator methods that can be used to validate
 # input.
 #
-# This module is in UMD format, and will export a `Ribcage.validators.methods`
+# This module is in UMD format, and will export a `ribcage.validators.methods`
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
-    (@Ribcage or= {}).validators or= {}
-    @Ribcage.validators.methods = factory()
+    (@ribcage or= {}).validators or= {}
+    @ribcage.validators.methods = factory()
 
 define (require) ->
 

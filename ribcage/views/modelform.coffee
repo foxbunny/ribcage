@@ -5,8 +5,8 @@
 # the model's own `#validate()` method.
 #
 # This module is in UMD format and it will create
-# `Ribcage.views.modelFormView`, `Ribcage.views.ModelFormView`, and
-# `Ribcage.viewMixins.modelFormViewMixin` globals if not used with an AMD
+# `ribcage.views.modelFormView`, `ribcage.views.ModelFormView`, and
+# `ribcage.viewMixins.modelFormViewMixin` globals if not used with an AMD
 # loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -15,15 +15,15 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when 'ribcage/views/form' then @Ribcage.views.baseFormView
+        when 'ribcage/views/form' then @ribcage.views.baseFormView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).views or= {}
-    @Ribcage.viewMixins or= {}
-    @Ribcage.views.modelFormView = factory @require
-    @Ribcage.views.ModelFormView = @Ribcage.views.modelFormView.View
-    @Ribcage.viewMixins.ModelFormView = @Ribcage.views.modelFormView.mixin
+    (@ribcage or= {}).views or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.views.modelFormView = factory @require
+    @ribcage.views.ModelFormView = @ribcage.views.modelFormView.View
+    @ribcage.viewMixins.ModelFormView = @ribcage.views.modelFormView.mixin
 
 define (require) ->
   $ = require 'jquery'

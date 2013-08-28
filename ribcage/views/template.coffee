@@ -3,23 +3,23 @@
 # This module implements the template view. This view eases the typical
 # workflow of rendering a template.
 #
-# This module is in UMD module and creates `Ribcage.views.templateView`,
-# `Ribcage.views.TemplateView`, `Ribcage.viewMixins.TemplateView` if not used
+# This module is in UMD module and creates `ribcage.views.templateView`,
+# `ribcage.views.TemplateView`, `ribcage.viewMixins.TemplateView` if not used
 # with an AMD module loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'ribcage/views/base' then @Ribcage.views.baseView
+        when 'ribcage/views/base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).views or= {}
-    @Ribcage.viewMixins or= {}
-    @Ribcage.views.templateView = factory @require
-    @Ribcage.views.TemplateView = @Ribcage.views.templateView.View
-    @Ribcage.viewMixins.TemplateView = @Ribcage.views.templateView.mixin
+    (@ribcage or= {}).views or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.views.templateView = factory @require
+    @ribcage.views.TemplateView = @ribcage.views.templateView.View
+    @ribcage.viewMixins.TemplateView = @ribcage.views.templateView.mixin
 
 define (require) ->
   Backbone = require 'backbone'

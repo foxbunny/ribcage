@@ -4,7 +4,7 @@
 # helper method is also attached to jQuery as both a `$.serializeForm` method
 # as well as `$.fn.serializeForm` method.
 #
-# The model is in UMD format, and will create a `Ribcage.utils.serializeForm`
+# The model is in UMD format, and will create a `ribcage.utils.serializeForm`
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -16,8 +16,8 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).utils or= {}
-    @Ribcage.utils.serializeForm = factory @require
+    (@ribcage or= {}).utils or= {}
+    @ribcage.utils.serializeForm = factory @require
 
 define (require) ->
   $ = require 'jquery'

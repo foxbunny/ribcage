@@ -5,7 +5,7 @@
 # method as well `$.fn.deserializeForm` method.
 #
 # This model is in UMD format, and will create a
-# `Ribcage.utils.deserializeForm` global if not used with an AMD loader such as
+# `ribcage.utils.deserializeForm` global if not used with an AMD loader such as
 # RequireJS.
 
 if typeof define isnt 'function' or not define.amd
@@ -17,8 +17,8 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@Ribcage or= {}).utils or= {}
-    @Ribcage.utils.deserializeForm = factory @require
+    (@ribcage or= {}).utils or= {}
+    @ribcage.utils.deserializeForm = factory @require
 
 define (require) ->
   $ = require 'jquery'

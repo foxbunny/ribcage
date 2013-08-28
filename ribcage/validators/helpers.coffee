@@ -3,13 +3,13 @@
 # This module defines a few functions used to simplify code in the validator
 # methods.
 #
-# This module is in UMD format and will create a `Ribcage.validators.helpers`
+# This module is in UMD format and will create a `ribcage.validators.helpers`
 # global if not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
-    (@Ribcage or= {}).validators or= {}
-    @Ribcage.validators.helpers = factory()
+    (@ribcage or= {}).validators or= {}
+    @ribcage.validators.helpers = factory()
 
 define (require) ->
 
