@@ -42,6 +42,16 @@ The CoffeeScript sources are located in the `src` directory, and are _not_
 installed by volo. If you want to use the CoffeeScript version instead, simply
 manually copy them into your project.
 
+## Application project template
+
+There is also a 
+[full application template](https://github.com/foxbunny/create-ribcage-app) 
+that sets up a Backbone application with Ribcage. Currently, the template is
+CoffeeScript-centric, although you could easily modify it and remove
+CoffeeScript dependencies. To create a new project using the template, run:
+
+    volo create my_app foxbunny/create-ribcage-app
+
 ## Minified and concatenated version
 
 No, there are none and there will never be. Why minify a single component when
