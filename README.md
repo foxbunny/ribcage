@@ -44,13 +44,17 @@ manually copy them into your project.
 
 ## Application project template
 
-There is also a 
-[full application template](https://github.com/foxbunny/create-ribcage-app) 
-that sets up a Backbone application with Ribcage. Currently, the template is
-CoffeeScript-centric, although you could easily modify it and remove
-CoffeeScript dependencies. To create a new project using the template, run:
+There are two application templates that provide a good base and also a simple
+example of a Ribcage app. One of them is
+[for CoffeeScript developers](https://github.com/foxbunny/create-ribcage-app),
+and the other is 
+[for JavaScript nijas](https://github.com/foxbunny/create-ribcage-app-js).
 
-    volo create my_app foxbunny/create-ribcage-app
+The templates set up a Backbone application with Ribcage. You can use volo to
+kickstart a project using the templates:
+
+    volo create my_app foxbunny/create-ribcage-app # CoffeeScript
+    volo create my_app foxbunny/create-ribcage-app-js # JavaScript
 
 ## Minified and concatenated version
 
