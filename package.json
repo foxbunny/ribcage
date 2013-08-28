@@ -10,7 +10,16 @@
     "backbone": ">= 1.0.0"
   },
   "devDependencies": {
-    "coffee-script": "1.6.1"
+    "volo": "*",
+    "coffee-script": "1.6.3"
+  },
+  "volo": {
+    "dependencies": {
+      "jquery": "jquery",
+      "underscore": "underscore",
+      "backbone": "backbone"
+    },
+    "baseUrl": "lib"
   },
   "version" : "0.0.1"
 }
