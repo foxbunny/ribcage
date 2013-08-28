@@ -1,0 +1,38 @@
+/*jslint node: true */
+'use strict';
+
+var quietFlag = {'q': 'quiet'};
+
+var useConsole = function(namedArgs) {
+    return {useConsole: !namedArgs.quiet};
+};
+
+module.exports = {
+    clean: {
+        run: [
+            'v.rm dist',
+        ]
+    },
+    compile: {
+        flags: quietFlag,
+        run: function(d, v, namedArgs) {
+            d.resolve(v.spawn(
+                'node',
+                ['node_modules/coffee-script/bin/coffee', '-o', 'lib', 
+                '-bc', 'src'], 
+                useConsole(namedArgs)
+            ));
+        }
+    },
+    watch: {
+        flags: quietFlag,
+        run: function(d, v, namedArgs) {
+            d.resolve(v.spawn(
+                'node', 
+                ['node_modules/coffee-script/bin/coffee', '-o', 'lib', 
+                '-bcw', 'src'], 
+                useConsole(namedArgs)
+            ));
+        }
+    }
+};
