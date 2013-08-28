@@ -44,10 +44,31 @@ define (require) ->
   serializeObject = require './utils/serializeobject'
   deserializeForm = require './utils/deserializeForm'
 
-
+  # ## Models
+  #
+  # The models are accessible thorugh the `ribcage.models` object. There are
+  # two moedels that you can use:
+  #
+  #  + `SoapModel` - Provides functionality for consuiming SOAP services
+  #  + `LocalStorageModel` - Uses the browser's `localStorage` API to persist
+  #    the model data
   models:
     SoapModel: SoapModel
     LocalStorageModel: LocalStorageModel
+
+  # ## Views
+  #
+  # All view constructors are accessible through the `ribcage.views` object.
+  # These include:
+  #
+  #  + `BaseFormView` - Provides basic form manipulation and error handling
+  #  + `ModelFormView` - Provides model-specific form behavior such as
+  #    data-binding
+  #  + `CreateView` - Simplifies creation of new model instances server-side
+  #  + `TemplateView` - Simplifies rendering of templates
+  #  + `ModelView` - Augments `TemplateView` by passing model data to templates
+  #  + `RedirectView` - Simply redirects to a specified path
+  #  + `LoadingView` - Displays an AJAX loading spinner
   views:
     BaseFormView: baseFormView.View
     ModelFormView: modelFormView.View
@@ -56,6 +77,12 @@ define (require) ->
     ModelView: modelView.View
     RedirectView: redirectView.View
     LoadingView: loadingView.View
+
+  # ## View mixins
+  #
+  # The `ribcage.viewMixins` object provides access to view mixins. The mixins
+  # implement the core APIs for all of the views, and mixins allow you to
+  # combine such functionality with your own custom views.
   viewMixins:
     BaseFormView: baseFormView.mixin
     ModelFormView: modelFormView.mixin
@@ -64,10 +91,33 @@ define (require) ->
     ModelView: modelView.mixin
     RedirectView: redirectView.mixin
     LoadingView: loadingView.mixin
+
+  # ## Validators
+  #
+  # The validation tools are accessible through `ribcage.validators` object.
+  # The object contains validation methods (fucntions that peroform
+  # validation), and two validator mixins:
+  #
+  #  + `ValidatingMixin` - Generic mixin that can be used on views.
+  #  + `ModelValidatingMixin` - A mixin specific to models.
+  #
+  # Note that validation methods can also be used to clean up and format your
+  # data since they return the data in the format that validator expect it to
+  # be in. For example, a `numeric` validator will return a number, regardless
+  # of the input value, if the input value can be successfully converted to a
+  # number.
   validators:
     methods: methods
     ValidatingMixin: mixins.validatingMixin
     ModelValidatingMixin: mixins.modelValidatingMixin
+
+  # ## Utilities
+  #
+  # The `ribcage.utils` object gives you access to utility methods. Those are:
+  #
+  #  + `serializeObject` - Serializes form data into an object
+  #  + `deserializeForm` - Deserializes an object into a form (fills in the
+  #    form)
   utils:
     serializeObject: serializeObject
     deserializeForm: deserializeForm
