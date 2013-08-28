@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Generic SOAP client model
 #
 # This model hooks the model layer to SOAP service in a generic way. It cannot

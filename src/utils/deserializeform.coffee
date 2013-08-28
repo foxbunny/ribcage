@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Deserialize object to form
 #
 # This module provides a helper method to deserialize an object into a form.

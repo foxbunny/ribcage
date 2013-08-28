@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Local storage model
 #
 # Backbone model with localStorage support

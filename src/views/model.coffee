@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Model view
 #
 # This module implements a view for rendering a single module using the

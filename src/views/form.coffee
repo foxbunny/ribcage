@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Base form view
 #
 # This view provides the basic form-handling functionality. It handles the

@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Model form view
 #
 # Extends the BaseFormView to add support for model handling. It updates the

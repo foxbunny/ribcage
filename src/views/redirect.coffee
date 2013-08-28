@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Redirect View
 #
 # This view simply redirects to another location and provides hooks for

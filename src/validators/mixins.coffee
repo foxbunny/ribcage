@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Validating mixins for views and models
 #
 # This module defines two mixin objects that expose the validation methods and

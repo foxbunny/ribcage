@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Ribcage validation methods
 #
 # This module defines a few validator methods that can be used to validate

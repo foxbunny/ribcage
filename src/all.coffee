@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Ribcage
 #
 # This module is a one-stop-shop for all the Ribcage modules. It imports all

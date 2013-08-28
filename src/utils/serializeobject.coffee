@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Serialize form to object
 #
 # This module provides a helper method to serialize form into an object. The

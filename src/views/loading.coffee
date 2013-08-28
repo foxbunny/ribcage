@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # AJAX loder mixin
 #
 # This module implements a simple view that provides methods for displaying a

@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Ribcage validator helper functions
 #
 # This module defines a few functions used to simplify code in the validator

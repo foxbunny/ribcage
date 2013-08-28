@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Local storage interface
 #
 # This is a simple `localStorage` API interface that falls back on memory

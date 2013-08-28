@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Base view
 #
 # This is the base view for all Ribcage views. Every new Ribcage view should
