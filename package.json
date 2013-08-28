@@ -13,6 +13,7 @@
     "volo": "*",
     "coffee-script": "1.6.3"
   },
+  "main": "lib/all.js",
   "volo": {
     "dependencies": {
       "jquery": "jquery",
