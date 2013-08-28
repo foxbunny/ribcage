@@ -28,11 +28,31 @@ using the `ribacge/ribcage` module, or you can require indivudal parts by
 loading them as separate modules. Note that some Ribcage modules may depend on
 other Ribcage modules (e.g., `TemplateView` depends on `BaseView`).
 
+## Installing using volo
+
+If you are using [volo](http://volojs.org/), you can safely install ribcage
+using the usual `add` command:
+
+    volo add foxbunny/ribcage
+
+It will be installed into `lib/ribcage` directory, and `lib/ribcage.js` module
+will be created as an alias for `lib/ribcage/main.js`. 
+
+The CoffeeScript sources are located in the `src` directory, and are _not_
+installed by volo. If you watn to use the CoffeeScript version instead, simply
+manually copy them into your project.
+
+## Minified and concatenated version
+
+No, there are none and there will never be. Why minify a single component when
+there's a whole project to be minified?
+
 ## Documentation
 
 Until we set up a proper documentation page, please look at the CoffeeScript
 sources. They are well-documented and the final documentation will be generated
-from them anyway. :)
+from them anyway. (Incidentally, if you know of a good documentation generator
+that actually works, please let me know.)
 
 ## Reporting bugs
 
