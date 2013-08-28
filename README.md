@@ -39,7 +39,7 @@ It will be installed into `lib/ribcage` directory, and `lib/ribcage.js` module
 will be created as an alias for `lib/ribcage/main.js`. 
 
 The CoffeeScript sources are located in the `src` directory, and are _not_
-installed by volo. If you watn to use the CoffeeScript version instead, simply
+installed by volo. If you want to use the CoffeeScript version instead, simply
 manually copy them into your project.
 
 ## Minified and concatenated version
