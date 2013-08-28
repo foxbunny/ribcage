@@ -27,6 +27,7 @@ define (require) ->
   modelFormView = require 'ribcage/views/modelform'
   createView = require 'ribcage/views/create'
   templateView = require 'ribcage/views/template'
+  modelView = require 'ribcage/views/model'
   redirectView = require 'ribcage/views/redirect'
   loadingView = require 'ribcage/views/loading'
 
@@ -47,6 +48,7 @@ define (require) ->
     ModelFormView: modelFormView.View
     CreateView: createView.View
     TemplateView: templateView.View
+    ModelView: modelView.View
     RedirectView: redirectView.View
     LoadingView: loadingView.View
   viewMixins:
@@ -54,6 +56,7 @@ define (require) ->
     ModelFormView: modelFormView.mixin
     CreateView: createView.mixin
     TemplateView: templateView.mixin
+    ModelView: modelView.mixin
     RedirectView: redirectView.mixin
     LoadingView: loadingView.mixin
   validators:
