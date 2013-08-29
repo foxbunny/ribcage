@@ -21,7 +21,7 @@ if typeof define isnt 'function' or not define.amd
         when '../utils/searializeobject' then @ribcage.utils.serializeObject
         when '../utils/deserializeform' then @ribcage.utils.deserializeForm
         when '../validation/mixins' then @ribcage.validation.mixins
-        when './base' then @ribcage.views.baseView
+        when './template' then @ribcage.views.templateView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -37,7 +37,7 @@ define (require) ->
   serializeObject = require '../utils/serializeobject'
   deserializeForm = require '../utils/deserializeform'
   validationMixins = require '../validators/mixins'
-  baseView = require './base'
+  templateView = require './template'
 
   # ## `baseFormViewMixin`
   #
@@ -324,7 +324,7 @@ define (require) ->
   #
   # Please see the documentation for the `baseFormViewMixin` for more
   # information on the API that this view provides.
-  BaseFormView = baseView.View.extend baseFormViewMixin
+  BaseFormView = templateView.View.extend baseFormViewMixin
 
 
   mixin: baseFormViewMixin

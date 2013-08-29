@@ -20,8 +20,8 @@ if (typeof define !== 'function' || !define.amd) {
           return _this.ribcage.utils.deserializeForm;
         case '../validation/mixins':
           return _this.ribcage.validation.mixins;
-        case './base':
-          return _this.ribcage.views.baseView;
+        case './template':
+          return _this.ribcage.views.templateView;
         default:
           return null;
       }
@@ -40,13 +40,13 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var $, BaseFormView, baseFormViewMixin, baseView, deserializeForm, serializeObject, validationMixins, _;
+  var $, BaseFormView, baseFormViewMixin, deserializeForm, serializeObject, templateView, validationMixins, _;
   $ = require('jquery');
   _ = require('underscore');
   serializeObject = require('../utils/serializeobject');
   deserializeForm = require('../utils/deserializeform');
   validationMixins = require('../validators/mixins');
-  baseView = require('./base');
+  templateView = require('./template');
   baseFormViewMixin = _.extend({}, validationMixins.validatingMixin, {
     errorClass: 'error',
     formErrorClass: 'error-form',
@@ -211,7 +211,7 @@ define(function(require) {
       return true;
     }
   });
-  BaseFormView = baseView.View.extend(baseFormViewMixin);
+  BaseFormView = templateView.View.extend(baseFormViewMixin);
   return {
     mixin: baseFormViewMixin,
     View: BaseFormView
