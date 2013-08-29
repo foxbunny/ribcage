@@ -10,12 +10,12 @@ if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
-        case 'backbone':
-          return _this.Backbone;
         case 'jquery':
           return _this.jQuery;
         case 'underscore':
           return _this._;
+        case './base':
+          return _this.ribcage.models.baseModel;
         default:
           return null;
       }
@@ -24,20 +24,23 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var _base;
+    var _base, _base1;
     (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
-    return _this.ribcage.models.SoapModel = factory(_this.require);
+    (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
+    _this.ribcage.models.soapModel = factory(_this.require);
+    _this.ribcage.models.SoapModel = _this.ribcage.models.soapModel.Model;
+    return _this.ribcage.modelMixins.SoapModel = _this.ribcage.models.soapModel.mixin;
   };
 }
 
 define(function(require) {
-  var $, Backbone, SoapModel, _;
-  Backbone = require('backbone');
+  var $, SoapModel, baseModel, soapModelMixin, _;
   $ = require('jquery');
   _ = require('underscore');
   require('jquery.soap');
   require('jquery.xml2json');
-  return SoapModel = Backbone.Model.extend({
+  baseModel = require('./base');
+  soapModelMixin = {
     baseUrl: 'http://example.com',
     namespace: 'http://example.com',
     debug: false,
@@ -141,5 +144,10 @@ define(function(require) {
     parse: function(response, options) {
       return this.convertResponse(response.toJSON().Body, options);
     }
-  });
+  };
+  SoapModel = baseModel.Model.extend(soapModelMixin);
+  return {
+    mixin: soapModelMixin,
+    Model: SoapModel
+  };
 });

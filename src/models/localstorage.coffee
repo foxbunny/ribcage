@@ -15,26 +15,29 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'backbone' then @Backbone
+        when './base' then @ribcage.models.baseModel
         when '../utils/localstorage' then @ribcage.utils.LocalStorage
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
     (@ribcage or= {}).models or= {}
-    @ribcage.models.LocalStorageModel = factory @require
+    @ribcage.modelMixins or= {}
+    @ribcage.models.localStorageModel = factory @require
+    @ribcage.models.LocalStorageModel = @ribcage.models.localStorageModel.Model
+    @ribcage.modelMixins.LocalStorageModel = @ribcage.models.localStorageModel.mixin
 
 define (require) ->
-  Backbone = require 'backbone'
+  baseView = require './base'
   LocalStorage = require '../utils/localstorage'
 
   # The `LocalStorageModel` model uses  `LocalStorage` utiltiy class as an
   # abstraction layer for `localStorage` API.
   storage = new LocalStorage()
 
-  # ## `LocalStorageModel`
+  # ## `localStorageModelmixin`
   #
-  # This model extends the native Backbone model.
-  LocalStorageModel = Backbone.Model.extend
+  # This mixin implements the API of the `LocalStorageModel`.
+  localStorageModelMixin =
 
     # ### `LocalStorageModel.prototype.store`
     #
@@ -107,5 +110,12 @@ define (require) ->
       @persistent = false
       @store.removeItem @storageKey
 
+  # ## `LocalStorageModel`
+  #
+  # Please see the documentation on the `localStorageModelMixin` for more
+  # information about this model's API.
+  LocalStorageModel = baseModel.Model.extend
 
+  mixin: localStorageModelMixin
+  Model: LocalStorageModel
 

@@ -24,8 +24,9 @@ if typeof define isnt 'function' or not define.amd
 define (require) ->
 
   # Models
-  SoapModel = require './models/soap'
-  LocalStorageModel = require './models/localstorage'
+  baseModel = require './models/base'
+  soapModel = require './models/soap'
+  localStorageModel = require './models/localstorage'
 
   # Views
   baseFormView = require './views/form'
@@ -49,12 +50,15 @@ define (require) ->
   # The models are accessible thorugh the `ribcage.models` object. There are
   # two moedels that you can use:
   #
+  #  + `BaseModel` - Provides the base mode functionality common to all Ribcage
+  #    models (currently same as stock Backbone model).
   #  + `SoapModel` - Provides functionality for consuiming SOAP services
   #  + `LocalStorageModel` - Uses the browser's `localStorage` API to persist
   #    the model data
   models:
-    SoapModel: SoapModel
-    LocalStorageModel: LocalStorageModel
+    BaseModel: baseModel.Model
+    SoapModel: soapModel.Model
+    LocalStorageModel: localStorageModel.Model
 
   # ## Views
   #
@@ -77,6 +81,16 @@ define (require) ->
     ModelView: modelView.View
     RedirectView: redirectView.View
     LoadingView: loadingView.View
+
+  # ## Model mixins
+  #
+  # The `ribcage.modelMixins` object provides access to model mixins. These
+  # mixins implement the APIs for matching models, and allow you to easily add
+  # their features to other models in your application.
+  modelMixins:
+    BaseModel: baseModel.mixin
+    SoapModel: soapModel.mixin
+    LocalStorageModel: localStorageModel.mixin
 
   # ## View mixins
   #

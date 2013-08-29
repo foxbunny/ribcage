@@ -10,8 +10,8 @@ if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
-        case 'backbone':
-          return _this.Backbone;
+        case './base':
+          return _this.ribcage.models.baseModel;
         case '../utils/localstorage':
           return _this.ribcage.utils.LocalStorage;
         default:
@@ -22,18 +22,21 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var _base;
+    var _base, _base1;
     (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
-    return _this.ribcage.models.LocalStorageModel = factory(_this.require);
+    (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
+    _this.ribcage.models.localStorageModel = factory(_this.require);
+    _this.ribcage.models.LocalStorageModel = _this.ribcage.models.localStorageModel.Model;
+    return _this.ribcage.modelMixins.LocalStorageModel = _this.ribcage.models.localStorageModel.mixin;
   };
 }
 
 define(function(require) {
-  var Backbone, LocalStorage, LocalStorageModel, storage;
-  Backbone = require('backbone');
+  var LocalStorage, LocalStorageModel, baseView, localStorageModelMixin, storage;
+  baseView = require('./base');
   LocalStorage = require('../utils/localstorage');
   storage = new LocalStorage();
-  return LocalStorageModel = Backbone.Model.extend({
+  localStorageModelMixin = {
     store: storage,
     storageKey: null,
     persistent: true,
@@ -69,5 +72,10 @@ define(function(require) {
       this.persistent = false;
       return this.store.removeItem(this.storageKey);
     }
-  });
+  };
+  LocalStorageModel = baseModel.Model.extend;
+  return {
+    mixin: localStorageModelMixin,
+    Model: LocalStorageModel
+  };
 });

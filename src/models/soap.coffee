@@ -20,27 +20,30 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'backbone' then @Backbone
         when 'jquery' then @jQuery
         when 'underscore' then @_
+        when './base' then @ribcage.models.baseModel
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
     (@ribcage or= {}).models or= {}
-    @ribcage.models.SoapModel = factory @require
+    @ribcage.modelMixins or= {}
+    @ribcage.models.soapModel = factory @require
+    @ribcage.models.SoapModel = @ribcage.models.soapModel.Model
+    @ribcage.modelMixins.SoapModel = @ribcage.models.soapModel.mixin
 
 define (require) ->
-  Backbone = require 'backbone'
   $ = require 'jquery'
   _ = require 'underscore'
   require 'jquery.soap'
   require 'jquery.xml2json'
+  baseModel = require './base'
 
-
-  # ## `SoapModel`
+  # ## `soapModelMixin`
   #
-  # This model maps the model's CRUD methods to SOAP methods. With a bit of
-  # customization, you can perform an infinite number of different SOAP
+  # This mixin implements the API for the `SoapModel` model.
+  #
+  # With customization, you can perform an infinite number of different SOAP
   # requests depending on the circumstances, so you are not limited to a
   # one-to-one mapping between CRUD and SOAP methods.
   #
@@ -48,7 +51,7 @@ define (require) ->
   # for this model to function correctly. If you keep the default
   # implementation, all response data is converted to JSON by jquery.xml2json
   # plugin.
-  SoapModel = Backbone.Model.extend
+  soapModelMixin =
 
     # ### `SoapModel.prototype.baseUrl`
     #
@@ -368,3 +371,11 @@ define (require) ->
     parse: (response, options) ->
       @convertResponse response.toJSON().Body, options
 
+  # ## `SoapModel`
+  #
+  # Please see the documentation on `soapModelMixin` for more information on
+  # the API for this model.
+  SoapModel = baseModel.Model.extend soapModelMixin
+
+  mixin: soapModelMixin
+  Model: SoapModel

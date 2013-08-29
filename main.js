@@ -13,9 +13,10 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStorageModel, SoapModel, baseFormView, createView, deserializeForm, loadingView, methods, mixins, modelFormView, modelView, redirectView, serializeObject, templateView;
-  SoapModel = require('./models/soap');
-  LocalStorageModel = require('./models/localstorage');
+  var baseFormView, baseModel, createView, deserializeForm, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, redirectView, serializeObject, soapModel, templateView;
+  baseModel = require('./models/base');
+  soapModel = require('./models/soap');
+  localStorageModel = require('./models/localstorage');
   baseFormView = require('./views/form');
   modelFormView = require('./views/modelform');
   createView = require('./views/create');
@@ -29,8 +30,9 @@ define(function(require) {
   deserializeForm = require('./utils/deserializeForm');
   return {
     models: {
-      SoapModel: SoapModel,
-      LocalStorageModel: LocalStorageModel
+      BaseModel: baseModel.Model,
+      SoapModel: soapModel.Model,
+      LocalStorageModel: localStorageModel.Model
     },
     views: {
       BaseFormView: baseFormView.View,
@@ -40,6 +42,11 @@ define(function(require) {
       ModelView: modelView.View,
       RedirectView: redirectView.View,
       LoadingView: loadingView.View
+    },
+    modelMixins: {
+      BaseModel: baseModel.mixin,
+      SoapModel: soapModel.mixin,
+      LocalStorageModel: localStorageModel.mixin
     },
     viewMixins: {
       BaseFormView: baseFormView.mixin,
