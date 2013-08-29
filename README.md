@@ -8,11 +8,7 @@ It's also a set of opinions on how you should develop a web application.
 
 ## Requirements
 
-Ribcage depends on Backbone (surprised?) and jQuery, and also two more jQuery
-plugins if you use the `SoapModel` model. These are:
-
- + [jquery.soap](http://plugins.jquery.com/soap/)
- + [jquery.xml2json](http://code.google.com/p/jquery-xml2json-plugin/)
+Ribcage depends on Backbone (surprised?) and jQuery.
 
 ## Installing
 

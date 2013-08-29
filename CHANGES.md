@@ -1,5 +1,35 @@
 # Ribcage changelog
 
+This changelog logs all changes in the Ribcage API that may (and usually will)
+affect your code.
+
+## 0.2.0
+
+### Removed SOAP support
+
+The `SoapModel` is no longer part of Ribcage. A 
+[separate project](https://github.com/foxbunny/ribcage-soap) is being prepared
+for public release, which will provide both `SoapModel` and `SoapCollection`
+objects for Ribcage.
+
+As a result, Ribcage no longer requires jquery.soap and jquery.xml2json
+dependencies when loading the main module.
+
+### `BaseModel` and model mixins
+
+The models now have the same structure as views. They all share the same
+`BaseModel`, and the model modules now all export `Model` and `mixin`
+properties instead of a single object that represents the constructor. This
+change is not backwards compatible and it __will break your code__.
+
+By extension, the main Ribcage module will now also have a `modelMixins`
+property which provides access to model mixins.
+
+### UMD wrapper rewrite
+
+The UMD wrapper has been rewritten in all modules and are now somewhat easier
+to decipher, and a few bugs were fixed.
+
 ## 0.1.0
 
 ### `FormView` extends `TemplateView`
