@@ -8,8 +8,6 @@ var _this = this;
 
 if (typeof define !== 'function' || !define.amd) {
   this.define = function(factory) {
-    var _base;
-    (_base = (_this.ribcage || (_this.ribcage = {}))).utils || (_base.utils = {});
     return _this.ribcage.utils.LocalStorage = factory();
   };
 }

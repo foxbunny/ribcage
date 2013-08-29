@@ -8,8 +8,6 @@ var _this = this;
 
 if (typeof define !== 'function' || !define.amd) {
   this.define = function(factory) {
-    var _base;
-    (_base = (_this.ribcage || (_this.ribcage = {}))).validators || (_base.validators = {});
     return _this.ribcage.validators.helpers = factory();
   };
 }

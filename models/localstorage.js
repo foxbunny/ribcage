@@ -22,12 +22,10 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var mixins, models, module, _base, _base1;
-    models = (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
-    mixins = (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
-    module = models.localStorageModel = factory(_this.require);
-    models.LocalStorageModel = module.Model;
-    return mixins.LocalStorageModel = module.mixin;
+    var module;
+    module = _this.ribcage.models.localStorageModel = factory(_this.require);
+    _this.ribcage.models.LocalStorageModel = module.Model;
+    return _this.ribcage.modelMixins.LocalStorageModel = module.mixin;
   };
 }
 

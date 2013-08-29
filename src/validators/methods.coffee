@@ -19,7 +19,6 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@ribcage or= {}).validators or= {}
     @ribcage.validators.methods = factory(@require)
 
 define (require) ->

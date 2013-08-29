@@ -21,12 +21,10 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var mixins, module, views, _base, _base1;
-    views = (_base = (_this.ribcage || (_this.ribcage = {}))).views || (_base.views = {});
-    mixins = (_base1 = _this.ribcage).viewMixins || (_base1.viewMixins = {});
-    module = views.createView = factory(_this.require);
-    views.CreateView = module.View;
-    return mixins.CreateView = module.mixin;
+    var module;
+    module = _this.ribcage.views.createView = factory(_this.require);
+    _this.ribcage.views.CreateView = module.View;
+    return _this.ribcage.viewMixins.CreateView = module.mixin;
   };
 }
 

@@ -23,11 +23,9 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    views = (@ribcage or= {}).views or= {}
-    mixins = @ribcage.viewMixins or= {}
-    module = views.baseView = factory @require
-    views.BaseView = module.View
-    mixins.BaseView = module.mixin
+    module = @ribcage.views.baseView = factory @require
+    @ribcage.views.BaseView = module.View
+    @ribcage.viewMixins.BaseView = module.mixin
 
 define (require) ->
   Backbone = require 'backbone'

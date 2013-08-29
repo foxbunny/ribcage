@@ -13,7 +13,6 @@
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
-    (@ribcage or= {}).validators or= {}
     @ribcage.validators.helpers = factory()
 
 define (require) ->

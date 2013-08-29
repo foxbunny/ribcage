@@ -1,8 +1,3 @@
-###!
-@author Branko Vukelic <branko@brankovukelic.com>
-@license MIT
-###
-
 # # AJAX loder mixin
 #
 # This module implements a simple view that provides methods for displaying a
@@ -19,20 +14,18 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'underscore' then @_
-        when './base' then @ribcage.views.baseView
+        when 'ribcage/views/base' then @ribcage.views.baseView
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    views = (@ribcage or= {}).views or= {}
-    mixins = @ribcage.viewMixins or= {}
-    module = views.loadingView = factory @require
-    views.LoadingView = module.View
-    mixins.LoadingView = module.mixin
+    module = @ribcage.views.loadingView = factory @require
+    @ribcage.views.LoadingView = module.View
+    @ribcage.viewMixins.LoadingView = module.mixin
 
 define (require) ->
   $ = require 'jquery'
   _ = require 'underscore'
-  baseView = require './base'
+  baseView = require 'ribcage/views/base'
 
   # ## `OVERLAY_FADE_SPEED`
   #

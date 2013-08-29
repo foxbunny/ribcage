@@ -20,11 +20,9 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    views = (@ribcage or= {}).views or= {}
-    mixins = @ribcage.viewMixins or= {}
-    module = views.modelView = factory @require
-    views.ModelView = module.View
-    mixins.ModelView = module.mixin
+    module = @ribcage.views.modelView = factory @require
+    @ribcage.views.ModelView = module.View
+    @ribcage.viewMixins.ModelView = module.mixin
 
 define (require) ->
   templateView = require './template'

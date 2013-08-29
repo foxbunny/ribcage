@@ -15,12 +15,10 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var collections, mixins, module, _base, _base1;
-    collections = (_base = (_this.ribcage || (_this.ribcage = {}))).collections || (_base.collections = {});
-    mixins = (_base1 = _this.ribcage).collectionMixins || (_base1.collectionMixins = {});
-    module = collections.baseCollection = factory(_this.require);
-    collections.BaseCollection = module.Collection;
-    return mixins.BaseCollection = module.mixin;
+    var module;
+    module = _this.ribcage.collections.baseCollection = factory(_this.require);
+    _this.ribcage.collections.BaseCollection = module.Collection;
+    return _this.ribcage.collectionMixins.BaseCollection = module.mixin;
   };
 }
 

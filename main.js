@@ -8,7 +8,16 @@ var _this = this;
 
 if (typeof define !== 'function' || !define.amd) {
   this.define = function(factory) {
-    return _this.ribcage;
+    var _base, _base1, _base2, _base3, _base4, _base5, _base6, _base7;
+    _this.ribcage || (_this.ribcage = {});
+    (_base = _this.ribcage).models || (_base.models = {});
+    (_base1 = _this.ribcage).collections || (_base1.collections = {});
+    (_base2 = _this.ribcage).views || (_base2.views = {});
+    (_base3 = _this.ribcage).modelMixins || (_base3.modelMixins = {});
+    (_base4 = _this.ribcage).collectionMixins || (_base4.collectionMixins = {});
+    (_base5 = _this.ribcage).viewMixins || (_base5.viewMixins = {});
+    (_base6 = _this.ribcage).validators || (_base6.validators = {});
+    return (_base7 = _this.ribcage).utils || (_base7.utils = {});
   };
 }
 

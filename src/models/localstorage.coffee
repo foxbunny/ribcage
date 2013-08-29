@@ -21,11 +21,9 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    models = (@ribcage or= {}).models or= {}
-    mixins = @ribcage.modelMixins or= {}
-    module = models.localStorageModel = factory @require
-    models.LocalStorageModel = module.Model
-    mixins.LocalStorageModel = module.mixin
+    module = @ribcage.models.localStorageModel = factory @require
+    @ribcage.models.LocalStorageModel = module.Model
+    @ribcage.modelMixins.LocalStorageModel = module.mixin
 
 # This model depends on `ribcage.models.base`, and `ribcage.utils.localstorage`
 # modules.

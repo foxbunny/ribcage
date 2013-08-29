@@ -10,16 +10,20 @@
 # object. If you only need to access parts of the Ribcage library, you should
 # instead manually require individual modules.
 #
-# This module is in UMD format, and will only be useful if used with an AMD
-# loader such as RequireJS. For convenience and compatibility, it will simply
-# return the `ribcage` global when used without the loader.
+# This module acts as namespace creator when not used with an AMD loader such
+# as RequireJS. Please load it _before_ any other Ribcage modules.
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
-    # If we are not using AMD, we assume that all the dependencies have already
-    # been loaded, and that they have created their respective property trees
-    # under the `ribcage` global, so we simply return it.
-    @ribcage
+    @ribcage or= {}
+    @ribcage.models or= {}
+    @ribcage.collections or= {}
+    @ribcage.views or= {}
+    @ribcage.modelMixins or= {}
+    @ribcage.collectionMixins or= {}
+    @ribcage.viewMixins or= {}
+    @ribcage.validators or= {}
+    @ribcage.utils or= {}
 
 define (require) ->
 

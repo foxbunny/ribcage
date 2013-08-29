@@ -22,7 +22,6 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@ribcage or= {}).utils or= {}
     @ribcage.utils.deserializeForm = factory @require
 
 define (require) ->
