@@ -60,6 +60,9 @@ define(function(require) {
       BaseModel: baseModel.mixin,
       LocalStorageModel: localStorageModel.mixin
     },
+    collectionMixins: {
+      BaseCollection: baseCollection.Collection
+    },
     viewMixins: {
       BaseView: baseView.mixin,
       BaseFormView: baseFormView.mixin,

@@ -54,8 +54,8 @@ define (require) ->
 
   # ## Models
   #
-  # The models are accessible thorugh the `ribcage.models` object. There are
-  # two moedels that you can use:
+  # The models are accessible through the `ribcage.models` object. There are
+  # two models that you can use:
   #
   #  + `BaseModel` - Provides the base mode functionality common to all Ribcage
   #    models (currently same as stock Backbone model).
@@ -70,7 +70,7 @@ define (require) ->
   # The `ribcage.collections` object exposes the Ribcage collections. These are
   # the available collections:
   #
-  #  + `BaseCollection` - Base collection fucntionality for all Ribcage
+  #  + `BaseCollection` - Base collection functionality for all Ribcage
   #    collections.
   collections:
     BaseCollection: baseCollection.Collection
@@ -109,6 +109,14 @@ define (require) ->
     BaseModel: baseModel.mixin
     LocalStorageModel: localStorageModel.mixin
 
+  # ## Collection mixins
+  #
+  # The `ribcage.collectionMixins` object contains collection mixins. These
+  # mixins implement the APIs of matching collections, and you can use them to
+  # add their features to your own collections.
+  collectionMixins:
+    BaseCollection: baseCollection.Collection
+
   # ## View mixins
   #
   # The `ribcage.viewMixins` object provides access to view mixins. The mixins
@@ -127,7 +135,7 @@ define (require) ->
   # ## Validators
   #
   # The validation tools are accessible through `ribcage.validators` object.
-  # The object contains validation methods (fucntions that peroform
+  # The object contains validation methods (functions that perform
   # validation), and two validator mixins:
   #
   #  + `ValidatingMixin` - Generic mixin that can be used on views.
