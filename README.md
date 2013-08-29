@@ -63,10 +63,13 @@ there's a whole project to be minified?
 
 ## Documentation
 
-Until we set up a proper documentation page, please look at the CoffeeScript
-sources. They are well-documented and the final documentation will be generated
-from them anyway. (Incidentally, if you know of a good documentation generator
-that actually works, please let me know.)
+Please see the [Ribcage wiki](https://github.com/foxbunny/ribcage/wiki) for 
+introductory and cookbook articles.
+
+Until we set up a proper API documentation page, please look at the
+CoffeeScript sources. They are well-documented and the final documentation will
+be generated from them anyway. (Incidentally, if you know of a good
+documentation generator that actually works, please let me know.)
 
 ## Reporting bugs
 
