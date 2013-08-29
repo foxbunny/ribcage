@@ -28,6 +28,9 @@ define (require) ->
   soapModel = require './models/soap'
   localStorageModel = require './models/localstorage'
 
+  # Collections
+  baseCollection = rquire './collections/base'
+
   # Views
   baseView = require './views/base'
   baseFormView = require './views/form'
@@ -60,6 +63,16 @@ define (require) ->
     BaseModel: baseModel.Model
     SoapModel: soapModel.Model
     LocalStorageModel: localStorageModel.Model
+
+  # ## Collections
+  #
+  # The `ribcage.collections` object exposes the Ribcage collections. These are
+  # the available collections:
+  #
+  #  + `BaseCollection` - Base collection fucntionality for all Ribcage
+  #    collections.
+  collections:
+    BaseCollection: baseCollection.Collection
 
   # ## Views
   #
