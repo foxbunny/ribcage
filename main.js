@@ -13,9 +13,8 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, redirectView, serializeObject, soapModel, templateView;
+  var baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, redirectView, serializeObject, templateView;
   baseModel = require('./models/base');
-  soapModel = require('./models/soap');
   localStorageModel = require('./models/localstorage');
   baseCollection = rquire('./collections/base');
   baseView = require('./views/base');
@@ -33,7 +32,6 @@ define(function(require) {
   return {
     models: {
       BaseModel: baseModel.Model,
-      SoapModel: soapModel.Model,
       LocalStorageModel: localStorageModel.Model
     },
     collections: {
@@ -51,7 +49,6 @@ define(function(require) {
     },
     modelMixins: {
       BaseModel: baseModel.mixin,
-      SoapModel: soapModel.mixin,
       LocalStorageModel: localStorageModel.mixin
     },
     viewMixins: {

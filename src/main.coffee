@@ -25,7 +25,6 @@ define (require) ->
 
   # Models
   baseModel = require './models/base'
-  soapModel = require './models/soap'
   localStorageModel = require './models/localstorage'
 
   # Collections
@@ -56,12 +55,10 @@ define (require) ->
   #
   #  + `BaseModel` - Provides the base mode functionality common to all Ribcage
   #    models (currently same as stock Backbone model).
-  #  + `SoapModel` - Provides functionality for consuiming SOAP services
   #  + `LocalStorageModel` - Uses the browser's `localStorage` API to persist
   #    the model data
   models:
     BaseModel: baseModel.Model
-    SoapModel: soapModel.Model
     LocalStorageModel: localStorageModel.Model
 
   # ## Collections
@@ -106,7 +103,6 @@ define (require) ->
   # their features to other models in your application.
   modelMixins:
     BaseModel: baseModel.mixin
-    SoapModel: soapModel.mixin
     LocalStorageModel: localStorageModel.mixin
 
   # ## View mixins
