@@ -3,6 +3,14 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## 0.2.4
+
+### Fixed broken `LocalStorageModel`
+
+LocalStorageModel was not extending the BaseView with its own mixin so its
+functionality as a model had been completely broken. This is now fixed and
+LocalStorageModel now works correctly.
+
 ## 0.2.2
 
 ### `ribcage` mamespace created in `main.js` not in other modules
