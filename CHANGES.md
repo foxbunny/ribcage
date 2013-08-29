@@ -3,7 +3,31 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## 0.2.2
+
+### `ribcage` mamespace created in `main.js` not in other modules
+
+This change only affects developers that load Ribcage using `<script>` tag. Use
+of Ribcage as AMD modules is not affected by this change. 
+
+The UMD wrappers no longer check for existence of properties in the global
+`ribcage` object. Instead `main.js` module will now set up that namespaces, so
+it now needs to be loaded before any other Ribcage module. Failure to load
+`main.js` before other modules will throw `TypeError: Cannot set property X of
+undefined` exception or similar.
+
+This change is intentional, and it is meant to further reduce the complexity of
+the UMD wrappers.
+
+There is no need to update to 0.2.2 except for purely cosmetic reasons.
+
+## 0.2.1
+
+Fixes a few silly bugs and typos that made it into 0.2.0. 
+
 ## 0.2.0
+
+0.2.0 is has some serious bugs that render it useless. Use 0.2.1 or above.
 
 ### Removed SOAP support
 
