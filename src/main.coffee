@@ -29,6 +29,7 @@ define (require) ->
   localStorageModel = require './models/localstorage'
 
   # Views
+  baseView = require './views/base'
   baseFormView = require './views/form'
   modelFormView = require './views/modelform'
   createView = require './views/create'
@@ -65,6 +66,8 @@ define (require) ->
   # All view constructors are accessible through the `ribcage.views` object.
   # These include:
   #
+  #  + `BaseView` - A view that provides the base functionality of all Ribcage
+  #    views
   #  + `BaseFormView` - Provides basic form manipulation and error handling
   #  + `ModelFormView` - Provides model-specific form behavior such as
   #    data-binding
@@ -74,6 +77,7 @@ define (require) ->
   #  + `RedirectView` - Simply redirects to a specified path
   #  + `LoadingView` - Displays an AJAX loading spinner
   views:
+    BaseView: baseView.View
     BaseFormView: baseFormView.View
     ModelFormView: modelFormView.View
     CreateView: createView.View
@@ -98,6 +102,7 @@ define (require) ->
   # implement the core APIs for all of the views, and mixins allow you to
   # combine such functionality with your own custom views.
   viewMixins:
+    BaseView: baseView.mixin
     BaseFormView: baseFormView.mixin
     ModelFormView: modelFormView.mixin
     CreateView: createView.mixin
