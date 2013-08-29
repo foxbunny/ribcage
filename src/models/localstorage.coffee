@@ -115,7 +115,7 @@ define (require) ->
   #
   # Please see the documentation on the `localStorageModelMixin` for more
   # information about this model's API.
-  LocalStorageModel = baseModel.Model.extend {}
+  LocalStorageModel = baseModel.Model.extend localStorageModelMixin
 
   mixin: localStorageModelMixin
   Model: LocalStorageModel
