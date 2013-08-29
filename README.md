@@ -16,6 +16,11 @@ Ribcage modules are in UMD format. This means that you can use them either as
 AMD modules (with loaders like [RequireJS](http://requirejs.org/)), or load
 them using `<script>` tags.
 
+When loading modules using the `<script>` tags, please __make sure `main.js` is
+loaded before all other modules__. It will set up the `ribcage` global object
+and other modules will simply assume that properties on that object have been
+correctly set up.
+
 When used with `<script>` tags, the modules will do basic dependency checking,
 so you will get exceptions in many cases.
 
