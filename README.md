@@ -48,7 +48,7 @@ There are two application templates that provide a good base and also a simple
 example of a Ribcage app. One of them is
 [for CoffeeScript developers](https://github.com/foxbunny/create-ribcage-app),
 and the other is 
-[for JavaScript nijas](https://github.com/foxbunny/create-ribcage-app-js).
+[for JavaScript ninjas](https://github.com/foxbunny/create-ribcage-app-js).
 
 The templates set up a Backbone application with Ribcage. You can use volo to
 kickstart a project using the templates:
