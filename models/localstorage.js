@@ -73,7 +73,7 @@ define(function(require) {
       return this.store.removeItem(this.storageKey);
     }
   };
-  LocalStorageModel = baseModel.Model.extend;
+  LocalStorageModel = baseModel.Model.extend({});
   return {
     mixin: localStorageModelMixin,
     Model: LocalStorageModel
