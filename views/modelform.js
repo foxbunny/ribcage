@@ -24,12 +24,12 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var _base, _base1;
-    (_base = (_this.ribcage || (_this.ribcage = {}))).views || (_base.views = {});
-    (_base1 = _this.ribcage).viewMixins || (_base1.viewMixins = {});
-    _this.ribcage.views.modelFormView = factory(_this.require);
-    _this.ribcage.views.ModelFormView = _this.ribcage.views.modelFormView.View;
-    return _this.ribcage.viewMixins.ModelFormView = _this.ribcage.views.modelFormView.mixin;
+    var mixins, module, views, _base, _base1;
+    views = (_base = (_this.ribcage || (_this.ribcage = {}))).views || (_base.views = {});
+    mixins = (_base1 = _this.ribcage).viewMixins || (_base1.viewMixins = {});
+    module = views.modelFormView = factory(_this.require);
+    views.ModelFormView = module.View;
+    return mixins.ModelFormView = module.mixin;
   };
 }
 

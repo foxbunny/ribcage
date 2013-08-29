@@ -30,12 +30,12 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var _base, _base1;
-    (_base = (_this.ribcage || (_this.ribcage = {}))).views || (_base.views = {});
-    (_base1 = _this.ribcage).viewMixins || (_base1.viewMixins = {});
-    _this.ribcage.views.createView = factory(_this.require);
-    _this.ribcage.views.CreateView = _this.ribcage.views.createView.View;
-    return _this.ribcage.viewMixins.CreateView = _this.ribcage.views.createView.mixin;
+    var mixins, module, views, _base, _base1;
+    views = (_base = (_this.ribcage || (_this.ribcage = {}))).views || (_base.views = {});
+    mixins = (_base1 = _this.ribcage).viewMixins || (_base1.viewMixins = {});
+    module = views.baseFormView = factory(_this.require);
+    views.BaseFormView = module.View;
+    return mixins.BaseFormView = module.mixin;
   };
 }
 

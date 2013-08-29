@@ -13,8 +13,9 @@
 #  + [jquery.soap](http://plugins.jquery.com/soap/)
 #  + [jquery.xml2json](http://code.google.com/p/jquery-xml2json-plugin/)
 #
-# This model is in UMD format, and will create a `ribcage.models.SoapModel`
-# global if not used with an AMD loader such as RequireJS.
+# This model is in UMD format, and will create a `ribcage.models.soapModel`,
+# `ribcage.models.SoapModel`, and `ribcage.modelMixins.SoapModel` globals if
+# not used with an AMD loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -23,21 +24,23 @@ if typeof define isnt 'function' or not define.amd
         when 'jquery' then @jQuery
         when 'underscore' then @_
         when './base' then @ribcage.models.baseModel
+        # Ignoring jquery.soap and jquery.xml2json, since their return values
+        # are also ignored
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@ribcage or= {}).models or= {}
-    @ribcage.modelMixins or= {}
-    @ribcage.models.soapModel = factory @require
-    @ribcage.models.SoapModel = @ribcage.models.soapModel.Model
-    @ribcage.modelMixins.SoapModel = @ribcage.models.soapModel.mixin
+    models = (@ribcage or= {}).models or= {}
+    mixins = @ribcage.modelMixins or= {}
+    module = models.soapModel = factory @require
+    models.SoapModel = module.Model
+    mixins.SoapModel = module.mixin
 
 define (require) ->
   $ = require 'jquery'
   _ = require 'underscore'
+  baseModel = require './base'
   require 'jquery.soap'
   require 'jquery.xml2json'
-  baseModel = require './base'
 
   # ## `soapModelMixin`
   #

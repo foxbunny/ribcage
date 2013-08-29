@@ -8,8 +8,9 @@
 # Backbone model with localStorage support
 #
 # This model is in UMD format, and will create a
-# `ribcage.models.LocalStorageModel` global if not used with an AMD loader such
-# as RequireJS.
+# `ribcage.models.localStorageModel`, `ribcage.models.LocalStorageModel`, and
+# `ribcage.modelMixins.LocalStorageModel` globals if not used with an AMD
+# loader such as RequireJS.
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -20,14 +21,16 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@ribcage or= {}).models or= {}
-    @ribcage.modelMixins or= {}
-    @ribcage.models.localStorageModel = factory @require
-    @ribcage.models.LocalStorageModel = @ribcage.models.localStorageModel.Model
-    @ribcage.modelMixins.LocalStorageModel = @ribcage.models.localStorageModel.mixin
+    models = (@ribcage or= {}).models or= {}
+    mixins = @ribcage.modelMixins or= {}
+    module = models.localStorageModel = factory @require
+    models.LocalStorageModel = module.Model
+    mixins.LocalStorageModel = module.mixin
 
+# This model depends on `ribcage.models.base`, and `ribcage.utils.localstorage`
+# modules.
 define (require) ->
-  baseView = require './base'
+  baseModel = require './base'
   LocalStorage = require '../utils/localstorage'
 
   # The `LocalStorageModel` model uses  `LocalStorage` utiltiy class as an

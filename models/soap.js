@@ -24,12 +24,12 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var _base, _base1;
-    (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
-    (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
-    _this.ribcage.models.soapModel = factory(_this.require);
-    _this.ribcage.models.SoapModel = _this.ribcage.models.soapModel.Model;
-    return _this.ribcage.modelMixins.SoapModel = _this.ribcage.models.soapModel.mixin;
+    var mixins, models, module, _base, _base1;
+    models = (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
+    mixins = (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
+    module = models.soapModel = factory(_this.require);
+    models.SoapModel = module.Model;
+    return mixins.SoapModel = module.mixin;
   };
 }
 
@@ -37,9 +37,9 @@ define(function(require) {
   var $, SoapModel, baseModel, soapModelMixin, _;
   $ = require('jquery');
   _ = require('underscore');
+  baseModel = require('./base');
   require('jquery.soap');
   require('jquery.xml2json');
-  baseModel = require('./base');
   soapModelMixin = {
     baseUrl: 'http://example.com',
     namespace: 'http://example.com',

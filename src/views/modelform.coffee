@@ -24,11 +24,11 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@ribcage or= {}).views or= {}
-    @ribcage.viewMixins or= {}
-    @ribcage.views.modelFormView = factory @require
-    @ribcage.views.ModelFormView = @ribcage.views.modelFormView.View
-    @ribcage.viewMixins.ModelFormView = @ribcage.views.modelFormView.mixin
+    views = (@ribcage or= {}).views or= {}
+    mixins = @ribcage.viewMixins or= {}
+    module = views.modelFormView = factory @require
+    views.ModelFormView = module.View
+    mixins.ModelFormView = module.mixin
 
 define (require) ->
   $ = require 'jquery'

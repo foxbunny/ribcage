@@ -22,18 +22,18 @@ if (typeof define !== 'function' || !define.amd) {
     })();
   };
   this.define = function(factory) {
-    var _base, _base1;
-    (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
-    (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
-    _this.ribcage.models.localStorageModel = factory(_this.require);
-    _this.ribcage.models.LocalStorageModel = _this.ribcage.models.localStorageModel.Model;
-    return _this.ribcage.modelMixins.LocalStorageModel = _this.ribcage.models.localStorageModel.mixin;
+    var mixins, models, module, _base, _base1;
+    models = (_base = (_this.ribcage || (_this.ribcage = {}))).models || (_base.models = {});
+    mixins = (_base1 = _this.ribcage).modelMixins || (_base1.modelMixins = {});
+    module = models.localStorageModel = factory(_this.require);
+    models.LocalStorageModel = module.Model;
+    return mixins.LocalStorageModel = module.mixin;
   };
 }
 
 define(function(require) {
-  var LocalStorage, LocalStorageModel, baseView, localStorageModelMixin, storage;
-  baseView = require('./base');
+  var LocalStorage, LocalStorageModel, baseModel, localStorageModelMixin, storage;
+  baseModel = require('./base');
   LocalStorage = require('../utils/localstorage');
   storage = new LocalStorage();
   localStorageModelMixin = {

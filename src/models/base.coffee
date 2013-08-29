@@ -21,11 +21,11 @@ if typeof define isnt 'function' or not define.amd
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
-    (@ribcage or= {}).models or= {}
-    @ribcage.modelMixins or= {}
-    @ribcage.models.baseModel = factory @require
-    @ribcage.models.BaseModel = @ribcage.models.baseModel.Model
-    @ribcage.modelMixins.BaseModel = @ribcage.models.baseModel.mixin
+    models = (@ribcage or= {}).models or= {}
+    mixins = @ribcage.modelMixins or= {}
+    module = models.baseModel = factory @require
+    models.BaseModel = module.Model
+    mixins.BaseModel = module.mixin
 
 # This module depends on Backbone.
 
