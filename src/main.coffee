@@ -28,7 +28,7 @@ define (require) ->
   localStorageModel = require './models/localstorage'
 
   # Collections
-  baseCollection = rquire './collections/base'
+  baseCollection = require './collections/base'
 
   # Views
   baseView = require './views/base'

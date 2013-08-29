@@ -16,7 +16,7 @@ define(function(require) {
   var baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, redirectView, serializeObject, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
-  baseCollection = rquire('./collections/base');
+  baseCollection = require('./collections/base');
   baseView = require('./views/base');
   baseFormView = require('./views/form');
   modelFormView = require('./views/modelform');
