@@ -33,7 +33,7 @@ define(function(require) {
   var Backbone, BaseModel, baseModelMixin;
   Backbone = require('backbone');
   baseModelMixin = {};
-  BaseModel = Backbone.Models.extend(baseModelMixin);
+  BaseModel = Backbone.Model.extend(baseModelMixin);
   return {
     mixin: baseModelMixin,
     Model: BaseModel

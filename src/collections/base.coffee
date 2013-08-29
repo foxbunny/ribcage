@@ -35,7 +35,7 @@ define (require) ->
   # ## `BaseCollection`
   #
   # Currently identical to Backbone collection.
-  BaseCollection = Backbone.Collections.extend baseCollectionMixin
+  BaseCollection = Backbone.Collection.extend baseCollectionMixin
 
   mixin: baseCollectionMixin
   Collection: BaseCollection

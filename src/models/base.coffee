@@ -42,7 +42,7 @@ define (require) ->
   #
   # The model that is extended by all Ribcage models. Currently it is identical
   # to normal Backbone model.
-  BaseModel = Backbone.Models.extend baseModelMixin
+  BaseModel = Backbone.Model.extend baseModelMixin
 
   mixin: baseModelMixin
   Model: BaseModel

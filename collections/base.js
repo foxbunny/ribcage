@@ -28,7 +28,7 @@ define(function(require) {
   var Backbone, BaseCollection, baseCollectionMixin;
   Backbone = require('backbone');
   baseCollectionMixin = {};
-  BaseCollection = Backbone.Collections.extend(baseCollectionMixin);
+  BaseCollection = Backbone.Collection.extend(baseCollectionMixin);
   return {
     mixin: baseCollectionMixin,
     Collection: BaseCollection
