@@ -51,6 +51,7 @@ define (require) ->
   # Utils
   serializeObject = require './utils/serializeobject'
   deserializeForm = require './utils/deserializeForm'
+  randString = require './utils/randstring'
 
   # ## Models
   #
@@ -158,7 +159,9 @@ define (require) ->
   #  + `serializeObject` - Serializes form data into an object
   #  + `deserializeForm` - Deserializes an object into a form (fills in the
   #    form)
+  #  + `randString` - Random string generator
   utils:
     serializeObject: serializeObject
     deserializeForm: deserializeForm
+    randString: randString
 
