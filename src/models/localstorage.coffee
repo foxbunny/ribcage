@@ -16,8 +16,10 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
+        when 'underscore' then @_
         when './base' then @ribcage.models.baseModel
         when '../utils/localstorage' then @ribcage.utils.LocalStorage
+        when '../utils/localstore' then @ribcage.utils.LocalStore
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
@@ -28,8 +30,10 @@ if typeof define isnt 'function' or not define.amd
 # This model depends on `ribcage.models.base`, and `ribcage.utils.localstorage`
 # modules.
 define (require) ->
+  _ = require 'underscore'
   baseModel = require './base'
   LocalStorage = require '../utils/localstorage'
+  LocalStore = require '../utils/localstore'
 
   # The `LocalStorageModel` model uses  `LocalStorage` utiltiy class as an
   # abstraction layer for `localStorage` API.
@@ -42,11 +46,10 @@ define (require) ->
 
     # ### `LocalStorageModel.prototype.store`
     #
-    # The storage object is accessible through the storage property. It
-    # provides the `localStorage`-compatible API for manipulating the HTML5
-    # local storage. You can provide a different abstraction layer by
-    # overriding this property.
-    store: storage
+    # The storage object is accessible through the storage property. It will be
+    # initialized when model is initialized, so overriding this property does
+    # nothing.
+    store: null
 
     # ### `LocalStorageModel.prototype.storageKey`
     #
@@ -64,25 +67,45 @@ define (require) ->
     #
     # The model data is automatically fetched when model is initialized.
     initialize: () ->
-      @fetch()
+      @store = new LocalStore(@storageKey, storage, @idProperty)
 
-    # ### `LocalStorageModel.prototype.sync(method, model)`
+    # ### `LocalStorageModel.prototype.sync(method, model, options)`
     #
     # This is a customized version of `Backbone.sync()` which stores the data
     # in the `localStorage`. Internally, it communicates with the `#store`
     # object.
-    sync: (method, model) ->
-      if not @persistent and method in ['create', 'update', 'delete']
-        @toJSON()
-      else
-        switch method
-          when 'create', 'update'
-            @store.setItem @storageKey, model.toJSON()
-          when 'read'
-            @attributes = @store.getItem(@storageKey) or @defaults or {}
-          when 'delete'
-            @store.removeItem @storageKey
-            @clear silent: true
+    sync: (method, model, options={}) ->
+      methodMap =
+        read: 'GET'
+        create: 'POST'
+        update: 'PUT'
+        patch: 'PATCH'
+        delete: 'DELETE'
+
+      # If the `forceCreate` option has been passed, we will allow the 'update'
+      # method to be converted to 'create', and a `noFail` setting to be
+      # passed. This is useful in cases where you want to create a record and
+      # set the ID yourself.
+      if options.forceCreate and method is 'update'
+        method = 'create'
+        options.noFail = true
+
+      dataMethods = ['create', 'update', 'patch']
+      alterMethods = dataMethods.concat ['delete']
+
+      if not @persistent and method in alterMethods
+        options.success(model.attributes)
+
+      if method in dataMethods
+        options.data = if model then model.attributes or null
+
+      # Add dummy callbacks if option is not specified
+      options.success or= () ->
+      options.error or= () ->
+
+      url = options.url = model.id or null
+      options.type = methodMap[method]
+      @store.query url, options
 
     # ### `LocalStorageModel.prototype.destroy()`
     #
@@ -109,7 +132,7 @@ define (require) ->
     # Note that calling this method does _not_ trigger the 'change' event.
     unpersist: () ->
       @persistent = false
-      @store.removeItem @storageKey
+      @store.destroyStore()
 
   # ## `LocalStorageModel`
   #

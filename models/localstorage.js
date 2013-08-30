@@ -4,16 +4,21 @@
 @license MIT
 */
 
-var _this = this;
+var _this = this,
+  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
+        case 'underscore':
+          return _this._;
         case './base':
           return _this.ribcage.models.baseModel;
         case '../utils/localstorage':
           return _this.ribcage.utils.LocalStorage;
+        case '../utils/localstore':
+          return _this.ribcage.utils.LocalStore;
         default:
           return null;
       }
@@ -30,34 +35,48 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStorage, LocalStorageModel, baseModel, localStorageModelMixin, storage;
+  var LocalStorage, LocalStorageModel, LocalStore, baseModel, localStorageModelMixin, storage, _;
+  _ = require('underscore');
   baseModel = require('./base');
   LocalStorage = require('../utils/localstorage');
+  LocalStore = require('../utils/localstore');
   storage = new LocalStorage();
   localStorageModelMixin = {
-    store: storage,
+    store: null,
     storageKey: null,
     persistent: true,
     initialize: function() {
-      return this.fetch();
+      return this.store = new LocalStore(this.storageKey, storage, this.idProperty);
     },
-    sync: function(method, model) {
-      if (!this.persistent && (method === 'create' || method === 'update' || method === 'delete')) {
-        return this.toJSON();
-      } else {
-        switch (method) {
-          case 'create':
-          case 'update':
-            return this.store.setItem(this.storageKey, model.toJSON());
-          case 'read':
-            return this.attributes = this.store.getItem(this.storageKey) || this.defaults || {};
-          case 'delete':
-            this.store.removeItem(this.storageKey);
-            return this.clear({
-              silent: true
-            });
-        }
+    sync: function(method, model, options) {
+      var alterMethods, dataMethods, methodMap, url;
+      if (options == null) {
+        options = {};
       }
+      methodMap = {
+        read: 'GET',
+        create: 'POST',
+        update: 'PUT',
+        patch: 'PATCH',
+        "delete": 'DELETE'
+      };
+      if (options.forceCreate && method === 'update') {
+        method = 'create';
+        options.noFail = true;
+      }
+      dataMethods = ['create', 'update', 'patch'];
+      alterMethods = dataMethods.concat(['delete']);
+      if (!this.persistent && __indexOf.call(alterMethods, method) >= 0) {
+        options.success(model.attributes);
+      }
+      if (__indexOf.call(dataMethods, method) >= 0) {
+        options.data = model ? model.attributes || null : void 0;
+      }
+      options.success || (options.success = function() {});
+      options.error || (options.error = function() {});
+      url = options.url = model.id || null;
+      options.type = methodMap[method];
+      return this.store.query(url, options);
     },
     destroy: function() {
       return this.sync('delete', this);
@@ -68,7 +87,7 @@ define(function(require) {
     },
     unpersist: function() {
       this.persistent = false;
-      return this.store.removeItem(this.storageKey);
+      return this.store.destroyStore();
     }
   };
   LocalStorageModel = baseModel.Model.extend(localStorageModelMixin);
