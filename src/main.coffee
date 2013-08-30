@@ -52,6 +52,7 @@ define (require) ->
   serializeObject = require './utils/serializeobject'
   deserializeForm = require './utils/deserializeForm'
   randString = require './utils/randstring'
+  LocalStore = require './utils/localstore'
 
   # ## Models
   #
@@ -164,4 +165,5 @@ define (require) ->
     serializeObject: serializeObject
     deserializeForm: deserializeForm
     randString: randString
+    LocalStore: LocalStore
 
