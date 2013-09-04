@@ -3,6 +3,10 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## 0.3.1
+
+### Fixed typo in a require statement in the main module.
+
 ## 0.3.0
 
 ### `LocalStorageModel` refactor and `LocalStore` class
