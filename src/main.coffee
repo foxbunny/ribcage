@@ -50,7 +50,7 @@ define (require) ->
 
   # Utils
   serializeObject = require './utils/serializeobject'
-  deserializeForm = require './utils/deserializeForm'
+  deserializeForm = require './utils/deserializeform'
   randString = require './utils/randstring'
   LocalStore = require './utils/localstore'
 

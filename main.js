@@ -37,7 +37,7 @@ define(function(require) {
   methods = require('./validators/methods');
   mixins = require('./validators/mixins');
   serializeObject = require('./utils/serializeobject');
-  deserializeForm = require('./utils/deserializeForm');
+  deserializeForm = require('./utils/deserializeform');
   randString = require('./utils/randstring');
   LocalStore = require('./utils/localstore');
   return {
