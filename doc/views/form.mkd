@@ -18,7 +18,7 @@ This module depends on jQuery, Underscore, `ribcage.utils.serializeobject`,
    - [`#inputErrorClass`](#inputerrorclass)
    - [`#validateOnInput`](#validateoninput)
    - [`#__form`](#form)
-   - [`#getForm()](#getform)
+   - [`#getForm()`](#getform)
    - [`#getFormData()`](#getformdata)
    - [`#setFormData(data)`](#setformdata-data)
    - [`#validateForm(form)`](#validateform-form)
@@ -74,7 +74,7 @@ Holds cached jQuery selector for the form.
 This is an internal implementation detail. Do not rely on presence or internal
 usage of this property.
 
-### `#getForm() <a name="getform"></a>
+### `#getForm()` <a name="getform"></a>
 
 Returns the form element rendered in this view
 
