@@ -10,8 +10,6 @@ if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
-        case 'backbone':
-          return _this.Backbone;
         case 'underscore':
           return _this._;
         case './base':
@@ -32,8 +30,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var Backbone, TemplateView, baseView, templateViewMixin, _;
-  Backbone = require('backbone');
+  var TemplateView, baseView, templateViewMixin, _;
   _ = require('underscore');
   baseView = require('./base');
   templateViewMixin = {

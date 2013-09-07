@@ -11,12 +11,12 @@
 # This module is in UMD module and creates `ribcage.views.templateView`,
 # `ribcage.views.TemplateView`, `ribcage.viewMixins.TemplateView` if not used
 # with an AMD module loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'backbone' then @Backbone
         when 'underscore' then @_
         when './base' then @ribcage.views.baseView
         else null
@@ -27,70 +27,85 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.viewMixins.TemplateView = module.mixin
 
 define (require) ->
-  Backbone = require 'backbone'
+
+  # This module depends on Underscore and `ribcage.views.BaseView`.
+  #
   _ = require 'underscore'
   baseView = require './base'
+
+  # ::TOC::
+  #
 
   # ## `templateViewMixin`
   #
   # This mixin implements the API for the `TemplateView`.
+  #
   templateViewMixin =
-    # ### `templateViewMixin.templateSettings`
+    # ### `#templateSettings`
     #
     # This property is passed in as template settings. The default value is
     # `null`. If the template function you are using (default is Underscore
     # template) takes extra settings, you can use this property to specify it.
+    #
     templateSettings: null
 
-    # ### `templateViewMixin.templateSource`
+    # ### `#templateSource`
     #
     # The template source to render. It provides a simple default for debugging
     # purposes.
+    #
     templateSource: '<p>Please override me</p>'
 
-    # ### `templateViewMixin.template`
+    # ### `#template`
     #
     # Template to render. This method takes data and passes it to Underscore's
     # `#template()` method. The default implementation renders the
     # `#templateSource` property.
+    #
     template: (data) ->
       _.template @templateSource, data, @templateSettings
 
-    # ### `templateViewMixin.getContext()`
+    # ### `#getContext()`
     #
     # Returns template context data. Should return an object whose keys will be
     # used in the template's scope.
+    #
     getTemplateContext: () ->
       {}
 
-    # ### `templateViewMixin.beforeRender()`
+    # ### `#beforeRender()`
     #
     # Called before render performs its magic. Does nothing by default.
+    #
     beforeRender: () ->
       this
 
-    # ### `templateViewMixin.renderTemplate()`
+    # ### `#renderTemplate()`
     #
     # Render the template given a context.
+    #
     renderTemplate: (context) ->
       @template context
 
-    # ### `templateViewMixin.insertTemplate()`
+    # ### `#insertTemplate()`
     #
     # Insert rendered template to DOM.
+    #
     insertTemplate: (html) ->
       @$el.html html
 
-    # ### `templateViewMixin.afterRender()`
+    # ### `#afterRender()`
     #
     # Called after rendering is finished. Does nothing by default.
+    #
     afterRender: (context) ->
       this
 
-    # ### `templateViewMixin.render()`
+    # ### `#render()`
     #
     # Calls the pre- and post-rendering hooks, compiles the template, and
     # attaches it to the DOM tree.
+    #
     render: () ->
       @beforeRender()
       context = @getTemplateContext()
@@ -100,8 +115,10 @@ define (require) ->
 
   # ## `TemplateView`
   #
-  # Please see the documentation for the `templateViewMixin` for more
-  # information on the API that this view provides.
+  # Please see the documentation for the
+  # [`templateViewMixin`](#templateviewmixin) for more information on the API
+  # that this view provides.
+  #
   TemplateView = baseView.View.extend templateViewMixin
 
   mixin: templateViewMixin

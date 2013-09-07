@@ -12,6 +12,7 @@
 #
 # This module acts as namespace creator when not used with an AMD loader such
 # as RequireJS. Please load it _before_ any other Ribcage modules.
+#
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
@@ -27,14 +28,14 @@ if typeof define isnt 'function' or not define.amd
 
 define (require) ->
 
-  # Models
+  ## Models
   baseModel = require './models/base'
   localStorageModel = require './models/localstorage'
 
-  # Collections
+  ## Collections
   baseCollection = require './collections/base'
 
-  # Views
+  ## Views
   baseView = require './views/base'
   baseFormView = require './views/form'
   modelFormView = require './views/modelform'
@@ -44,11 +45,11 @@ define (require) ->
   redirectView = require './views/redirect'
   loadingView = require './views/loading'
 
-  # Validators
+  ## Validators
   methods = require './validators/methods'
   mixins = require './validators/mixins'
 
-  # Utils
+  ## Utils
   serializeObject = require './utils/serializeobject'
   deserializeForm = require './utils/deserializeform'
   randString = require './utils/randstring'
@@ -63,6 +64,7 @@ define (require) ->
   #    models (currently same as stock Backbone model).
   #  + `LocalStorageModel` - Uses the browser's `localStorage` API to persist
   #    the model data
+  #
   models:
     BaseModel: baseModel.Model
     LocalStorageModel: localStorageModel.Model
@@ -74,6 +76,7 @@ define (require) ->
   #
   #  + `BaseCollection` - Base collection functionality for all Ribcage
   #    collections.
+  #
   collections:
     BaseCollection: baseCollection.Collection
 
@@ -92,6 +95,7 @@ define (require) ->
   #  + `ModelView` - Augments `TemplateView` by passing model data to templates
   #  + `RedirectView` - Simply redirects to a specified path
   #  + `LoadingView` - Displays an AJAX loading spinner
+  #
   views:
     BaseView: baseView.View
     BaseFormView: baseFormView.View
@@ -107,6 +111,7 @@ define (require) ->
   # The `ribcage.modelMixins` object provides access to model mixins. These
   # mixins implement the APIs for matching models, and allow you to easily add
   # their features to other models in your application.
+  #
   modelMixins:
     BaseModel: baseModel.mixin
     LocalStorageModel: localStorageModel.mixin
@@ -116,6 +121,7 @@ define (require) ->
   # The `ribcage.collectionMixins` object contains collection mixins. These
   # mixins implement the APIs of matching collections, and you can use them to
   # add their features to your own collections.
+  #
   collectionMixins:
     BaseCollection: baseCollection.Collection
 
@@ -124,6 +130,7 @@ define (require) ->
   # The `ribcage.viewMixins` object provides access to view mixins. The mixins
   # implement the core APIs for all of the views, and mixins allow you to
   # combine such functionality with your own custom views.
+  #
   viewMixins:
     BaseView: baseView.mixin
     BaseFormView: baseFormView.mixin
@@ -148,6 +155,7 @@ define (require) ->
   # be in. For example, a `numeric` validator will return a number, regardless
   # of the input value, if the input value can be successfully converted to a
   # number.
+  #
   validators:
     methods: methods
     ValidatingMixin: mixins.validatingMixin
@@ -161,6 +169,7 @@ define (require) ->
   #  + `deserializeForm` - Deserializes an object into a form (fills in the
   #    form)
   #  + `randString` - Random string generator
+  #
   utils:
     serializeObject: serializeObject
     deserializeForm: deserializeForm

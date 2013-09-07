@@ -10,7 +10,8 @@
 #
 # This module is in UMD format and creates `ribcage.views.modelView`,
 # `ribcage.view.ModelView` and `ribcage.viewMixins.ModelView` globals if not
-# used with an AMD loader such as RequireJS
+# used with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -25,6 +26,9 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.viewMixins.ModelView = module.mixin
 
 define (require) ->
+
+  # This module depends on `ribcage.views.TemplateView`.
+  #
   templateView = require './template'
 
   # ## `modelViewMixin`

@@ -31,80 +31,8 @@ define(function(require) {
   _ = require('underscore');
   methods = require('./methods');
   validatingMixin = {
-    /*
-    #validators
-    
-    An object containig name-method pairs of validators. You can add your
-    custom validators here. It defaults to validators found in
-    `ribcage/validators/methods` module.
-    
-    You can use Underscore.js's `#extend()` method to add yours:
-    
-      validators: _.extend(methods, {
-        myValidator: function(s) { .... }
-      })
-    
-    Each custom validator method must take a single string value, and return
-    an array containing the cleaned value (value converted to appropraite
-    format usable by your application) and and status. The status is a boolean
-    value which should be `true` if the value is valid, or `false` if it's not.
-    */
-
     validators: methods,
-    /*
-    #rules
-    
-    This object describes the validation rules. Each rule maps an attribute
-    name to an object that contains validation mappings. For example:
-    
-        rules: {
-          name: {
-            required: 'Name is required'
-          },
-          email: {
-            required: 'Email is required',
-            email: 'Email must be a valid email'
-          }
-        }
-    
-    A special key `__all` is used to validate the entire form data.
-    
-        rules: {
-          password: {
-            required: 'Password cannot be blank'
-          },
-          passwordConfirm: {
-            required: 'Please type in your password again'
-          },
-          __all: {
-            customValidator: 'Passwords do not match'
-          }
-        }
-    
-    Key in the validation mapping represents the name of the validator method.
-    Valid methods are:
-    
-     + required
-     + email
-     + numeric
-     + integer
-    
-    Note that none of the default validator methods work with entire data sets,
-    so be sure to add your own validators if you want to validate sets of data.
-    */
-
     rules: {},
-    /*
-    #applyValidators(name, val)
-    
-    Applies validators to a single value. The errors are either `null` if value
-    is valid, or an array of messages for invalid value.
-    
-    @param name {String} Attribute name
-    @param val {String} Value to validate
-    @return {Array} [errors, value]
-    */
-
     applyValidators: function(name, val) {
       var errors, method, msg, valid, _ref, _ref1;
       errors = null;
@@ -122,16 +50,6 @@ define(function(require) {
       }
       return [errors, val];
     },
-    /*
-    #cleanFields(dada)
-    
-    Validates fields using given rules in the `#rules` object. The return value
-    maps attribute names to an Array of error messages.
-    
-    @param data {Object} Object containing the data to be cleaned
-    @return {Array} [errorObject, cleanedData]
-    */
-
     cleanFields: function(data) {
       var attribute, cleaned, errors, messages, val, _ref;
       cleaned = {};
@@ -154,15 +72,6 @@ define(function(require) {
       }
       return [errors, cleaned];
     },
-    /*
-    #clean(data)
-    
-    Cleans fields and entire data set.
-    
-    @param data {Object} Object containing the data to be cleaned
-    @return {Array} [errorObject, cleanedData]
-    */
-
     clean: function(data) {
       var cleaned, errors, _ref;
       _ref = this.cleanFields(data), errors = _ref[0], cleaned = _ref[1];

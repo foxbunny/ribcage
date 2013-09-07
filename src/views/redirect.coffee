@@ -11,6 +11,7 @@
 # This module is in UMD format and creates `ribcage.views.redirectView`,
 # `ribcage.views.RedirectView` and `ribcage.viewMixins.RedirectView` globals if
 # not used with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -25,35 +26,47 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.viewMixins.RedirectView = module.mixin
 
 define (require) ->
+
+  # This module depends on `ribcage.views.BaseView`
+  #
   baseView = require './base'
+
+  # ::TOC::
+  #
 
   # ## `redirectViewMixin`
   #
   # This mixin implements the API for the `RedirectView`.
+  #
   redirectViewMixin =
-    # ### `redirectViewMixin.redirectPath`
+    # ### `#redirectPath`
     #
-    # The redirect path.
+    # The redirect path. Default value is an empty string, which will cause a
+    # redirect to '#' fragment identifier.
+    #
     redirectPath: ''
 
-    # ### `redirectViewMixin.getRedirectPath()`
+    # ### `#getRedirectPath()`
     #
     # Returns the path to which view will redirect. By default, it returns the
-    # value of `#redirectPath`.
+    # value of [`#redirectPath`](#redirectpath).
+    #
     getRedirectPath: () ->
       @redirectPath
 
-    # ### `redirectViewMixin.beforeRedirect()`
+    # ### `#beforeRedirect()`
     #
     # Called before the redirect is performed. Has no arguments and return value
     # is not used.
+    #
     beforeRedirect: () ->
       this
 
-    # ### `redirectViewMixin.redirect()`
+    # ### `#redirect()`
     #
     # Performs the actual redirect. By default, it simply assigns to
     # `window.location.hash`.
+    #
     redirect: () ->
       @beforeRedirect()
       window.location.hash = @getRedirectPath()
@@ -61,14 +74,17 @@ define (require) ->
     # ### `redirectViewMixin,render()`
     #
     # This overrides the default `#render()` method to immediately redirect.
+    #
     render: () ->
       @redirect()
       this
 
   # ## `RedirectView`
   #
-  # Please see the documentation for the `redirectViewMixin` for more
-  # information on the API that this view provides.
+  # Please see the documentation for the
+  # [`redirectViewMixin`](#redirectviewmixin) for more information on the API
+  # this view provides.
+  #
   RedirectView = Backbone.View.extend redirectViewMixin
 
   mixin: redirectViewMixin

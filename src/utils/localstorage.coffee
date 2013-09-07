@@ -10,6 +10,7 @@
 #
 # This module is in UMD format and will return a `ribcage.utils.LocalStorage`
 # global if not used with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
@@ -17,15 +18,29 @@ if typeof define isnt 'function' or not define.amd
 
 define () ->
 
+  # This module has no external dependencies.
+  #
+  # ::TOC::
+  #
+
   # ## `LocalStorage`
   #
   # This constructor implements the `localStorage` API that wraps around native
-  # `localStorage` object with fallback on in-memory storage.
+  # `localStorage` object with fallback on in-memory storage. It implements
+  # only a subset of the localStorage API needed for use in Ribcage.
   #
   # The constructor takes a single boolean `debug` argument that tells the
   # object whether to log its actions. It currently has no effect.
   #
   # All data is internally stored as JSON and deserialized on retrieval.
+  #
+  # Example:
+  #
+  #     var ls = new LocalStorage();
+  #     ls.setItem('foo', {a: 12, b: 'bar'});
+  #     ls.getItem('foo');        // returns {a: 12, b: 'bar'}
+  #     ls.getItem('foo', true);  // returns '{"a": 12, "b": "bar"}'
+  #
   class LocalStorage
     constructor: (@debug=false) ->
       @hasNative = 'localStorage' of window
@@ -46,12 +61,13 @@ define () ->
             del store[key] if store[key]?
         )()
 
-    # ### `LocalStorage.prototype.getItem(key, [raw])
+    # ### `#getItem(key, [raw])
     #
     # Gets data with given key.
     #
     # The `raw` argument is a boolean and data is returned raw without
     # deserialization if it's set to `true`.
+    #
     getItem: (key, raw=false) ->
       val = @localStorage.getItem(key)
 
@@ -62,19 +78,21 @@ define () ->
       catch e
         return null
 
-    # ### `LocalStorage.prototype.setItem(key, value, [raw])`
+    # ### `#setItem(key, value, [raw])`
     #
     # Sets `val` as data for given key.
     #
     # The `raw` argument is a boolean and data is set raw without serialization
     # if it's set to `true`.
+    #
     setItem: (key, val, raw=false) ->
       val = if raw then val else JSON.stringify(val)
       @localStorage.setItem key, val
 
-    # ### `LocalStorage.prototype.removeItem(key)`
+    # ### `#removeItem(key)`
     #
     # Removes data with given key from local storage.
+    #
     removeItem: (key) ->
       @localStorage.removeItem key
       true

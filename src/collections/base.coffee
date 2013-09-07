@@ -1,3 +1,8 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # Base collection
 #
 # This module implements the common API for all Ribcage collections. All
@@ -7,6 +12,7 @@
 # `ribcage.collections.baseCollection`, `ribcage.collections.BaseCollection`,
 # and `ribcage.collectionMixins.BaseCollection` globals if not used with an AMD
 # loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -20,19 +26,31 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.collections.BaseCollection = module.Collection
     @ribcage.collectionMixins.BaseCollection = module.mixin
 
-# This module depends on Backbone
-
 define (require) ->
+
+  # This module depends on Backbone
+  #
   Backbone = require 'backbone'
+
+  # ::TOC::
+  #
 
   # ## `baseCollectionMixin`
   #
-  # This is a placeholder for future functionality.
+  # Mixin that implements the functionality of the `BaseCollection`
+  # constructor.
+  #
+  # It is currently just a stub, but you should generally extend
+  # `BaseCollection` constructor to build all Ribcage constructors.
+  #
   baseCollectionMixin = {}
 
   # ## `BaseCollection`
   #
-  # Currently identical to Backbone collection.
+  # Please see the documentation on
+  # [`baseCollectionMixin`](#basecollectionmixin) for more information about
+  # this collection.
+  #
   BaseCollection = Backbone.Collection.extend baseCollectionMixin
 
   mixin: baseCollectionMixin

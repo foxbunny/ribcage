@@ -13,6 +13,7 @@
 # `ribcage.views.modelFormView`, `ribcage.views.ModelFormView`, and
 # `ribcage.viewMixins.modelFormViewMixin` globals if not used with an AMD
 # loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -29,48 +30,59 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.viewMixins.ModelFormView = module.mixin
 
 define (require) ->
+
+  # This module depends on jQuery, Underscore, and
+  # `ribcage.views.BaseFormView`.
+  #
   $ = require 'jquery'
   _ = require 'underscore'
   baseForm = require './form'
 
+  # ::TOC::
+  #
+
   # ## `modelFormViewMixin`
   #
   # This mixin implements the API for the `ModelFormView` view.
+  #
   modelFormViewMixin =
 
-    # ### `modelFormViewMixin.validate()`
+    # ### `#validate()`
     #
     # Validates the model.
     #
     # The model's validate method should return an error object that conforms
     # to the `BaseFormView`'s error object format.
     #
-    # The method should return and array in [errorObject, data] format.
+    # The method should return and array in `[errorObject, data]` format.
+    #
     validate: () ->
       err = @model.validate @model.attributes
       [err, @model.toJSON()]
 
-    # ### `modelFormViewMixin.events`
+    # ### `#events`
     #
+    # Maps events to event handlers.
     #
     events:
       'submit form': 'submit'
       'change :input': 'inputChange'
       'input :input': 'inputChange'
 
-    # ### `modelFormViewMixin.inputChange(e)`
+    # ### `#inputChange(e)`
     #
     # Wrapper function to call the change and input events handlers for form
     # inputs on both this model and the `BaseFormView`.
+    #
     inputChange: (e) ->
       @onFieldChange(e)
       @updateModel(e)
 
-    # ### `modelFormViewMixin.updateModel(e)`
+    # ### `#updateModel(e)`
     #
     # Update the model by setting serialized form data.
+    #
     updateModel: (e) ->
-      # First also call the change event on the FormClass
       input = @$ e.target
       val = input.val()
       name = input.attr 'name'
@@ -81,8 +93,10 @@ define (require) ->
 
   # ## `ModelFormView`
   #
-  # Please see the documentation for the `modelFormViewMixin` for more
-  # information on the API that this view provides.
+  # Please see the documentation for the
+  # [`modelFormViewMixin`](#modelformviewmixin) for more information on the API
+  # that this view provides.
+  #
   ModelFormView = baseForm.View.extend modelFormViewMixin
 
   mixin: modelFormViewMixin

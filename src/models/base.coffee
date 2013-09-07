@@ -5,13 +5,13 @@
 
 # # Base model
 #
-# This module implements the base model. This model implements the API that is
-# common to all Ribcage models, and should be extended to build all other
-# models.
+# This module implements common API for all Ribcage models. All ribcage models
+# should extend this model.
 #
 # This module is in UMD format and creates `Ribcage.models.baseModel`,
 # `Ribcage.models.BaseModel`, and `Ribcage.modelMixins.BaseModel` globals if
 # not used with with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -25,21 +25,29 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.models.BaseModel = module.Model
     @ribcage.modelMixins.BaseModel = module.mixin
 
-# This module depends on Backbone.
-
 define (require) ->
+
+  # This module depends on Backbone.
+  #
   Backbone = require 'backbone'
+
+  # ::TOC::
+  #
 
   # ## `baseModelMixin`
   #
-  # This mixin is a placeholder for future functionality that will be mixed
-  # into all Ribcage models.
+  # Mixin that implements the common functionality of all Ribcage models.
+  #
+  # It is currently a stub, but you should generally extend the `BaseModel`
+  # constructor to build all Ribcage models.
+  #
   baseModelMixin = {}
 
   # ## `BaseModel`
   #
-  # The model that is extended by all Ribcage models. Currently it is identical
-  # to normal Backbone model.
+  # Please see the documentation on [`baseModelMixin`](#basemodelmixin) for
+  # more information about this model.
+  #
   BaseModel = Backbone.Model.extend baseModelMixin
 
   mixin: baseModelMixin

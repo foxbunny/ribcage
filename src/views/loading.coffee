@@ -1,12 +1,18 @@
+###!
+@author Branko Vukelic <branko@brankovukelic.com>
+@license MIT
+###
+
 # # AJAX loder mixin
 #
 # This module implements a simple view that provides methods for displaying a
 # spinning loader icon. This view is best used as an omni-present view whose
-# methods are triggered though events.
+# methods are triggered though events (full-screen spinner).
 #
 # This module is in UMD format and will create `ribcage.views.loadingView`,
 # `ribcage.views.LoadingView`, and `ribcage.viewMixins.LoadingView` if not used
 # with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -23,14 +29,15 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.viewMixins.LoadingView = module.mixin
 
 define (require) ->
+
+  # This module depends on jQuery, Underscore, and `ribcage.views.baseView`.
+  #
   $ = require 'jquery'
   _ = require 'underscore'
   baseView = require 'ribcage/views/base'
 
-  # ## `OVERLAY_FADE_SPEED`
+  # ::TOC::
   #
-  # The overlay fade speed is controlled by this constant. It is set to 225ms.
-  OVERLAY_FADE_SPEED = 225
 
   tLoader = _.template """
   <div class="loader-spinner">
@@ -44,32 +51,53 @@ define (require) ->
   # ## `loadingMixin`
   #
   # This mixin implements the API for displaying and hiding the loader.
+  #
+  # The general idea is to set up the view once during application's
+  # initialization, and then toggle the loader on and off as needed.
+  #
+  # The view currently does not implement any custom events or listeners, so if
+  # you want to toggle the loader using events, you will have to add the
+  # functionality yourself. Events will be added in a later version, but
+  # weren't needed thus far, so they are a low-priority target.
+  #
   loadingMixin =
-    # ### `loadingMixin.spinner`
+
+    # ## `#fadeTime``
+    #
+    # The overlay fade speed is controlled by this constant. It is set to
+    # 225ms by default.
+    #
+    fadeTime: 225
+
+    # ### `#spinner`
     #
     # Defines the HTML for the spinner. By default, it's a FontAewsome spinning
     # spinner icon. If you leave this property as `null`, it will retain the
     # default spinner.
+    #
     spinner: null
 
-    # ### `loadingMixin.loadingLabel`
+    # ### `#loadingLabel`
     #
     # Defines the text to use as the loading label. By default, it's
     # 'loading...'. Leave this as `null` to keep it. You can also set it to a
     # function which would be evaluated to obtain the label (e.g., if you need
     # i18n support.
+    #
     loadingLabel: null
 
-    # ### `loadingMixin.initialize(options)`
+    # ### `#initialize(settings)`
     #
     # Sets `spinner` and `loadingLabel` properties from the same-named keys
-    # passed in through the `options` argument.
+    # passed in through the `settings` argument.
+    #
     initialize: ({@spinner, @loadingLabel}) ->
 
-    # ### `loadingMixin.render()`
+    # ### `#render()`
     #
     # Renders the loader HTML and customizes the spinner and label, and hides
     # the loader.
+    #
     render: () ->
       @$el.append tLoader
       if @spinner
@@ -83,27 +111,32 @@ define (require) ->
       @$el.hide()
       this
 
-    # ### `loadingMixin.showLoader()`
+    # ### `#showLoader()`
     #
     # Shows the loader
+    #
     showLoader: () ->
-      @$el.stop().fadeIn OVERLAY_FADE_SPEED
+      @$el.stop().fadeIn @fadeTime
 
-    # ### `loadingMixin.hideLoader()`
+    # ### `#hideLoader()`
     #
     # Hides the loader.
+    #
     hideLoader: () ->
-      @$el.stop().fadeOut OVERLAY_FADE_SPEED
+      @$el.stop().fadeOut @fadeTime
 
-    # ### `loadingMixin.toggleLoader()`
+    # ### `#toggleLoader()`
     #
     # Toggles the loader.
+    #
     toggleLoader: () ->
-      @$el.stop().toggleFade OVERLAY_FADE_SPEED
+      @$el.stop().toggleFade @fadeTime
 
   # ## `LoadingView`
   #
-  # For details of this view's API, see the documentation for `loadingMixin`.
+  # For details of this view's API, see the documentation for
+  # [`loadingMixin`](#loadingmixin).
+  #
   LoadingView = baseView.View.extend loadingMixin
 
   mixin: loadingMixin

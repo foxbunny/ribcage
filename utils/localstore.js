@@ -113,7 +113,7 @@ define(function(require) {
 
     LocalStore.prototype.getIndexOf = function(id) {
       var index;
-      index = this.getStore().index;
+      index = this.getStore().index[id].index;
       return index[id];
     };
 

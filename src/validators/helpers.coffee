@@ -10,6 +10,7 @@
 #
 # This module is in UMD format and will create a `ribcage.validators.helpers`
 # global if not used with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @define = (factory) =>
@@ -17,10 +18,16 @@ if typeof define isnt 'function' or not define.amd
 
 define (require) ->
 
+  # This module has no external dependencies.
+  #
+  # ::TOC::
+  #
+
   # ## `notRequired(fn)`
   #
   # Returns a wrapped validator function which returns a positive result if the
   # value is undefined or an empty string.
+  #
   notRequired: (fn) ->
     (s) ->
       if not s? or s is ''
@@ -40,7 +47,9 @@ define (require) ->
   # Writing of validator functions is simplified by providing a function to
   # `mustPass` that will try to convert the value into an appropriate format
   # without having to worry about formatting the result.
+  #
   mustPass: (fn) ->
     (s) ->
       s = fn(s)
       [s, s isnt undefined]
+
