@@ -94,7 +94,7 @@ define (require) ->
     #
     __form: null
 
-    # ### `#getForm()
+    # ### `#getForm()`
     #
     # Returns the form element rendered in this view
     #
