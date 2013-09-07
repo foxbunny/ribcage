@@ -28,6 +28,12 @@ module.exports = {
             ));
         }
     },
+    docs: {
+      run: [
+        "v.rm doc",
+        "node tools/extract_docs.js src doc"
+      ]
+    },
     watch: {
         flags: quietFlag,
         run: function(d, v, namedArgs) {
