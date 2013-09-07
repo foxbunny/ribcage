@@ -7,6 +7,8 @@
 # Proper documentation helps you navigate the code base and also provides a
 # sanity check for your implementation.
 #
+# ::TOC::
+#
 # ## `extract_docs` script
 #
 # This code base uses the `extract_docs` script to extract documentation from

@@ -48,8 +48,8 @@ define () ->
         @localStorage = window.localStorage
       else
         @localStorage = (() ->
-          # Creates faux localStorage interface that uses a simple object to
-          # store all of its values.
+          ## Creates faux localStorage interface that uses a simple object to
+          ## store all of its values.
 
           store = {}
 

@@ -62,7 +62,7 @@ define (require) ->
   #
   loadingMixin =
 
-    # ## `#fadeTime``
+    # ### `#fadeTime``
     #
     # The overlay fade speed is controlled by this constant. It is set to
     # 225ms by default.

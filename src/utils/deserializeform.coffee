@@ -60,7 +60,7 @@ define (require) ->
       type = input.attr 'type'
       currentValue = input.val()
 
-      # Cannot get data if there's no input name, can we?
+      ## Cannot get data if there's no input name, can we?
       return if not name
 
       switch type

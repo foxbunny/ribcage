@@ -40,6 +40,7 @@ define (require) ->
 
   # The `LocalStorageModel` model uses  `LocalStorage` utiltiy class as an
   # abstraction layer for `localStorage` API.
+  #
   storage = new LocalStorage()
 
   # ::TOC::

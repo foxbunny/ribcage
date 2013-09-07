@@ -58,7 +58,7 @@ define (require) ->
     data = {}
     for {name, value} in arr
       if name of data
-        # Convert to array if needed
+        ## Convert to array if needed
         data[name] = if _.isArray data[name] then data[name] else [data[name]]
         data[name].push value
       else

@@ -31,14 +31,22 @@ define (require) ->
   #
   templateView = require './template'
 
+  # ::TOC::
+  #
+
   # ## `modelViewMixin`
   #
   # This mixin implements the API for the `ModelView`.
+  #
+  # The view is almost identical to `TemplateView`, except that it adds the
+  # model to the template context.
+  #
   modelViewMixin =
 
-    # ### `modelViewMixin.getTemplateContext()`
+    # ### `#getTemplateContext()`
     #
     # Adds the model attributes to template context.
+    #
     getTemplateContext: () ->
       @model.toJSON()
 
@@ -46,6 +54,7 @@ define (require) ->
   #
   # Please see the documentation for the `modelViewMixin` for more
   # information on the API that this view provides.
+  #
   ModelView = templateView.View.extend modelViewMixin
 
   mixin: modelViewMixin

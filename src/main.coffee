@@ -10,8 +10,10 @@
 # object. If you only need to access parts of the Ribcage library, you should
 # instead manually require individual modules.
 #
-# This module acts as namespace creator when not used with an AMD loader such
-# as RequireJS. Please load it _before_ any other Ribcage modules.
+# This module (main module) acts as namespace creator when not used with an AMD
+# loader such as RequireJS. Please load it _before_ any other Ribcage modules.
+#
+# ::TOC::
 #
 
 if typeof define isnt 'function' or not define.amd

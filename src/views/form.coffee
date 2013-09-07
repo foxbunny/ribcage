@@ -187,7 +187,7 @@ define (require) ->
     #
     # Removes all errors that are siblings of a given input. This doesn't work
     # if all inputs and all errors are siblings. Please be sure to add
-    # appropriate strucutre to your form.
+    # appropriate structure to your form.
     #
     cleanFieldErrors: (input) ->
       input = $ input
@@ -271,7 +271,7 @@ define (require) ->
     #
     # Handles the valid form submission. Does nothing by default.
     #
-    # You need to overload this method to make this entire view userful.
+    # You need to overload this method to make this entire view useful.
     #
     formValid: (data) ->
       return
