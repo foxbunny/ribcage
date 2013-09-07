@@ -1,0 +1,52 @@
+# Local storage interface <a name="local-storage-interface"></a>
+
+This is a simple `localStorage` API interface that falls back on memory
+storage.
+
+This module is in UMD format and will return a `ribcage.utils.LocalStorage`
+global if not used with an AMD loader such as RequireJS.
+
+This module has no external dependencies.
+
+ + [`LocalStorage`](#localstorage)
+   - [`#getItem(key, [raw])](#getitem-key-raw)
+   - [`#setItem(key, value, [raw])`](#setitem-key-value-raw)
+   - [`#removeItem(key)`](#removeitem-key)
+
+
+## `LocalStorage` <a name="localstorage"></a>
+
+This constructor implements the `localStorage` API that wraps around native
+`localStorage` object with fallback on in-memory storage. It implements only a
+subset of the localStorage API needed for use in Ribcage.
+
+The constructor takes a single boolean `debug` argument that tells the object
+whether to log its actions. It currently has no effect.
+
+All data is internally stored as JSON and deserialized on retrieval.
+
+Example:
+
+    var ls = new LocalStorage();
+    ls.setItem('foo', {a: 12, b: 'bar'});
+    ls.getItem('foo');        // returns {a: 12, b: 'bar'}
+    ls.getItem('foo', true);  // returns '{"a": 12, "b": "bar"}'
+
+
+### `#getItem(key, [raw]) <a name="getitem-key-raw"></a>
+
+Gets data with given key.
+
+The `raw` argument is a boolean and data is returned raw without
+deserialization if it's set to `true`.
+
+### `#setItem(key, value, [raw])` <a name="setitem-key-value-raw"></a>
+
+Sets `val` as data for given key.
+
+The `raw` argument is a boolean and data is set raw without serialization if
+it's set to `true`.
+
+### `#removeItem(key)` <a name="removeitem-key"></a>
+
+Removes data with given key from local storage.

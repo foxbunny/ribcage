@@ -1,0 +1,30 @@
+# Ribcage validation methods <a name="ribcage-validation-methods"></a>
+
+This module defines a few validator methods that can be used to validate input.
+
+This module is in UMD format, and will export a `ribcage.validators.methods`
+global if not used with an AMD loader such as RequireJS.
+
+This module depends on `ribcage.validators.helpers`
+
+ + [`required`](#required)
+ + [`email`](#email)
+ + [`numeric`](#numeric)
+ + [`integer`](#integer)
+
+
+## `required` <a name="required"></a>
+
+Ensures that value is not an empty string, undefined, or null.
+
+## `email` <a name="email"></a>
+
+Ensures that the value is a valid email address.
+
+## `numeric` <a name="numeric"></a>
+
+Ensures that value is a number.
+
+## `integer` <a name="integer"></a>
+
+Ensures that value is an integer.

@@ -1,0 +1,107 @@
+# CreateView <a name="createview"></a>
+
+This is an extension of the ModelView which automatically saves form data using
+the model's `#save()` method.
+
+The create view is used when there is a one-to-one corellation between the form
+and the model, and the goal of form submission is creation of a model and its
+persistence on the server.
+
+This module is in UDM format, and will create `ribcage.views.createView`,
+`ribcage.views.CreateView`, and `ribcage.viewMixins.CreateView` globals if not
+used with an AMD loader such as RequireJS.
+
+This module depends on `ribcage.views.modelform`.
+
+ + [`createViewMixin`](#createviewmixin)
+   - [`#redirectPath`](#redirectpath)
+   - [`#saveErrorMessage`](#saveerrormessage)
+   - [`#getRedirectPath()`](#getredirectpath)
+   - [`#getSaveErrorMessage(xhr, status, msg)`](#getsaveerrormessage-xhr-status-msg)
+   - [`#onSaveSuccess()`](#onsavesuccess)
+   - [`#onSaveError()`](#onsaveerror)
+   - [`#afterSubmit()`](#aftersubmit)
+   - [`#afterRequest()`](#afterrequest)
+   - [`#formInvalid(err)`](#forminvalid-err)
+ + [`CreateView`](#createview)
+
+
+## `createViewMixin` <a name="createviewmixin"></a>
+
+This mixin implements the crate view API.
+
+CreateView will handle validation, saving, and post-save operation in
+conjunction with a model assigned to the view. The general flow is to interrupt
+the submit method on a rendered form, validate the data, save the model, and
+then redirect to a specific path.
+
+Most aspects of the flow can be customized.
+
+### `#redirectPath` <a name="redirectpath"></a>
+
+Path to redirect to on successful creation of a model.
+
+### `#saveErrorMessage` <a name="saveerrormessage"></a>
+
+Default save error message. This message is shown to in the form if the object
+cannot be saved (e.g., because of a server error or because the connection is
+down).
+
+### `#getRedirectPath()` <a name="getredirectpath"></a>
+
+Returns the redirect path to which form will redirect on success. By default it
+returns `this.redirectPath` which in turn defaults to '#'.
+
+### `#getSaveErrorMessage(xhr, status, msg)` <a name="getsaveerrormessage-xhr-status-msg"></a>
+
+Returns the error message displayed to the form on save error. By default it
+returns the value of [`#saveErrorMessage`](#saveerrormessage).
+
+This method is called with the same arguments as the jQuery.ajax error
+callback.
+
+### `#onSaveSuccess()` <a name="onsavesuccess"></a>
+
+Called when model is successfully saved. This is basically a success callback
+passed to `Backbone.sync` (or a version of it defined in the model), so the
+signature is the same.
+
+The default implementation redirects the app to a location defined by the
+[`#getRedirectPath()`](#getredirectpath) method.
+
+### `#onSaveError()` <a name="onsaveerror"></a>
+
+Called when model could not be saved. This is basically an error callback
+passed to `Backbone.sync` (or a version of it defined in the model), so the
+signature is the same.
+
+Default implementation shows a form error message which is obtained by calling
+the [`#getSaveErrorMessage()`](#getsaveerrormessage-xhr-status-msg) method.
+
+### `#afterSubmit()` <a name="aftersubmit"></a>
+
+Called asynchronously after all the callbacks have been called. You should not
+assume that this method is called after requests are complted. In fact it is
+usually not. If you want to be sure that requests were finished, overload the
+[`#afterRequest()`](#afterrequest) method.
+
+### `#afterRequest()` <a name="afterrequest"></a>
+
+Called after AJAX calls have been completed. This method has no arguments, and
+return value is not used.
+
+Also, it is called after both a successful and unsuccessful request.
+
+### `#formInvalid(err)` <a name="forminvalid-err"></a>
+
+Handles the invalid form submission. By default, it simply renders the form
+input. ### `#formValid(data)`
+
+Saves the serialized form data using model's save method, and calls the
+[`#onSaveSuccess()`](#onsavesuccess) or
+[`#onSaveError()`](#onsaveerror-xhr-status-msg) method depending on the result.
+
+## `CreateView` <a name="createview"></a>
+
+Please see the documentation for the `createViewMixin` for more information on
+the API that this view provides.

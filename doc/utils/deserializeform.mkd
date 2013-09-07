@@ -1,0 +1,50 @@
+# Deserialize object to form <a name="deserialize-object-to-form"></a>
+
+This module provides a helper method to deserialize an object into a form. The
+helper method is also attached to jQuery as both a `jQuery.deserializeForm`
+method as well `jQuery.fn.deserializeForm` method.
+
+This model is in UMD format, and will create a `ribcage.utils.deserializeForm`
+global if not used with an AMD loader such as RequireJS.
+
+This module depends on jQuery and Underscore.
+
+ + [`jQuery.deserializeForm(form, data)`](#jquery-deserializeform-form-data)
+ + [`.deserializeForm(data)`](#deserializeform-data)
+
+
+## `jQuery.deserializeForm(form, data)` <a name="jquery-deserializeform-form-data"></a>
+
+Uses `data` object to fill a form found under `form` selector or jQuery object.
+
+Example:
+
+    <form id="myform">
+      <input name="name" type="text">
+      <input name="age" type="text">
+    </form>
+
+
+    $.deserializeForm('#myform', {
+      name: 'John Doe',
+      age: 22
+    });
+
+
+## `.deserializeForm(data)` <a name="deserializeform-data"></a>
+
+Uses data object to fill all inputs found under the selected element. This is a
+wrapper around `jQuery.deserializeForm()`.
+
+Example:
+
+    <form id="myform">
+      <input name="name" type="text">
+      <input name="age" type="text">
+    </form>
+
+
+    $('#myform').deserializeForm({
+      name: 'John Doe',
+      age: 22
+    });

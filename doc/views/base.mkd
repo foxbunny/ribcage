@@ -1,0 +1,26 @@
+# Base view <a name="base-view"></a>
+
+This is the base view for all Ribcage views. Every new Ribcage view should
+extend this view, and any API that is common to all views should be implemented
+by this view.
+
+Currently this view offers no special API. It merely serves as a placeholder.
+
+This module is in UMD format and will create `ribcage.views.BaseView`,
+`ribcage.viewMixins.BaseView`, and `ribcage.views.baseView` globals if not used
+with an AMD loader such as RequireJS.
+
+This module depends on Backbone.
+
+## `baseViewMixin` <a name="baseviewmixin"></a>
+
+The base view mixin. This mixin contains all the APIs that will be mixed into
+all Ribcage views.
+
+It is currently a stub, but you should generally extend `BaseView` constructor
+to build all Ribcage views.
+
+## `BaseView` <a name="baseview"></a>
+
+Please see the documentation on [`baseViewMixin`](#baseviewmixin) for more
+information about this view.

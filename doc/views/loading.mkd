@@ -1,0 +1,79 @@
+# AJAX loder mixin <a name="ajax-loder-mixin"></a>
+
+This module implements a simple view that provides methods for displaying a
+spinning loader icon. This view is best used as an omni-present view whose
+methods are triggered though events (full-screen spinner).
+
+This module is in UMD format and will create `ribcage.views.loadingView`,
+`ribcage.views.LoadingView`, and `ribcage.viewMixins.LoadingView` if not used
+with an AMD loader such as RequireJS.
+
+This module depends on jQuery, Underscore, and `ribcage.views.baseView`.
+
+ + [`loadingMixin`](#loadingmixin)
+   - [`#fadeTime``](#fadetime)
+   - [`#spinner`](#spinner)
+   - [`#loadingLabel`](#loadinglabel)
+   - [`#initialize(settings)`](#initialize-settings)
+   - [`#render()`](#render)
+   - [`#showLoader()`](#showloader)
+   - [`#hideLoader()`](#hideloader)
+   - [`#toggleLoader()`](#toggleloader)
+ + [`LoadingView`](#loadingview)
+
+
+## `loadingMixin` <a name="loadingmixin"></a>
+
+This mixin implements the API for displaying and hiding the loader.
+
+The general idea is to set up the view once during application's
+initialization, and then toggle the loader on and off as needed.
+
+The view currently does not implement any custom events or listeners, so if you
+want to toggle the loader using events, you will have to add the functionality
+yourself. Events will be added in a later version, but weren't needed thus far,
+so they are a low-priority target.
+
+### `#fadeTime`` <a name="fadetime"></a>
+
+The overlay fade speed is controlled by this constant. It is set to 225ms by
+default.
+
+### `#spinner` <a name="spinner"></a>
+
+Defines the HTML for the spinner. By default, it's a FontAewsome spinning
+spinner icon. If you leave this property as `null`, it will retain the default
+spinner.
+
+### `#loadingLabel` <a name="loadinglabel"></a>
+
+Defines the text to use as the loading label. By default, it's 'loading...'.
+Leave this as `null` to keep it. You can also set it to a function which would
+be evaluated to obtain the label (e.g., if you need i18n support.
+
+### `#initialize(settings)` <a name="initialize-settings"></a>
+
+Sets `spinner` and `loadingLabel` properties from the same-named keys passed in
+through the `settings` argument.
+
+### `#render()` <a name="render"></a>
+
+Renders the loader HTML and customizes the spinner and label, and hides the
+loader.
+
+### `#showLoader()` <a name="showloader"></a>
+
+Shows the loader
+
+### `#hideLoader()` <a name="hideloader"></a>
+
+Hides the loader.
+
+### `#toggleLoader()` <a name="toggleloader"></a>
+
+Toggles the loader.
+
+## `LoadingView` <a name="loadingview"></a>
+
+For details of this view's API, see the documentation for
+[`loadingMixin`](#loadingmixin).

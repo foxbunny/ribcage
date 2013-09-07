@@ -1,0 +1,75 @@
+# Template view <a name="template-view"></a>
+
+This module implements the template view. This view eases the typical workflow
+of rendering a template.
+
+This module is in UMD module and creates `ribcage.views.templateView`,
+`ribcage.views.TemplateView`, `ribcage.viewMixins.TemplateView` if not used
+with an AMD module loader such as RequireJS.
+
+This module depends on Underscore and `ribcage.views.BaseView`.
+
+ + [`templateViewMixin`](#templateviewmixin)
+   - [`#templateSettings`](#templatesettings)
+   - [`#templateSource`](#templatesource)
+   - [`#template`](#template)
+   - [`#getContext()`](#getcontext)
+   - [`#beforeRender()`](#beforerender)
+   - [`#renderTemplate()`](#rendertemplate)
+   - [`#insertTemplate()`](#inserttemplate)
+   - [`#afterRender()`](#afterrender)
+   - [`#render()`](#render)
+ + [`TemplateView`](#templateview)
+
+
+## `templateViewMixin` <a name="templateviewmixin"></a>
+
+This mixin implements the API for the `TemplateView`.
+
+### `#templateSettings` <a name="templatesettings"></a>
+
+This property is passed in as template settings. The default value is `null`.
+If the template function you are using (default is Underscore template) takes
+extra settings, you can use this property to specify it.
+
+### `#templateSource` <a name="templatesource"></a>
+
+The template source to render. It provides a simple default for debugging
+purposes.
+
+### `#template` <a name="template"></a>
+
+Template to render. This method takes data and passes it to Underscore's
+`#template()` method. The default implementation renders the `#templateSource`
+property.
+
+### `#getContext()` <a name="getcontext"></a>
+
+Returns template context data. Should return an object whose keys will be used
+in the template's scope.
+
+### `#beforeRender()` <a name="beforerender"></a>
+
+Called before render performs its magic. Does nothing by default.
+
+### `#renderTemplate()` <a name="rendertemplate"></a>
+
+Render the template given a context.
+
+### `#insertTemplate()` <a name="inserttemplate"></a>
+
+Insert rendered template to DOM.
+
+### `#afterRender()` <a name="afterrender"></a>
+
+Called after rendering is finished. Does nothing by default.
+
+### `#render()` <a name="render"></a>
+
+Calls the pre- and post-rendering hooks, compiles the template, and attaches it
+to the DOM tree.
+
+## `TemplateView` <a name="templateview"></a>
+
+Please see the documentation for the [`templateViewMixin`](#templateviewmixin)
+for more information on the API that this view provides.

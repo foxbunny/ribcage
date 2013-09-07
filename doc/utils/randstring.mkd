@@ -1,0 +1,26 @@
+# Random string generator <a name="random-string-generator"></a>
+
+This module implements a very crude pseudo-random string generator. The random
+number generator used for randomization is the plain-old `Math.random`.
+
+This module is in UMD format and will create `ribcage.utils.randString` global
+if not used with an AMD loader such as RequireJS.
+
+This module has no external dependencies.
+
+   - [`getRandChar([charPool])`](#getrandchar-charpool)
+   - [`generateRandStr([len, charPool])`](#generaterandstr-len-charpool)
+
+
+### `getRandChar([charPool])` <a name="getrandchar-charpool"></a>
+
+Returns a random character from the `charPool` string. The `charPool` is
+optional and defaults to 'abcdef0123456789' (hex digits)
+
+### `generateRandStr([len, charPool])` <a name="generaterandstr-len-charpool"></a>
+
+Returns a string of `len` length that consists of characters from the
+`charPool` string.
+
+Both arguments are optional. `len` defaults to 20, and `charPool` defaults to
+`null` (internally, `getRandChar` is called, so its defaults are used).

@@ -1,0 +1,31 @@
+# Model view <a name="model-view"></a>
+
+This module implements a view for rendering a single module using the template
+view.
+
+This module is in UMD format and creates `ribcage.views.modelView`,
+`ribcage.view.ModelView` and `ribcage.viewMixins.ModelView` globals if not used
+with an AMD loader such as RequireJS.
+
+This module depends on `ribcage.views.TemplateView`.
+
+ + [`modelViewMixin`](#modelviewmixin)
+   - [`#getTemplateContext()`](#gettemplatecontext)
+ + [`ModelView`](#modelview)
+
+
+## `modelViewMixin` <a name="modelviewmixin"></a>
+
+This mixin implements the API for the `ModelView`.
+
+The view is almost identical to `TemplateView`, except that it adds the model
+to the template context.
+
+### `#getTemplateContext()` <a name="gettemplatecontext"></a>
+
+Adds the model attributes to template context.
+
+## `ModelView` <a name="modelview"></a>
+
+Please see the documentation for the `modelViewMixin` for more information on
+the API that this view provides.

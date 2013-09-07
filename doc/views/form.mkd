@@ -1,0 +1,225 @@
+# Base form view <a name="base-form-view"></a>
+
+This view provides the basic form-handling functionality. It handles the form's
+submit method, and provides hooks for validation and error display.
+
+This module is in UMD format and will create `ribcage.views.baseFormView`,
+`ribcage.views.BaseFormView`, and `ribcage.viewMixins.BaseFormView` globals if
+not used with an AMD loader such as RequireJS.
+
+This module depends on jQuery, Underscore, `ribcage.utils.serializeobject`,
+`ribcage.utils.deserializeform`, `ribcage.validators.mixins`, and
+`ribcage.views.TemplateView`.
+
+ + [`baseFormViewMixin`](#baseformviewmixin)
+   - [`#errorClass`](#errorclass)
+   - [`#formErrorClass`](#formerrorclass)
+   - [`#fieldErrorClass`](#fielderrorclass)
+   - [`#inputErrorClass`](#inputerrorclass)
+   - [`#validateOnInput`](#validateoninput)
+   - [`#__form`](#form)
+   - [`#getForm()](#getform)
+   - [`#getFormData()`](#getformdata)
+   - [`#setFormData(data)`](#setformdata-data)
+   - [`#validateForm(form)`](#validateform-form)
+   - [`#fieldInvalid(input, errors)`](#fieldinvalid-input-errors)
+   - [`#validateField(input, name, value, data)`](#validatefield-input-name-value-data)
+   - [`#errorMessage(data)`](#errormessage-data)
+   - [`#clearErrors()`](#clearerrors)
+   - [`#clearFieldErrors(input)`](#clearfielderrors-input)
+   - [`#insertErrorMessage(input, [msgs])`](#inserterrormessage-input-msgs)
+   - [`#insertFormErrors(msgs)`](#insertformerrors-msgs)
+   - [`#insertErrorMessages(err)`](#inserterrormessages-err)
+   - [`#formInvalid(err)`](#forminvalid-err)
+   - [`#formValid(form, data)`](#formvalid-form-data)
+   - [`#disableButtons()`](#disablebuttons)
+   - [`#enableButtons()`](#enablebuttons)
+   - [`#beforeSubmit()`](#beforesubmit)
+   - [`#afterSubmit()`](#aftersubmit)
+   - [`#events`](#events)
+   - [`#submit(e)`](#submit-e)
+   - [`#onFieldChange(e)`](#onfieldchange-e)
+ + [`BaseFormView`](#baseformview)
+
+
+## `baseFormViewMixin` <a name="baseformviewmixin"></a>
+
+This mixin implements the [`BaseFormView`](#baseformview) view's API. It mixes
+in the `validatingMixin` to provide input validation facilities.
+
+### `#errorClass` <a name="errorclass"></a>
+
+This is a HTML class added to all form and field errors displayed in the form.
+
+### `#formErrorClass` <a name="formerrorclass"></a>
+
+This is a HTML class that is added to all form errors.
+
+### `#fieldErrorClass` <a name="fielderrorclass"></a>
+
+This is a HTML class added to all field errors.
+
+### `#inputErrorClass` <a name="inputerrorclass"></a>
+
+This is a HTML class added to individual inputs that have errors.
+
+### `#validateOnInput` <a name="validateoninput"></a>
+
+Whether to perform validation immediately on field change. Defaults to `false`.
+
+### `#__form` <a name="form"></a>
+
+Holds cached jQuery selector for the form.
+
+This is an internal implementation detail. Do not rely on presence or internal
+usage of this property.
+
+### `#getForm() <a name="getform"></a>
+
+Returns the form element rendered in this view
+
+### `#getFormData()` <a name="getformdata"></a>
+
+Serializes a form to a JavaScript object and returns the object.
+
+### `#setFormData(data)` <a name="setformdata-data"></a>
+
+Deserializes `data` object into the form.
+
+### `#validateForm(form)` <a name="validateform-form"></a>
+
+Perform validation on the form and return an array containing the error object
+and form data.
+
+The error object is expected to map field names to an array of error messages.
+A special `__all` key can be used to specify messages that apply to the entire
+form.
+
+Internally, this method calls the `#clean()` method, which is part of the
+`validatingMixin` mixin and passes it the serialized form data.
+
+### `#fieldInvalid(input, errors)` <a name="fieldinvalid-input-errors"></a>
+
+Called when field fails validation. By default, it inserts error messages next
+to fields.
+
+### `#validateField(input, name, value, data)` <a name="validatefield-input-name-value-data"></a>
+
+Validates a single field in a `change` or `input` callback (as the field) value
+is updated. It calls the `validatingMixin`'s `#applyValidators()` method, and
+then the `#fieldInvalid()` method if field has errors.
+
+### `#errorMessage(data)` <a name="errormessage-data"></a>
+
+Generates HTML to be inserted as error message. The `data` argument should be
+an object with three keys: `id`, `msg`, and `cls`. The `id` and `cls` keys are
+optional, and will default to `null` and 'error' respectively. The `msg` key is
+optional, too, but will be left `undefined` if you do not provide it, and will
+show up as 'undefined' in the final HTML.
+
+The reason we use an object as the argument is to make the method compatible
+with compiled Underscore.js templates. Naturally, you can override this method
+with an actual template if you prefer. Keep in mind that the default will no
+longer be used if you do so, unless you've specified defaults in your template.
+
+### `#clearErrors()` <a name="clearerrors"></a>
+
+Remove all errors from the form. It is assumed that all error messages have a
+wrapper element wit the class matching `this.errorClass`.
+
+It also removes the error class from inputs.
+
+### `#clearFieldErrors(input)` <a name="clearfielderrors-input"></a>
+
+Removes all errors that are siblings of a given input. This doesn't work if all
+inputs and all errors are siblings. Please be sure to add appropriate structure
+to your form.
+
+### `#insertErrorMessage(input, [msgs])` <a name="inserterrormessage-input-msgs"></a>
+
+Insert a list of error messages after the specified input. The `msgs` argument
+is optional, and defaults to ['Invalid value']. Otherwise, it should be an
+array of error messages for the field.
+
+The `msgs` argument can also be a single string.
+
+### `#insertFormErrors(msgs)` <a name="insertformerrors-msgs"></a>
+
+Insert a list of error messages after the specified input.
+
+`msgs` is required, and should be an array of messages. If it is not an array,
+it will be converted to one.
+
+### `#insertErrorMessages(err)` <a name="inserterrormessages-err"></a>
+
+Takes an object with error messages for the given form, and renders them next
+to the fields.
+
+The `err` object is expected to map field names to an array of error messages.
+A special `__all` key can be used to specify messages that apply to the entire
+form.
+
+### `#formInvalid(err)` <a name="forminvalid-err"></a>
+
+Handles the invalid form submission. By default, it simply renders the form
+errors.
+
+### `#formValid(form, data)` <a name="formvalid-form-data"></a>
+
+Handles the valid form submission. Does nothing by default.
+
+You need to overload this method to make this entire view useful.
+
+### `#disableButtons()` <a name="disablebuttons"></a>
+
+Disables form buttons (both button and input elements of type 'submit').
+
+### `#enableButtons()` <a name="enablebuttons"></a>
+
+Enables form buttons (both button and input elements of type 'submit').
+
+### `#beforeSubmit()` <a name="beforesubmit"></a>
+
+Called before form is submitted. Has no arguments, and return value is not used
+by the view.
+
+Default implementation disables the submit button by calling
+[`#disableButtons()`](#disablebuttons)
+
+### `#afterSubmit()` <a name="aftersubmit"></a>
+
+Called after either [`#formValid()`](#formvalid-data) or
+[`#formInvalid()`](#forminvalid-err) have returned.  Has no arguments, and
+return value is not used.
+
+This function is called at the end of the [`#submit()`](#submit-e) call. This
+is by no means a guarantee that any asynchronous operations in the callback
+have finished. For example, if you are doing an AJAX request in
+[`#formValid()`](#formvalid-data), this method will likely be invoked well
+before the AJAX request has completed.
+
+Default implementation enables the submit button by calling
+[`#enableButtons()`](#enablebuttons).
+
+### `#events` <a name="events"></a>
+
+Event mappings.
+
+### `#submit(e)` <a name="submit-e"></a>
+
+Form submit event handler.
+
+This is an internal implementation detail, and you generally should not
+override this.
+
+### `#onFieldChange(e)` <a name="onfieldchange-e"></a>
+
+Form input change event handler.
+
+This is an internal implementation detail, and you generally should not
+override this.
+
+## `BaseFormView` <a name="baseformview"></a>
+
+Please see the documentation for the [`baseFormViewMixin`](#baseformviewmixin)
+for more information on the API that this view provides.

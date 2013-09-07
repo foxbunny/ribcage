@@ -1,0 +1,50 @@
+# Serialize form to object <a name="serialize-form-to-object"></a>
+
+This module provides a helper method to serialize form into an object. The
+helper method is also attached to jQuery as both a `jQuery.serializeForm`
+method as well as `jQuery.fn.serializeForm` method.
+
+The model is in UMD format, and will create a `ribcage.utils.serializeForm`
+global if not used with an AMD loader such as RequireJS.
+
+This module depends on jQuery and Underscore.
+
+ + [`jQuery.serializeObject(form)`](#jquery-serializeobject-form)
+ + [`.serializeObject()`](#serializeobject)
+
+
+## `jQuery.serializeObject(form)` <a name="jquery-serializeobject-form"></a>
+
+Returns an object containing form data for a form represented by `form`
+selector or jQuery object.
+
+If there are multiple values with the same name (such as multi-select input),
+they are converted to arrays.
+
+Example:
+
+    <form id="myform>
+      <input name="name" value="John Doe">
+      <input name="age" value="12">
+    </form>
+
+
+    $.serializeObject('#myForm');
+    // returns {name: 'John Doe', age: '12'}
+
+
+## `.serializeObject()` <a name="serializeobject"></a>
+
+Serializes the selected form into an object. This is a wrapper around
+`$.serializeForm()`.
+
+Example:
+
+    <form id="myform>
+      <input name="name" value="John Doe">
+      <input name="age" value="12">
+    </form>
+
+
+    $('#myform').serializeObject();
+    // returns {name: 'John Doe', age: '12'}

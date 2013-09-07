@@ -1,0 +1,27 @@
+# Base collection <a name="base-collection"></a>
+
+This module implements the common API for all Ribcage collections. All Ribcage
+collections should extend this collection.
+
+This module is in UMD format and will create
+`ribcage.collections.baseCollection`, `ribcage.collections.BaseCollection`, and
+`ribcage.collectionMixins.BaseCollection` globals if not used with an AMD
+loader such as RequireJS.
+
+This module depends on Backbone
+
+ + [`baseCollectionMixin`](#basecollectionmixin)
+ + [`BaseCollection`](#basecollection)
+
+
+## `baseCollectionMixin` <a name="basecollectionmixin"></a>
+
+Mixin that implements the functionality of the `BaseCollection` constructor.
+
+It is currently just a stub, but you should generally extend `BaseCollection`
+constructor to build all Ribcage constructors.
+
+## `BaseCollection` <a name="basecollection"></a>
+
+Please see the documentation on [`baseCollectionMixin`](#basecollectionmixin)
+for more information about this collection.
