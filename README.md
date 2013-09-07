@@ -67,10 +67,10 @@ there's a whole project to be minified?
 Please see the [Ribcage wiki](https://github.com/foxbunny/ribcage/wiki) for 
 introductory and cookbook articles.
 
-Until we set up a proper API documentation page, please look at the
-CoffeeScript sources. They are well-documented and the final documentation will
-be generated from them anyway. (Incidentally, if you know of a good
-documentation generator that actually works, please let me know.)
+The complete API documentation is available in markdown format in the [`doc`
+directory](https://github.com/foxbunny/ribcage/tree/master/doc). The directory
+layout reflects the layout of the `src` directory as each source code file
+generates one matching Markdown document.
 
 ## Reporting bugs
 
