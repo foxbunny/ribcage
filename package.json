@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "volo": "*",
-    "coffee-script": "1.6.3"
+    "coffee-script": "1.6.3",
+    "dahelpers": "*"
   },
   "main": "main.js",
   "volo": {
@@ -31,10 +32,13 @@
     "ignore": [
       "package.json",
       ".gitignore",
+      "CHANGES.md",
       "README.md",
       "LICENSE",
       "volofile",
-      "src"
+      "src",
+      "doc",
+      "tools"
     ]
   },
   "version" : "0.3.1"
