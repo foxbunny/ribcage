@@ -4,31 +4,37 @@
 @license MIT
 */
 
-var _this = this;
+var define;
 
-if (typeof define !== 'function' || !define.amd) {
-  this.require = function(dep) {
-    return (function() {
-      switch (dep) {
-        case 'underscore':
-          return _this._;
-        case './localstorage':
-          return _this.ribcage.utils.LocalStorage;
-        default:
-          return null;
-      }
-    })() || (function() {
-      throw new Error("Unmet dependency " + dep);
-    })();
-  };
-  this.define = function(factory) {
-    return _this.ribcage.utils.LocalStore = factory(_this.require);
-  };
-}
+define = (function(root) {
+  var require,
+    _this = this;
+  if (typeof root.define === 'function' && root.define.amd) {
+    return root.define;
+  } else {
+    require = function(dep) {
+      return (function() {
+        switch (dep) {
+          case 'dahelpers':
+            return _this.dahelpers;
+          case './localstorage':
+            return _this.ribcage.utils.LocalStorage;
+          default:
+            return null;
+        }
+      })() || (function() {
+        throw new Error("Unmet dependency " + dep);
+      })();
+    };
+    return function(factory) {
+      return root.ribcage.utils.LocalStore = factory(require);
+    };
+  }
+})(this);
 
 define(function(require) {
-  var EMPTY, LocalStorage, LocalStore, randString, _;
-  _ = require('underscore');
+  var EMPTY, LocalStorage, LocalStore, extend, randString, toArray, type, _ref;
+  _ref = require('dahelpers'), extend = _ref.extend, toArray = _ref.toArray, type = _ref.type;
   LocalStorage = require('./localstorage');
   randString = require('./randstring');
   EMPTY = {
@@ -105,7 +111,7 @@ define(function(require) {
     LocalStore.prototype.patchItem = function(idx, data) {
       var patchedData, store;
       store = this.getStore();
-      patchedData = _.extend(store.data[idx], data);
+      patchedData = extend(store.data[idx], data);
       store.data[idx] = patchedData;
       this.storage.setItem(this.key, store);
       return patchedData;
@@ -147,9 +153,7 @@ define(function(require) {
 
     LocalStore.prototype.createAll = function(data, noFail) {
       var createdData, e, index, item, _i, _len;
-      if (!_.isArray(data)) {
-        data = [data];
-      }
+      data = toArray(data);
       this.setRestorePoint();
       createdData = [];
       try {
@@ -172,9 +176,7 @@ define(function(require) {
 
     LocalStore.prototype.updateAll = function(data) {
       var e, id, index, item, updatedData, _i, _len;
-      if (!_.isArray(data)) {
-        data = [data];
-      }
+      data = toArray(data);
       this.setRestorePoint();
       updatedData = [];
       try {
@@ -198,9 +200,7 @@ define(function(require) {
 
     LocalStore.prototype.patchAll = function(data) {
       var e, id, item, patchedData, _i, _len;
-      if (!_.isArray(data)) {
-        data = [data];
-      }
+      data = toArray(data);
       this.setRestorePoint();
       patchedData = [];
       try {
@@ -267,7 +267,7 @@ define(function(require) {
     };
 
     LocalStore.prototype.POST = function(id, data, noFail) {
-      if (_.isArray(data)) {
+      if (type(data, 'array')) {
         return this.createAll(data, noFail);
       } else {
         return this.createOne(data, noFail);

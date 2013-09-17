@@ -12,23 +12,27 @@
 # global if not used with an AMD loader such as RequireJS.
 #
 
-if typeof define isnt 'function' or not define.amd
-  @require = (dep) =>
-    (() =>
-      switch dep
-        when 'underscore' then @_
-        when './localstorage' then @ribcage.utils.LocalStorage
-        else null
-    )() or throw new Error "Unmet dependency #{dep}"
-  @define = (factory) =>
-    @ribcage.utils.LocalStore = factory @require
+define = ((root) ->
+  if typeof root.define is 'function' and root.define.amd
+    root.define
+  else
+    require = (dep) =>
+      (() =>
+        switch dep
+          when 'dahelpers' then @dahelpers
+          when './localstorage' then @ribcage.utils.LocalStorage
+          else null
+      )() or throw new Error "Unmet dependency #{dep}"
+    (factory) =>
+      root.ribcage.utils.LocalStore = factory require
+) this
 
 define (require) ->
 
-  # This module depends on Underscore, `ribcage.utils.LocalStorage`, and
+  # This module depends on DaHelpers, `ribcage.utils.LocalStorage`, and
   # `ribcage.utils.randString`.
   #
-  _ = require 'underscore'
+  {extend, toArray, type} = require 'dahelpers'
   LocalStorage = require './localstorage'
   randString = require './randstring'
 
@@ -168,7 +172,7 @@ define (require) ->
     #
     patchItem: (idx, data) ->
       store = @getStore()
-      patchedData = _.extend store.data[idx], data
+      patchedData = extend store.data[idx], data
       store.data[idx] = patchedData
       @storage.setItem @key, store
       patchedData
@@ -237,7 +241,7 @@ define (require) ->
     # back to the state before creation of the first item.
     #
     createAll: (data, noFail) ->
-      data = [data] if not _.isArray data
+      data = toArray data
       @setRestorePoint()
       createdData = []
       try
@@ -265,7 +269,7 @@ define (require) ->
     # The store will be rolled back if an item fails to update.
     #
     updateAll: (data) ->
-      data = [data] if not _.isArray data
+      data = toArray data
       @setRestorePoint()
       updatedData = []
       try
@@ -295,7 +299,7 @@ define (require) ->
     # back to the state before patching of the first item.
     #
     patchAll: (data) ->
-      data = [data] if not _.isArray data
+      data = toArray data
       @setRestorePoint()
       patchedData = []
       try
@@ -377,7 +381,7 @@ define (require) ->
     # [`#createOne()`](#createone-data-nofail) method.
     #
     POST: (id, data, noFail) ->
-      if _.isArray data then @createAll data, noFail
+      if type(data, 'array') then @createAll data, noFail
       else @createOne data, noFail
 
     # ### `#PATCH(id, data)`
@@ -441,3 +445,8 @@ define (require) ->
         success this[type.toUpperCase()] id, data, noFail
       catch e
         error e
+
+  # ## Exports
+  #
+  # This module exports the `LocalStore` constructor.
+  #
