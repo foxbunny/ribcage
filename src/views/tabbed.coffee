@@ -25,7 +25,7 @@ define = ((root) ->
     require = (dep) =>
       (() =>
         switch dep
-          when 'ribcage/views/template' then @ribcage.views.templateView
+          when 'ribcage/views/template' then root.ribcage.views.templateView
           else null
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) =>
