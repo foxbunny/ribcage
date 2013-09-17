@@ -7,10 +7,11 @@ method as well `jQuery.fn.deserializeForm` method.
 This model is in UMD format, and will create a `ribcage.utils.deserializeForm`
 global if not used with an AMD loader such as RequireJS.
 
-This module depends on jQuery and Underscore.
+This module depends on jQuery.
 
  + [`jQuery.deserializeForm(form, data)`](#jquery-deserializeform-form-data)
  + [`.deserializeForm(data)`](#deserializeform-data)
+ + [Exports](#exports)
 
 
 ## `jQuery.deserializeForm(form, data)` <a name="jquery-deserializeform-form-data"></a>
@@ -48,3 +49,8 @@ Example:
       name: 'John Doe',
       age: 22
     });
+
+
+## Exports <a name="exports"></a>
+
+This module exports the `jQuery.deserializeForm` method.

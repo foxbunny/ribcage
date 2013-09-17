@@ -7,8 +7,8 @@ This model is in UMD format, and will create a
 `ribcage.modelMixins.LocalStorageModel` globals if not used with an AMD loader
 such as RequireJS.
 
-This model depends on `ribcage.models.base`, and `ribcage.utils.localstorage`
-modules.
+This model depends on `ribcage/models/base`, `ribcage/utils/localstore`, and
+`ribcage/utils/localstorage` modules.
 
 The `LocalStorageModel` model uses  `LocalStorage` utiltiy class as an
 abstraction layer for `localStorage` API.
@@ -22,6 +22,7 @@ abstraction layer for `localStorage` API.
    - [`#makePersistent()`](#makepersistent)
    - [`#unpersist()`](#unpersist)
  + [`LocalStorageModel`](#localstoragemodel)
+ + [Exports](#exports)
 
 
 ## `localStorageModelmixin` <a name="localstoragemodelmixin"></a>
@@ -109,3 +110,7 @@ Note that calling this method does _not_ trigger the 'change' event.
 Please see the documentation on the
 [`localStorageModelMixin`](#localstoragemodelmixin) for more information about
 this model's API.
+
+## Exports <a name="exports"></a>
+
+This module exports `mixin` and `Model` properties.

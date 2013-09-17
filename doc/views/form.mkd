@@ -12,10 +12,6 @@ This module depends on jQuery, Underscore, `ribcage.utils.serializeobject`,
 `ribcage.views.TemplateView`.
 
  + [`baseFormViewMixin`](#baseformviewmixin)
-   - [`#errorClass`](#errorclass)
-   - [`#formErrorClass`](#formerrorclass)
-   - [`#fieldErrorClass`](#fielderrorclass)
-   - [`#inputErrorClass`](#inputerrorclass)
    - [`#validateOnInput`](#validateoninput)
    - [`#__form`](#form)
    - [`#getForm()`](#getform)
@@ -24,12 +20,6 @@ This module depends on jQuery, Underscore, `ribcage.utils.serializeobject`,
    - [`#validateForm(form)`](#validateform-form)
    - [`#fieldInvalid(input, errors)`](#fieldinvalid-input-errors)
    - [`#validateField(input, name, value, data)`](#validatefield-input-name-value-data)
-   - [`#errorMessage(data)`](#errormessage-data)
-   - [`#clearErrors()`](#clearerrors)
-   - [`#clearFieldErrors(input)`](#clearfielderrors-input)
-   - [`#insertErrorMessage(input, [msgs])`](#inserterrormessage-input-msgs)
-   - [`#insertFormErrors(msgs)`](#insertformerrors-msgs)
-   - [`#insertErrorMessages(err)`](#inserterrormessages-err)
    - [`#formInvalid(err)`](#forminvalid-err)
    - [`#formValid(form, data)`](#formvalid-form-data)
    - [`#disableButtons()`](#disablebuttons)
@@ -46,22 +36,6 @@ This module depends on jQuery, Underscore, `ribcage.utils.serializeobject`,
 
 This mixin implements the [`BaseFormView`](#baseformview) view's API. It mixes
 in the `validatingMixin` to provide input validation facilities.
-
-### `#errorClass` <a name="errorclass"></a>
-
-This is a HTML class added to all form and field errors displayed in the form.
-
-### `#formErrorClass` <a name="formerrorclass"></a>
-
-This is a HTML class that is added to all form errors.
-
-### `#fieldErrorClass` <a name="fielderrorclass"></a>
-
-This is a HTML class added to all field errors.
-
-### `#inputErrorClass` <a name="inputerrorclass"></a>
-
-This is a HTML class added to individual inputs that have errors.
 
 ### `#validateOnInput` <a name="validateoninput"></a>
 
@@ -108,56 +82,6 @@ to fields.
 Validates a single field in a `change` or `input` callback (as the field) value
 is updated. It calls the `validatingMixin`'s `#applyValidators()` method, and
 then the `#fieldInvalid()` method if field has errors.
-
-### `#errorMessage(data)` <a name="errormessage-data"></a>
-
-Generates HTML to be inserted as error message. The `data` argument should be
-an object with three keys: `id`, `msg`, and `cls`. The `id` and `cls` keys are
-optional, and will default to `null` and 'error' respectively. The `msg` key is
-optional, too, but will be left `undefined` if you do not provide it, and will
-show up as 'undefined' in the final HTML.
-
-The reason we use an object as the argument is to make the method compatible
-with compiled Underscore.js templates. Naturally, you can override this method
-with an actual template if you prefer. Keep in mind that the default will no
-longer be used if you do so, unless you've specified defaults in your template.
-
-### `#clearErrors()` <a name="clearerrors"></a>
-
-Remove all errors from the form. It is assumed that all error messages have a
-wrapper element wit the class matching `this.errorClass`.
-
-It also removes the error class from inputs.
-
-### `#clearFieldErrors(input)` <a name="clearfielderrors-input"></a>
-
-Removes all errors that are siblings of a given input. This doesn't work if all
-inputs and all errors are siblings. Please be sure to add appropriate structure
-to your form.
-
-### `#insertErrorMessage(input, [msgs])` <a name="inserterrormessage-input-msgs"></a>
-
-Insert a list of error messages after the specified input. The `msgs` argument
-is optional, and defaults to ['Invalid value']. Otherwise, it should be an
-array of error messages for the field.
-
-The `msgs` argument can also be a single string.
-
-### `#insertFormErrors(msgs)` <a name="insertformerrors-msgs"></a>
-
-Insert a list of error messages after the specified input.
-
-`msgs` is required, and should be an array of messages. If it is not an array,
-it will be converted to one.
-
-### `#insertErrorMessages(err)` <a name="inserterrormessages-err"></a>
-
-Takes an object with error messages for the given form, and renders them next
-to the fields.
-
-The `err` object is expected to map field names to an array of error messages.
-A special `__all` key can be used to specify messages that apply to the entire
-form.
 
 ### `#formInvalid(err)` <a name="forminvalid-err"></a>
 

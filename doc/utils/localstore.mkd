@@ -6,7 +6,7 @@ to, and mostly compatible with `jQuery.ajax`.
 This module is in UMD format and will create a `ribcage.utils.LocalStore`
 global if not used with an AMD loader such as RequireJS.
 
-This module depends on Underscore, `ribcage.utils.LocalStorage`, and
+This module depends on DaHelpers, `ribcage.utils.LocalStorage`, and
 `ribcage.utils.randString`.
 
  + [`LocalStore(key, storage, [idProperty])`](#localstore-key-storage-idproperty)
@@ -38,6 +38,7 @@ This module depends on Underscore, `ribcage.utils.LocalStorage`, and
    - [`#PATCH(id, data)`](#patch-id-data)
    - [`#DELETE(id, data)`](#delete-id-data)
    - [`#query(url, settings)`](#query-url-settings)
+ + [Exports](#exports)
 
 
 ## `LocalStore(key, storage, [idProperty])` <a name="localstore-key-storage-idproperty"></a>
@@ -268,3 +269,7 @@ been changed and/or persisted.
 
 It is important to note that the callbacks are all _synchronous_. This means
 that a call to `#query()` will block until all operations are completed.
+
+## Exports <a name="exports"></a>
+
+This module exports the `LocalStore` constructor.

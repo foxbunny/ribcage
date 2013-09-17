@@ -11,6 +11,7 @@ This module depends on Backbone.
 
  + [`baseModelMixin`](#basemodelmixin)
  + [`BaseModel`](#basemodel)
+ + [Exports](#exports)
 
 
 ## `baseModelMixin` <a name="basemodelmixin"></a>
@@ -24,3 +25,7 @@ constructor to build all Ribcage models.
 
 Please see the documentation on [`baseModelMixin`](#basemodelmixin) for more
 information about this model.
+
+## Exports <a name="exports"></a>
+
+This module exports `mixin` and `Model` properties.

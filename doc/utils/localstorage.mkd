@@ -12,6 +12,7 @@ This module has no external dependencies.
    - [`#getItem(key, [raw])](#getitem-key-raw)
    - [`#setItem(key, value, [raw])`](#setitem-key-value-raw)
    - [`#removeItem(key)`](#removeitem-key)
+ + [Exports](#exports)
 
 
 ## `LocalStorage` <a name="localstorage"></a>
@@ -50,3 +51,7 @@ it's set to `true`.
 ### `#removeItem(key)` <a name="removeitem-key"></a>
 
 Removes data with given key from local storage.
+
+## Exports <a name="exports"></a>
+
+This module exports the `LocalStorage` constructor.

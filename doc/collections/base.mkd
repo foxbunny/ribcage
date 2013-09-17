@@ -12,6 +12,7 @@ This module depends on Backbone
 
  + [`baseCollectionMixin`](#basecollectionmixin)
  + [`BaseCollection`](#basecollection)
+ + [Exports](#exports)
 
 
 ## `baseCollectionMixin` <a name="basecollectionmixin"></a>
@@ -25,3 +26,7 @@ constructor to build all Ribcage constructors.
 
 Please see the documentation on [`baseCollectionMixin`](#basecollectionmixin)
 for more information about this collection.
+
+## Exports <a name="exports"></a>
+
+This module exports `mixin` and `Collection` properties.

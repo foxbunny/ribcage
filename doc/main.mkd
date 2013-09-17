@@ -45,6 +45,8 @@ include:
 
  + `BaseView` - A view that provides the base functionality of all Ribcage
    views
+ + `FormErrorView` - Provides hooks for displaying and clearing form error
+   messages
  + `BaseFormView` - Provides basic form manipulation and error handling
  + `ModelFormView` - Provides model-specific form behavior such as
    data-binding
