@@ -22,9 +22,6 @@ if typeof define isnt 'function' or not define.amd
       switch dep
         when 'jquery' then @$
         when 'dahelpers' then @dahelpers
-        when '../utils/searializeobject' then @ribcage.utils.serializeObject
-        when '../utils/deserializeform' then @ribcage.utils.deserializeForm
-        when '../validation/mixins' then @ribcage.validation.mixins
         when './template' then @ribcage.views.templateView
         else null
     )() or throw new Error "Unmet dependency #{dep}"

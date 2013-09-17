@@ -14,12 +14,6 @@ if (typeof define !== 'function' || !define.amd) {
           return _this.$;
         case 'dahelpers':
           return _this.dahelpers;
-        case '../utils/searializeobject':
-          return _this.ribcage.utils.serializeObject;
-        case '../utils/deserializeform':
-          return _this.ribcage.utils.deserializeForm;
-        case '../validation/mixins':
-          return _this.ribcage.validation.mixins;
         case './template':
           return _this.ribcage.views.templateView;
         default:
