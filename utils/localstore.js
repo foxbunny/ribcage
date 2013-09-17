@@ -16,9 +16,9 @@ define = (function(root) {
       return (function() {
         switch (dep) {
           case 'dahelpers':
-            return _this.dahelpers;
+            return root.dahelpers;
           case './localstorage':
-            return _this.ribcage.utils.LocalStorage;
+            return root.ribcage.utils.LocalStorage;
           default:
             return null;
         }

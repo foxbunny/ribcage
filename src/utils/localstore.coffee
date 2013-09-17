@@ -19,8 +19,8 @@ define = ((root) ->
     require = (dep) =>
       (() =>
         switch dep
-          when 'dahelpers' then @dahelpers
-          when './localstorage' then @ribcage.utils.LocalStorage
+          when 'dahelpers' then root.dahelpers
+          when './localstorage' then root.ribcage.utils.LocalStorage
           else null
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) =>
