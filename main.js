@@ -22,7 +22,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStore, baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, tabbedView, templateView;
+  var LocalStore, baseCollection, baseFormView, baseModel, baseView, collectionCreateView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, tabbedView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -31,6 +31,7 @@ define(function(require) {
   baseFormView = require('./views/form');
   modelFormView = require('./views/modelform');
   createView = require('./views/create');
+  collectionCreateView = require('./views/collectioncreate');
   templateView = require('./views/template');
   modelView = require('./views/model');
   redirectView = require('./views/redirect');
@@ -56,6 +57,7 @@ define(function(require) {
       BaseFormView: baseFormView.View,
       ModelFormView: modelFormView.View,
       CreateView: createView.View,
+      CollectionCreateView: collectionCreateView.View,
       TemplateView: templateView.View,
       ModelView: modelView.View,
       RedirectView: redirectView.View,
@@ -75,6 +77,7 @@ define(function(require) {
       BaseFormView: baseFormView.mixin,
       ModelFormView: modelFormView.mixin,
       CreateView: createView.mixin,
+      CollectionCreateView: collectionCreateView.mixin,
       TemplateView: templateView.mixin,
       ModelView: modelView.mixin,
       RedirectView: redirectView.mixin,

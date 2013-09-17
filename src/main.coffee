@@ -43,6 +43,7 @@ define (require) ->
   baseFormView = require './views/form'
   modelFormView = require './views/modelform'
   createView = require './views/create'
+  collectionCreateView = require './views/collectioncreate'
   templateView = require './views/template'
   modelView = require './views/model'
   redirectView = require './views/redirect'
@@ -97,6 +98,8 @@ define (require) ->
   #  + `ModelFormView` - Provides model-specific form behavior such as
   #    data-binding
   #  + `CreateView` - Simplifies creation of new model instances server-side
+  #  + `CollectionCreateView` - Create view that uses the collection object to
+  #    crate a new model.
   #  + `TemplateView` - Simplifies rendering of templates
   #  + `ModelView` - Augments `TemplateView` by passing model data to templates
   #  + `RedirectView` - Simply redirects to a specified path
@@ -109,6 +112,7 @@ define (require) ->
     BaseFormView: baseFormView.View
     ModelFormView: modelFormView.View
     CreateView: createView.View
+    CollectionCreateView: collectionCreateView.View
     TemplateView: templateView.View
     ModelView: modelView.View
     RedirectView: redirectView.View
@@ -146,6 +150,7 @@ define (require) ->
     BaseFormView: baseFormView.mixin
     ModelFormView: modelFormView.mixin
     CreateView: createView.mixin
+    CollectionCreateView: collectionCreateView.mixin
     TemplateView: templateView.mixin
     ModelView: modelView.mixin
     RedirectView: redirectView.mixin
