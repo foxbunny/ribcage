@@ -19,17 +19,16 @@ if typeof define isnt 'function' or not define.amd
     (() =>
       switch dep
         when 'jquery' then @jQuery
-        when 'underscore' then @_
         else null
     )() or throw new Error "Unmet dependency #{dep}"
   @define = (factory) =>
     @ribcage.utils.deserializeForm = factory @require
 
 define (require) ->
-  # This module depends on jQuery and Underscore.
+
+  # This module depends on jQuery.
   #
   $ = require 'jquery'
-  _ = require 'underscore'
 
   # ::TOC::
   #
@@ -93,4 +92,8 @@ define (require) ->
   $.fn.deserializeForm = (data) ->
     $.deserializeForm this, data
 
+  # ## Exports
+  #
+  # This module exports the `jQuery.deserializeForm` method.
+  #
   $.deserializeForm

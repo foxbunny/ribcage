@@ -12,8 +12,6 @@ if (typeof define !== 'function' || !define.amd) {
       switch (dep) {
         case 'jquery':
           return _this.jQuery;
-        case 'underscore':
-          return _this._;
         default:
           return null;
       }
@@ -27,9 +25,8 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var $, _;
+  var $;
   $ = require('jquery');
-  _ = require('underscore');
   $.deserializeForm = function(form, data) {
     form = $(form);
     form.find(':input').each(function() {
