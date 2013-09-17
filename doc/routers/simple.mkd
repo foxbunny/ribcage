@@ -18,6 +18,7 @@ This module depends on Backbone.
    - [`#register(view)`](#register-view)
    - [`#cleanup()`](#cleanup)
    - [`#back()`](#back)
+   - [`#start()`](#start)
  + [`SimpleRouter`](#simplerouter)
 
 
@@ -66,6 +67,11 @@ Simple wrapper for Router.navigate that also passes `{trigger: true}`.
 ### `#back()` <a name="back"></a>
 
 Simple alias for `window.history.back()`.
+
+### `#start()` <a name="start"></a>
+
+Shortcut for `Backbone.history.start()`. Any arguments are passed to
+`Backbone.history.start()` method.
 
 ## `SimpleRouter` <a name="simplerouter"></a>
 
