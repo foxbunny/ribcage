@@ -17,7 +17,7 @@ define = (function(root) {
       return (function() {
         switch (dep) {
           case 'ribcage/views/create':
-            return _this.ribcage.views.createView;
+            return root.ribcage.views.createView;
           default:
             return null;
         }

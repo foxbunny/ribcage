@@ -21,7 +21,7 @@ define = ((root) ->
     require = (dep) =>
       (() =>
         switch dep
-          when 'ribcage/views/create' then @ribcage.views.createView
+          when 'ribcage/views/create' then root.ribcage.views.createView
           else null
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) =>
