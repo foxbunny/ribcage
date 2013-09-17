@@ -22,9 +22,11 @@ if typeof define isnt 'function' or not define.amd
     @ribcage.models or= {}
     @ribcage.collections or= {}
     @ribcage.views or= {}
+    @ribcage.routers or= {}
     @ribcage.modelMixins or= {}
     @ribcage.collectionMixins or= {}
     @ribcage.viewMixins or= {}
+    @ribcage.routerMixins or= {}
     @ribcage.validators or= {}
     @ribcage.utils or= {}
 
@@ -49,6 +51,9 @@ define (require) ->
   redirectView = require './views/redirect'
   loadingView = require './views/loading'
   tabbedView = require './views/tabbed'
+
+  ## Routers
+  simpleRouter = require './routers/simple'
 
   ## Validators
   methods = require './validators/methods'
@@ -119,6 +124,17 @@ define (require) ->
     LoadingView: loadingView.View
     TabbedView: tabbedView.View
 
+  # ## Routers
+  #
+  # All router constructors are accessible thorugh `ribcage.routers` object.
+  # These include:
+  #
+  #  + `SimpleRouter` - A simple router with view registration and cleanup
+  #    logic.
+  #
+  routers:
+    SimpleRouter: simpleRouter.Router
+
   # ## Model mixins
   #
   # The `ribcage.modelMixins` object provides access to model mixins. These
@@ -156,6 +172,15 @@ define (require) ->
     RedirectView: redirectView.mixin
     LoadingView: loadingView.mixin
     TabbedView: tabbedView.mixin
+
+  # ## Router mixins
+  #
+  # The `ribcage.routerMixins` object contains router mixins. The mixins
+  # implement the base APIs for respective Ribcage routers. You can use them to
+  # create your own routers with features from different built-in routers.
+  #
+  routerMixins:
+    SimpleRouter: simpleRouter.mixin
 
   # ## Validators
   #

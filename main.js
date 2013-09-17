@@ -8,21 +8,23 @@ var _this = this;
 
 if (typeof define !== 'function' || !define.amd) {
   this.define = function(factory) {
-    var _base, _base1, _base2, _base3, _base4, _base5, _base6, _base7;
+    var _base, _base1, _base2, _base3, _base4, _base5, _base6, _base7, _base8, _base9;
     _this.ribcage || (_this.ribcage = {});
     (_base = _this.ribcage).models || (_base.models = {});
     (_base1 = _this.ribcage).collections || (_base1.collections = {});
     (_base2 = _this.ribcage).views || (_base2.views = {});
-    (_base3 = _this.ribcage).modelMixins || (_base3.modelMixins = {});
-    (_base4 = _this.ribcage).collectionMixins || (_base4.collectionMixins = {});
-    (_base5 = _this.ribcage).viewMixins || (_base5.viewMixins = {});
-    (_base6 = _this.ribcage).validators || (_base6.validators = {});
-    return (_base7 = _this.ribcage).utils || (_base7.utils = {});
+    (_base3 = _this.ribcage).routers || (_base3.routers = {});
+    (_base4 = _this.ribcage).modelMixins || (_base4.modelMixins = {});
+    (_base5 = _this.ribcage).collectionMixins || (_base5.collectionMixins = {});
+    (_base6 = _this.ribcage).viewMixins || (_base6.viewMixins = {});
+    (_base7 = _this.ribcage).routerMixins || (_base7.routerMixins = {});
+    (_base8 = _this.ribcage).validators || (_base8.validators = {});
+    return (_base9 = _this.ribcage).utils || (_base9.utils = {});
   };
 }
 
 define(function(require) {
-  var LocalStore, baseCollection, baseFormView, baseModel, baseView, collectionCreateView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, tabbedView, templateView;
+  var LocalStore, baseCollection, baseFormView, baseModel, baseView, collectionCreateView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, simpleRouter, tabbedView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -37,6 +39,7 @@ define(function(require) {
   redirectView = require('./views/redirect');
   loadingView = require('./views/loading');
   tabbedView = require('./views/tabbed');
+  simpleRouter = require('./routers/simple');
   methods = require('./validators/methods');
   mixins = require('./validators/mixins');
   serializeObject = require('./utils/serializeobject');
@@ -64,6 +67,9 @@ define(function(require) {
       LoadingView: loadingView.View,
       TabbedView: tabbedView.View
     },
+    routers: {
+      SimpleRouter: simpleRouter.Router
+    },
     modelMixins: {
       BaseModel: baseModel.mixin,
       LocalStorageModel: localStorageModel.mixin
@@ -83,6 +89,9 @@ define(function(require) {
       RedirectView: redirectView.mixin,
       LoadingView: loadingView.mixin,
       TabbedView: tabbedView.mixin
+    },
+    routerMixins: {
+      SimpleRouter: simpleRouter.mixin
     },
     validators: {
       methods: methods,
