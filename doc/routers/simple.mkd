@@ -1,0 +1,73 @@
+# SimpleRouter <a name="simplerouter"></a>
+
+This is a basic router that handles the most traditional case of routing
+different routes to matching handlers.
+
+Apart from standard Backbone router, this router also adds hooks for view
+registration and cleanup.
+
+This module is in UMD format and will create `ribcage.routers.simpleRouter`,
+`ribcage.routers.SimpleRouter`, and `ribcage.routerMixins.SimpleRouter` globals
+if not used with an AMD loader such as RequireJS.
+
+This module depends on Backbone.
+
+ + [`simpleRouterMixin`](#simpleroutermixin)
+   - [`#_activeViews`](#activeviews)
+   - [`#giveAccess(view)`](#giveaccess-view)
+   - [`#register(view)`](#register-view)
+   - [`#cleanup()`](#cleanup)
+   - [`#back()`](#back)
+ + [`SimpleRouter`](#simplerouter)
+
+
+## `simpleRouterMixin` <a name="simpleroutermixin"></a>
+
+This mixin implements the API of the `SimpleRouter`.
+
+### `#_activeViews` <a name="activeviews"></a>
+
+An array containing currently registered views.
+
+### `#giveAccess(view)` <a name="giveaccess-view"></a>
+
+During view registration, this method is called to give the view access to
+anything that view may need.
+
+The default implementation is rather liberal and simply adds a `router`
+attribute to the view which points to this router object. This gives views full
+access to the router, but the tradeoff is that it has more access than usually
+needed.
+
+You should generally consider overloading this method to give views just enough
+access to get the job done.
+
+### `#register(view)` <a name="register-view"></a>
+
+Registers a view object as active view.
+
+This method can be used to register your views. All registered views can be
+accessed by the router to perform such tasks as cleanup when changing routes.
+
+### `#cleanup()` <a name="cleanup"></a>
+
+Cleans up all registered views. Returns the router instance for chaining. You
+should generally call this whenever you are setting up a blank page from
+scratch.
+
+If the view implements a `#cleanup()` method, it will be called. You do not
+need to call view's `#remove()` method since that will be taken care of by the
+router's cleanup.
+
+Model cleanup Collection cleanup ### `#go(hash)`
+
+Simple wrapper for Router.navigate that also passes `{trigger: true}`.
+
+### `#back()` <a name="back"></a>
+
+Simple alias for `window.history.back()`.
+
+## `SimpleRouter` <a name="simplerouter"></a>
+
+Please see the documentation on [`simpleRouterMixin`](#simpleroutermixin) for
+more information about this router's API.

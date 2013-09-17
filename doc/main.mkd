@@ -11,9 +11,11 @@ loader such as RequireJS. Please load it _before_ any other Ribcage modules.
  + [Models](#models)
  + [Collections](#collections)
  + [Views](#views)
+ + [Routers](#routers)
  + [Model mixins](#model-mixins)
  + [Collection mixins](#collection-mixins)
  + [View mixins](#view-mixins)
+ + [Router mixins](#router-mixins)
  + [Validators](#validators)
  + [Utilities](#utilities)
 
@@ -60,6 +62,15 @@ include:
  + `TabbedView` - Subview container with tabbed navigation.
 
 
+## Routers <a name="routers"></a>
+
+All router constructors are accessible thorugh `ribcage.routers` object. These
+include:
+
+ + `SimpleRouter` - A simple router with view registration and cleanup
+   logic.
+
+
 ## Model mixins <a name="model-mixins"></a>
 
 The `ribcage.modelMixins` object provides access to model mixins. These mixins
@@ -77,6 +88,12 @@ features to your own collections.
 The `ribcage.viewMixins` object provides access to view mixins. The mixins
 implement the core APIs for all of the views, and mixins allow you to combine
 such functionality with your own custom views.
+
+## Router mixins <a name="router-mixins"></a>
+
+The `ribcage.routerMixins` object contains router mixins. The mixins implement
+the base APIs for respective Ribcage routers. You can use them to create your
+own routers with features from different built-in routers.
 
 ## Validators <a name="validators"></a>
 
