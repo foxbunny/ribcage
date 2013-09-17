@@ -36,6 +36,9 @@ define = ((root) ->
 ) this
 
 define (require) ->
+
+  # This module depends on `ribcage.views.TemplateView`.
+  #
   {View: TemplateView} = require 'ribcage/views/template'
 
   # ## `tabbedViewMixin`
