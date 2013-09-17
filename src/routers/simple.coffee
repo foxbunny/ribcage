@@ -138,6 +138,14 @@ define (require) ->
     back: () ->
       window.history.back()
 
+    # ### `#start()`
+    #
+    # Shortcut for `Backbone.history.start()`. Any arguments are passed to
+    # `Backbone.history.start()` method.
+    #
+    start: () ->
+      Backbone.history.start arguments...
+
   # ## `SimpleRouter`
   #
   # Please see the documentation on [`simpleRouterMixin`](#simpleroutermixin)

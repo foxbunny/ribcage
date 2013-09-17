@@ -86,6 +86,10 @@ define(function(require) {
     },
     back: function() {
       return window.history.back();
+    },
+    start: function() {
+      var _ref;
+      return (_ref = Backbone.history).start.apply(_ref, arguments);
     }
   };
   SimpleRouter = Backbone.Router.extend(simpleRouterMixin);
