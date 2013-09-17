@@ -21,6 +21,15 @@ mixin are now in a separate module. Views that need to show error messages in
 forms, but don't need any of the other `BaseFormView` functionality will now be
 able to take advantage of this change.
 
+### `TabbedView` added
+
+The new `TabbedView` superview that managed subviews with tabbed navigation.
+
+### `CollectionCreateView` added
+
+A view that simplifies creation of models from form data using the collection's
+`#create` method.
+
 ## 0.3.1
 
 ### Fixed typo in a require statement in the main module.
