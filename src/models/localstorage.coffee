@@ -17,7 +17,6 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'underscore' then @_
         when './base' then @ribcage.models.baseModel
         when '../utils/localstorage' then @ribcage.utils.LocalStorage
         when '../utils/localstore' then @ribcage.utils.LocalStore
@@ -30,10 +29,9 @@ if typeof define isnt 'function' or not define.amd
 
 define (require) ->
 
-  # This model depends on `ribcage.models.base`, and `ribcage.utils.localstorage`
-  # modules.
+  # This model depends on `ribcage/models/base`, `ribcage/utils/localstore`,
+  # and `ribcage/utils/localstorage` modules.
   #
-  _ = require 'underscore'
   baseModel = require './base'
   LocalStorage = require '../utils/localstorage'
   LocalStore = require '../utils/localstore'
@@ -186,6 +184,10 @@ define (require) ->
   #
   LocalStorageModel = baseModel.Model.extend localStorageModelMixin
 
+  # ## Exports
+  #
+  # This module exports `mixin` and `Model` properties.
+  #
   mixin: localStorageModelMixin
   Model: LocalStorageModel
 

@@ -11,8 +11,6 @@ if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
-        case 'underscore':
-          return _this._;
         case './base':
           return _this.ribcage.models.baseModel;
         case '../utils/localstorage':
@@ -35,8 +33,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStorage, LocalStorageModel, LocalStore, baseModel, localStorageModelMixin, storage, _;
-  _ = require('underscore');
+  var LocalStorage, LocalStorageModel, LocalStore, baseModel, localStorageModelMixin, storage;
   baseModel = require('./base');
   LocalStorage = require('../utils/localstorage');
   LocalStore = require('../utils/localstore');
