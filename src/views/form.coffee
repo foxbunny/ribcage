@@ -18,7 +18,7 @@ if typeof define isnt 'function' or not define.amd
     (() =>
       switch dep
         when 'jquery' then @$
-        when 'underscore' then @_
+        when 'dahelpers' then @dahelpers
         when '../utils/searializeobject' then @ribcage.utils.serializeObject
         when '../utils/deserializeform' then @ribcage.utils.deserializeForm
         when '../validation/mixins' then @ribcage.validation.mixins
@@ -32,16 +32,17 @@ if typeof define isnt 'function' or not define.amd
 
 define (require) ->
 
-  # This module depends on jQuery, Underscore, `ribcage.utils.serializeobject`,
+  # This module depends on jQuery, DaHelpers, `ribcage.utils.serializeobject`,
   # `ribcage.utils.deserializeform`, `ribcage.validators.mixins`, and
   # `ribcage.views.TemplateView`.
   #
   $ = require 'jquery'
-  _ = require 'underscore'
+  {extend} = require 'dahelpers'
   serializeObject = require '../utils/serializeobject'
   deserializeForm = require '../utils/deserializeform'
-  validationMixins = require '../validators/mixins'
-  templateView = require './template'
+  {validatingMixin} = require '../validators/mixins'
+  {mixin: formErrorMixin} = require './formerror'
+  {View: TemplateView} = require './template'
 
   # ::TOC::
   #
@@ -51,33 +52,7 @@ define (require) ->
   # This mixin implements the [`BaseFormView`](#baseformview) view's API. It
   # mixes in the `validatingMixin` to provide input validation facilities.
   #
-  baseFormViewMixin = _.extend {}, validationMixins.validatingMixin,
-
-    # ### `#errorClass`
-    #
-    # This is a HTML class added to all form and field errors displayed in the
-    # form.
-    #
-    errorClass: 'error'
-
-    # ### `#formErrorClass`
-    #
-    # This is a HTML class that is added to all form errors.
-    #
-    formErrorClass: 'error-form'
-
-    # ### `#fieldErrorClass`
-    #
-    # This is a HTML class added to all field errors.
-    #
-    fieldErrorClass: 'error-field'
-
-    # ### `#inputErrorClass`
-    #
-    # This is a HTML class added to individual inputs that have errors.
-    #
-    inputErrorClass: 'error-input'
-
+  baseFormViewMixin = extend {}, validatingMixin, formErrorMixin,
     # ### `#validateOnInput`
     #
     # Whether to perform validation immediately on field change. Defaults to
@@ -150,122 +125,13 @@ define (require) ->
       if errors.length
         @fieldInvalid(input, name, value, errors)
 
-    # ### `#errorMessage(data)`
-    #
-    # Generates HTML to be inserted as error message. The `data` argument should
-    # be an object with three keys: `id`, `msg`, and `cls`. The `id` and `cls`
-    # keys are optional, and will default to `null` and 'error' respectively.
-    # The `msg` key is optional, too, but will be left `undefined` if you do not
-    # provide it, and will show up as 'undefined' in the final HTML.
-    #
-    # The reason we use an object as the argument is to make the method
-    # compatible with compiled Underscore.js templates. Naturally, you can
-    # override this method with an actual template if you prefer. Keep in mind
-    # that the default will no longer be used if you do so, unless you've
-    # specified defaults in your template.
-    #
-    errorMessage: ({id, msg, cls}) ->
-      cls or= 'error'
-      s = '<span'
-      s += " id=\"#{id}\"" if id?
-      s + " class=\"#{cls}\">#{msg}</span>"
-
-    # ### `#clearErrors()`
-    #
-    # Remove all errors from the form. It is assumed that all error messages
-    # have a wrapper element wit the class matching `this.errorClass`.
-    #
-    # It also removes the error class from inputs.
-    #
-    clearErrors: () ->
-      form = @getForm()
-      form.find(".#{@errorClass}").remove()
-      form.find(".#{@inputErrorClass}").removeClass @inputErrorClass
-      form
-
-    # ### `#clearFieldErrors(input)`
-    #
-    # Removes all errors that are siblings of a given input. This doesn't work
-    # if all inputs and all errors are siblings. Please be sure to add
-    # appropriate structure to your form.
-    #
-    cleanFieldErrors: (input) ->
-      input = $ input
-      input.siblings(".#{errorClass}").remove()
-
-    # ### `#insertErrorMessage(input, [msgs])`
-    #
-    # Insert a list of error messages after the specified input. The `msgs`
-    # argument is optional, and defaults to ['Invalid value']. Otherwise, it
-    # should be an array of error messages for the field.
-    #
-    # The `msgs` argument can also be a single string.
-    #
-    insertErrorMessage: (input, msgs=['Invalid value']) ->
-      msgs = [msgs] if not _.isArray msgs
-      input = $ input
-
-      ## We need to iterate the reversed array because each message is rendered
-      ## right below the input, and therefore ends up at the top.
-      for msg in msgs.reverse()
-        input.after @errorMessage
-          msg: msg
-          cls: "#{@fieldErrorClass} #{@errorClass}"
-
-        input.addClass @inputErrorClass
-
-    # ### `#insertFormErrors(msgs)`
-    #
-    # Insert a list of error messages after the specified input.
-    #
-    # `msgs` is required, and should be an array of messages. If it is not an
-    # array, it will be converted to one.
-    #
-    insertFormErrors: (msgs) ->
-      msgs = [msgs] if not _.isArray msgs
-      form = @getForm()
-
-      ## We need to iterate the reversed array because each message is rendered
-      ## right at the top of the form.
-      for msg in msgs.reverse()
-        form.prepend @errorMessage
-          msg: msg
-          cls: "#{@formErrorClass} #{@errorClass}"
-
-    # ### `#insertErrorMessages(err)`
-    #
-    # Takes an object with error messages for the given form, and renders them
-    # next to the fields.
-    #
-    # The `err` object is expected to map field names to an array of error
-    # messages. A special `__all` key can be used to specify messages that
-    # apply to the entire form.
-    #
-    insertErrorMessages: (err) ->
-      form = @getForm()
-
-      @clearErrors()
-
-      return if not err?
-
-      if err.__all
-        @insertFormErrors err.__all
-
-      form.find(':input').each (idx, el) =>
-        input = $ el
-        name = input.attr 'name'
-        if err[name]
-          @insertErrorMessage input, err[name]
-
-      this # return this for chaining
-
     # ### `#formInvalid(err)`
     #
     # Handles the invalid form submission. By default, it simply renders the
     # form errors.
     #
     formInvalid: (err) ->
-      @insertErrorMessages err
+      @insertErrorMessages @getForm(), err
 
     # ### `#formValid(form, data)`
     #
@@ -339,9 +205,8 @@ define (require) ->
     #
     submit: (e) ->
       e.preventDefault()
-      @clearErrors()
+      @clearErrors @getForm()
       @beforeSubmit()
-      form = @getForm()
       [err, data] = @validate()
       if err
         @formInvalid err, data
@@ -374,7 +239,7 @@ define (require) ->
   # [`baseFormViewMixin`](#baseformviewmixin) for more
   # information on the API that this view provides.
   #
-  BaseFormView = templateView.View.extend baseFormViewMixin
+  BaseFormView = TemplateView.extend baseFormViewMixin
 
 
   mixin: baseFormViewMixin

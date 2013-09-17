@@ -22,11 +22,12 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStore, baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, templateView;
+  var LocalStore, baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
   baseView = require('./views/base');
+  formErrorView = require('./views/formerror');
   baseFormView = require('./views/form');
   modelFormView = require('./views/modelform');
   createView = require('./views/create');
@@ -50,6 +51,7 @@ define(function(require) {
     },
     views: {
       BaseView: baseView.View,
+      FormError: formErrorView.View,
       BaseFormView: baseFormView.View,
       ModelFormView: modelFormView.View,
       CreateView: createView.View,
@@ -67,6 +69,7 @@ define(function(require) {
     },
     viewMixins: {
       BaseView: baseView.mixin,
+      FormErrorView: formErrorView.mixin,
       BaseFormView: baseFormView.mixin,
       ModelFormView: modelFormView.mixin,
       CreateView: createView.mixin,

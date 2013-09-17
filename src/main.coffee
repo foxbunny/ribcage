@@ -39,6 +39,7 @@ define (require) ->
 
   ## Views
   baseView = require './views/base'
+  formErrorView = require './views/formerror'
   baseFormView = require './views/form'
   modelFormView = require './views/modelform'
   createView = require './views/create'
@@ -89,6 +90,8 @@ define (require) ->
   #
   #  + `BaseView` - A view that provides the base functionality of all Ribcage
   #    views
+  #  + `FormErrorView` - Provides hooks for displaying and clearing form error
+  #    messages
   #  + `BaseFormView` - Provides basic form manipulation and error handling
   #  + `ModelFormView` - Provides model-specific form behavior such as
   #    data-binding
@@ -100,6 +103,7 @@ define (require) ->
   #
   views:
     BaseView: baseView.View
+    FormError: formErrorView.View
     BaseFormView: baseFormView.View
     ModelFormView: modelFormView.View
     CreateView: createView.View
@@ -135,6 +139,7 @@ define (require) ->
   #
   viewMixins:
     BaseView: baseView.mixin
+    FormErrorView: formErrorView.mixin
     BaseFormView: baseFormView.mixin
     ModelFormView: modelFormView.mixin
     CreateView: createView.mixin

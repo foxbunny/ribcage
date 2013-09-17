@@ -12,8 +12,8 @@ if (typeof define !== 'function' || !define.amd) {
       switch (dep) {
         case 'jquery':
           return _this.$;
-        case 'underscore':
-          return _this._;
+        case 'dahelpers':
+          return _this.dahelpers;
         case '../utils/searializeobject':
           return _this.ribcage.utils.serializeObject;
         case '../utils/deserializeform':
@@ -38,18 +38,15 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var $, BaseFormView, baseFormViewMixin, deserializeForm, serializeObject, templateView, validationMixins, _;
+  var $, BaseFormView, TemplateView, baseFormViewMixin, deserializeForm, extend, formErrorMixin, serializeObject, validatingMixin;
   $ = require('jquery');
-  _ = require('underscore');
+  extend = require('dahelpers').extend;
   serializeObject = require('../utils/serializeobject');
   deserializeForm = require('../utils/deserializeform');
-  validationMixins = require('../validators/mixins');
-  templateView = require('./template');
-  baseFormViewMixin = _.extend({}, validationMixins.validatingMixin, {
-    errorClass: 'error',
-    formErrorClass: 'error-form',
-    fieldErrorClass: 'error-field',
-    inputErrorClass: 'error-input',
+  validatingMixin = require('../validators/mixins').validatingMixin;
+  formErrorMixin = require('./formerror').mixin;
+  TemplateView = require('./template').View;
+  baseFormViewMixin = extend({}, validatingMixin, formErrorMixin, {
     validateOnInput: false,
     __form: null,
     getForm: function() {
@@ -75,88 +72,8 @@ define(function(require) {
         return this.fieldInvalid(input, name, value, errors);
       }
     },
-    errorMessage: function(_arg) {
-      var cls, id, msg, s;
-      id = _arg.id, msg = _arg.msg, cls = _arg.cls;
-      cls || (cls = 'error');
-      s = '<span';
-      if (id != null) {
-        s += " id=\"" + id + "\"";
-      }
-      return s + (" class=\"" + cls + "\">" + msg + "</span>");
-    },
-    clearErrors: function() {
-      var form;
-      form = this.getForm();
-      form.find("." + this.errorClass).remove();
-      form.find("." + this.inputErrorClass).removeClass(this.inputErrorClass);
-      return form;
-    },
-    cleanFieldErrors: function(input) {
-      input = $(input);
-      return input.siblings("." + errorClass).remove();
-    },
-    insertErrorMessage: function(input, msgs) {
-      var msg, _i, _len, _ref, _results;
-      if (msgs == null) {
-        msgs = ['Invalid value'];
-      }
-      if (!_.isArray(msgs)) {
-        msgs = [msgs];
-      }
-      input = $(input);
-      _ref = msgs.reverse();
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        msg = _ref[_i];
-        input.after(this.errorMessage({
-          msg: msg,
-          cls: "" + this.fieldErrorClass + " " + this.errorClass
-        }));
-        _results.push(input.addClass(this.inputErrorClass));
-      }
-      return _results;
-    },
-    insertFormErrors: function(msgs) {
-      var form, msg, _i, _len, _ref, _results;
-      if (!_.isArray(msgs)) {
-        msgs = [msgs];
-      }
-      form = this.getForm();
-      _ref = msgs.reverse();
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        msg = _ref[_i];
-        _results.push(form.prepend(this.errorMessage({
-          msg: msg,
-          cls: "" + this.formErrorClass + " " + this.errorClass
-        })));
-      }
-      return _results;
-    },
-    insertErrorMessages: function(err) {
-      var form,
-        _this = this;
-      form = this.getForm();
-      this.clearErrors();
-      if (err == null) {
-        return;
-      }
-      if (err.__all) {
-        this.insertFormErrors(err.__all);
-      }
-      form.find(':input').each(function(idx, el) {
-        var input, name;
-        input = $(el);
-        name = input.attr('name');
-        if (err[name]) {
-          return _this.insertErrorMessage(input, err[name]);
-        }
-      });
-      return this;
-    },
     formInvalid: function(err) {
-      return this.insertErrorMessages(err);
+      return this.insertErrorMessages(this.getForm(), err);
     },
     formValid: function(data) {},
     disableButtons: function() {
@@ -179,11 +96,10 @@ define(function(require) {
       'input :input': 'onFieldChange'
     },
     submit: function(e) {
-      var data, err, form, _ref;
+      var data, err, _ref;
       e.preventDefault();
-      this.clearErrors();
+      this.clearErrors(this.getForm());
       this.beforeSubmit();
-      form = this.getForm();
       _ref = this.validate(), err = _ref[0], data = _ref[1];
       if (err) {
         this.formInvalid(err, data);
@@ -209,7 +125,7 @@ define(function(require) {
       return true;
     }
   });
-  BaseFormView = templateView.View.extend(baseFormViewMixin);
+  BaseFormView = TemplateView.extend(baseFormViewMixin);
   return {
     mixin: baseFormViewMixin,
     View: BaseFormView
