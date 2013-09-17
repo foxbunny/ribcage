@@ -3,6 +3,24 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## Dev
+
+### Migration to DaHelpers
+
+The migration of the code base away from Underscore towards DaHelpers has been
+undertaken. Some of the code already uses DaHelpers while some still uses
+Underscore. Although this will ultimately mean that Ribcage will depend on both
+Underscore and DaHelpers, the ease of maintaining the code favors this
+direction. As a bonus, Ribcage projects will include DaHelpers, which is quite
+useful.
+
+### `BaseFormView` refactor
+
+The `BaseFormView` has been refactored, and the new `FormErrorView` and its
+mixin are now in a separate module. Views that need to show error messages in
+forms, but don't need any of the other `BaseFormView` functionality will now be
+able to take advantage of this change.
+
 ## 0.3.1
 
 ### Fixed typo in a require statement in the main module.
