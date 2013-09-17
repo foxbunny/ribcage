@@ -1,0 +1,73 @@
+# Collection create view <a name="collection-create-view"></a>
+
+This is an extension of the `CreateView` that uses a collection to create a new
+model, rather than saving a model object.
+
+This module is in UMD format and will create
+`ribcage.views.collectionCrateView`, `ribcage.views.CollectionCreateView`, and
+`ribcage.viewMixins.CollectionCreateView` globals if not used with an AMD
+loader such as RequrieJS.
+
+This module depends on `ribcage.views.CreateView`.
+
+ + [`collectionCreateViewMixin`](#collectioncreateviewmixin)
+   - [`#validate()`](#validate)
+   - [`#initialize(settings)`](#initialize-settings)
+   - [`#getModelData(data)`](#getmodeldata-data)
+   - [`#formValid(data)`](#formvalid-data)
+   - [`#inputChange(e)`](#inputchange-e)
+ + [`CollectionCreateView`](#collectioncreateview)
+
+
+## `collectionCreateViewMixin` <a name="collectioncreateviewmixin"></a>
+
+This mixin implements the API of the
+[`CollectionCreateView`](#collectioncreateview).
+
+It will perform validation using model's `#validate()` method and will crate
+the model using collection's `#create()` shortcut method.
+
+### `#validate()` <a name="validate"></a>
+
+Validates the form data using the model stored in `this.model` property.
+
+### `#initialize(settings)` <a name="initialize-settings"></a>
+
+The settings may contain a `model` key which will be used as the model
+constructor. The constructor will not be used to instantiate a new model
+object, but will still be used to validate the form data. This setting is not
+required if collection has a `model` attribute which points to a valid model
+constructor.
+
+If this setting is specified, and the collection does not have a `model`
+attribute, the specified setting will be assigned to the collection's
+attribute.
+
+If neither collection's `model` attribute nor the `model` setting are defined,
+an exception will be thrown.
+
+### `#getModelData(data)` <a name="getmodeldata-data"></a>
+
+Returns the attributes that will be used to create the model. This method can
+be used to clean the data before it is finally passed to collection's
+`#create()` method. Note that no validation will be performed on the data that
+is returned from this method. It is assumed that the validation performed on
+the form data is enough.
+
+Default implementation of this method simply returns the input.
+
+### `#formValid(data)` <a name="formvalid-data"></a>
+
+Crates the model by calling the collection's `#create()`.
+
+### `#inputChange(e)` <a name="inputchange-e"></a>
+
+Overloads the `ModelView`'s `#inputChange()` handler and removes the model
+update hoook. Since this view is not tied to a model instance, there is no need
+to update the model on input change.
+
+## `CollectionCreateView` <a name="collectioncreateview"></a>
+
+Please see the documentation on
+[`collectionCreateViewMixin`](#collectioncreateviewmixin) for more information
+about this view's API.

@@ -51,10 +51,13 @@ include:
  + `ModelFormView` - Provides model-specific form behavior such as
    data-binding
  + `CreateView` - Simplifies creation of new model instances server-side
+ + `CollectionCreateView` - Create view that uses the collection object to
+   crate a new model.
  + `TemplateView` - Simplifies rendering of templates
  + `ModelView` - Augments `TemplateView` by passing model data to templates
  + `RedirectView` - Simply redirects to a specified path
  + `LoadingView` - Displays an AJAX loading spinner
+ + `TabbedView` - Subview container with tabbed navigation.
 
 
 ## Model mixins <a name="model-mixins"></a>
