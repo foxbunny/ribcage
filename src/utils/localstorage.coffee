@@ -96,3 +96,8 @@ define () ->
     removeItem: (key) ->
       @localStorage.removeItem key
       true
+
+  # ## Exports
+  #
+  # This module exports the `LocalStorage` constructor.
+  #
