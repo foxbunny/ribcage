@@ -53,5 +53,9 @@ define (require) ->
   #
   BaseCollection = Backbone.Collection.extend baseCollectionMixin
 
+  # ## Exports
+  #
+  # This module exports `mixin` and `Collection` properties.
+  #
   mixin: baseCollectionMixin
   Collection: BaseCollection
