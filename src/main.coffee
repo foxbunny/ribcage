@@ -47,6 +47,7 @@ define (require) ->
   modelView = require './views/model'
   redirectView = require './views/redirect'
   loadingView = require './views/loading'
+  tabbedView = require './views/tabbed'
 
   ## Validators
   methods = require './validators/methods'
@@ -100,6 +101,7 @@ define (require) ->
   #  + `ModelView` - Augments `TemplateView` by passing model data to templates
   #  + `RedirectView` - Simply redirects to a specified path
   #  + `LoadingView` - Displays an AJAX loading spinner
+  #  + `TabbedView` - Subview container with tabbed navigation.
   #
   views:
     BaseView: baseView.View
@@ -111,6 +113,7 @@ define (require) ->
     ModelView: modelView.View
     RedirectView: redirectView.View
     LoadingView: loadingView.View
+    TabbedView: tabbedView.View
 
   # ## Model mixins
   #
@@ -147,6 +150,7 @@ define (require) ->
     ModelView: modelView.mixin
     RedirectView: redirectView.mixin
     LoadingView: loadingView.mixin
+    TabbedView: tabbedView.mixin
 
   # ## Validators
   #

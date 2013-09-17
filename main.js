@@ -22,7 +22,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStore, baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, templateView;
+  var LocalStore, baseCollection, baseFormView, baseModel, baseView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, tabbedView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -35,6 +35,7 @@ define(function(require) {
   modelView = require('./views/model');
   redirectView = require('./views/redirect');
   loadingView = require('./views/loading');
+  tabbedView = require('./views/tabbed');
   methods = require('./validators/methods');
   mixins = require('./validators/mixins');
   serializeObject = require('./utils/serializeobject');
@@ -58,7 +59,8 @@ define(function(require) {
       TemplateView: templateView.View,
       ModelView: modelView.View,
       RedirectView: redirectView.View,
-      LoadingView: loadingView.View
+      LoadingView: loadingView.View,
+      TabbedView: tabbedView.View
     },
     modelMixins: {
       BaseModel: baseModel.mixin,
@@ -76,7 +78,8 @@ define(function(require) {
       TemplateView: templateView.mixin,
       ModelView: modelView.mixin,
       RedirectView: redirectView.mixin,
-      LoadingView: loadingView.mixin
+      LoadingView: loadingView.mixin,
+      TabbedView: tabbedView.mixin
     },
     validators: {
       methods: methods,
