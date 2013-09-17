@@ -118,9 +118,7 @@ define(function(require) {
     };
 
     LocalStore.prototype.getIndexOf = function(id) {
-      var index;
-      index = this.getStore().index[id].index;
-      return index[id];
+      return this.getStore().index[id];
     };
 
     LocalStore.prototype.getIndexSafe = function(id) {

@@ -182,8 +182,7 @@ define (require) ->
     # Returns the index of an item with an ID of `id`.
     #
     getIndexOf: (id) ->
-      {index} = @getStore().index[id]
-      index[id]
+      @getStore().index[id]
 
     # ### `#getIndexSafe(id)`
     #
