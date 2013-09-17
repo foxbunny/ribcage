@@ -50,5 +50,9 @@ define (require) ->
   #
   BaseModel = Backbone.Model.extend baseModelMixin
 
+  # ## Exports
+  #
+  # This module exports `mixin` and `Model` properties.
+  #
   mixin: baseModelMixin
   Model: BaseModel
