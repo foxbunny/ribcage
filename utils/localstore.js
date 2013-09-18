@@ -222,7 +222,7 @@ define(function(require) {
       if (!index) {
         throw new Error("Object with ID " + id + " not found");
       }
-      return this.deleteItem(index);
+      return this.removeItem(index);
     };
 
     LocalStore.prototype.deleteAll = function(ids) {
@@ -238,7 +238,7 @@ define(function(require) {
         for (_i = 0, _len = ids.length; _i < _len; _i++) {
           id = ids[_i];
           index = this.getIndexOf(id);
-          this.deleteItem(index);
+          this.removeItem(index);
         }
       } catch (_error) {
         e = _error;

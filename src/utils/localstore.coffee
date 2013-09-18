@@ -319,7 +319,7 @@ define (require) ->
     deleteOne: (id) ->
       index = @getIndexOf id
       throw new Error "Object with ID #{id} not found" if not index
-      @deleteItem index
+      @removeItem index
 
     # ### `#deleteAll([ids])`
     #
@@ -337,7 +337,7 @@ define (require) ->
       try
         for id in ids
           index = @getIndexOf id
-          @deleteItem index
+          @removeItem index
       catch e
         @restore()
         throw new Error "Could not delete object with ID #{id}"
