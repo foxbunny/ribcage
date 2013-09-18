@@ -15,10 +15,8 @@ define = (function(root) {
     require = function(dep) {
       return (function() {
         switch (dep) {
-          case 'dahelpers':
-            return root.dahelpers;
-          case './localstorage':
-            return root.ribcage.utils.LocalStorage;
+          case './base':
+            return root.ribcage.views.baseView;
           default:
             return null;
         }
@@ -37,7 +35,8 @@ define = (function(root) {
 })(this);
 
 define(function(require) {
-  var FormExtraView, formExtraViewMixin;
+  var BaseView, FormExtraView, formExtraViewMixin;
+  BaseView = require('./base').View;
   formExtraViewMixin = {
     FOCUSABLE_INPUTS: 'input[type=text],input[type=date],input[type=number],input[type=email],textara,select',
     focusFirst: function(form) {

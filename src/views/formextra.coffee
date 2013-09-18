@@ -20,8 +20,7 @@ define = ((root) ->
     require = (dep) =>
       (() =>
         switch dep
-          when 'dahelpers' then root.dahelpers
-          when './localstorage' then root.ribcage.utils.LocalStorage
+          when './base' then root.ribcage.views.baseView
           else null
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) =>
@@ -32,6 +31,10 @@ define = ((root) ->
 ) this
 
 define (require) ->
+
+  # This module depends on `ribcage.views.BaseView`.
+  #
+  {View: BaseView} = require './base'
 
   # ## `formExtraViewMixin`
   #
