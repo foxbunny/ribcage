@@ -63,7 +63,7 @@ define(function(require) {
         data = {};
       }
       Model = this.getStateModel();
-      State = Mode.extend({
+      State = Model.extend({
         storageKey: this.storageKey,
         defaults: extend({}, this.defaultState, data)
       });
@@ -79,8 +79,14 @@ define(function(require) {
       return state;
     },
     initialize: function() {
-      this.state = initState();
+      this.state = this.initState();
       return BaseRouter.prototype.initialize.apply(this, arguments);
+    },
+    start: function() {
+      this.state.set({
+        started: true
+      });
+      return BaseRouter.prototype.start.call(this);
     }
   };
   StatefulRouter = BaseRouter.extend(statefulRouterMixin);

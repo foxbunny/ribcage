@@ -23,6 +23,7 @@ define = ((root) ->
     require = (dep) =>
       (() =>
         switch dep
+          when 'dahelpers' then root.dahelpers
           when 'backbone' then root.Backbone
           else null
       )() or throw new Error "Unmet dependency #{dep}"
@@ -35,8 +36,9 @@ define = ((root) ->
 
 define (require) ->
 
-  # This module depends on Backbone.
+  # This module depends on DaHelpers and Backbone.
   #
+  {type} = require 'dahelpers'
   Backbone = require 'backbone'
 
   # ::TOC::
@@ -78,8 +80,8 @@ define (require) ->
     # The settings may include an `autoCleanup` key which will override the
     # `#autoCleanup` property given a non-null value.
     #
-    initialize: ({autoCleanup}) ->
-      @autoCleanup = autoCleanup if autoCleanup?
+    initialize: (settings) ->
+      @autoCleanup = autoCleanup if settings?.autoCleanup?
 
       if @autoCleanup
         ## Set up the event handler for the `route` event and perofrm cleanup.

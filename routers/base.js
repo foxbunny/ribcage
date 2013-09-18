@@ -15,6 +15,8 @@ define = (function(root) {
     require = function(dep) {
       return (function() {
         switch (dep) {
+          case 'dahelpers':
+            return root.dahelpers;
           case 'backbone':
             return root.Backbone;
           default:
@@ -35,17 +37,16 @@ define = (function(root) {
 })(this);
 
 define(function(require) {
-  var Backbone, BaseRouter, baseRouterMixin;
+  var Backbone, BaseRouter, baseRouterMixin, type;
+  type = require('dahelpers').type;
   Backbone = require('backbone');
   baseRouterMixin = {
     _activeViews: [],
     autoCleanup: false,
     init: function() {},
-    initialize: function(_arg) {
-      var autoCleanup,
-        _this = this;
-      autoCleanup = _arg.autoCleanup;
-      if (autoCleanup != null) {
+    initialize: function(settings) {
+      var _this = this;
+      if ((settings != null ? settings.autoCleanup : void 0) != null) {
         this.autoCleanup = autoCleanup;
       }
       if (this.autoCleanup) {

@@ -128,7 +128,7 @@ define (require) ->
     #
     initState: (data={}) ->
       Model = @getStateModel()
-      State = Mode.extend
+      State = Model.extend
         storageKey: @storageKey
         defaults: extend {}, @defaultState, data
       state = new State id: @getStateId
@@ -144,8 +144,16 @@ define (require) ->
     # The same settings can be passed as for the `BaseRouter`.
     #
     initialize: () ->
-      @state = initState()
+      @state = @initState()
       BaseRouter::initialize.apply this, arguments
+
+    # ### `#start()`
+    #
+    # Starts the router and sets the `started` state to true.
+    #
+    start: () ->
+      @state.set started: true
+      BaseRouter::start.call this
 
   # ## `StatefulRouter`
   #
