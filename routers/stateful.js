@@ -62,9 +62,12 @@ define(function(require) {
       if (data == null) {
         data = {};
       }
+      if (this.stateStorageKey == null) {
+        throw new Error("The state storage key cannot be undefined or null.");
+      }
       Model = this.getStateModel();
       State = Model.extend({
-        storageKey: this.storageKey,
+        storageKey: this.stateStorageKey,
         defaults: extend({}, this.defaultState, data)
       });
       state = new State({

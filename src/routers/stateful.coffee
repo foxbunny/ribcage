@@ -127,9 +127,11 @@ define (require) ->
     # This method should return the created state model object.
     #
     initState: (data={}) ->
+      if not @stateStorageKey?
+        throw new Error "The state storage key cannot be undefined or null."
       Model = @getStateModel()
       State = Model.extend
-        storageKey: @storageKey
+        storageKey: @stateStorageKey
         defaults: extend {}, @defaultState, data
       state = new State id: @getStateId()
       state.save null, forceCreate: true
