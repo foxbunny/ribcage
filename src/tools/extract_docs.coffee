@@ -248,7 +248,7 @@ compile = (filename) ->
         toc += tocIndent + tocSymbol + ' [' + title + '](#' + hash + ')\n'
 
       ## Add the anchor to the actual heading
-      paragraph + ' ' + dahelpers.a '', name: hash
+      m[1] + ' ' + dahelpers.a title, name: hash
     else
       paragraph
 
