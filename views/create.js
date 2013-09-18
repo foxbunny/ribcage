@@ -44,7 +44,7 @@ define(function(require) {
       return window.location.hash = this.getRedirectPath();
     },
     onSaveError: function(xhr, status, msg) {
-      return this.insertErrorMessages({
+      return this.insertErrorMessages(this.getForm(), {
         __all: [this.getSaveErrorMessage(xhr, status, msg)]
       });
     },
