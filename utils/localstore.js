@@ -219,7 +219,7 @@ define(function(require) {
     LocalStore.prototype.deleteOne = function(id) {
       var index;
       index = this.getIndexOf(id);
-      if (!index) {
+      if (index == null) {
         throw new Error("Object with ID " + id + " not found");
       }
       return this.removeItem(index);

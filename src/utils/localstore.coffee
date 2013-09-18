@@ -318,7 +318,7 @@ define (require) ->
     #
     deleteOne: (id) ->
       index = @getIndexOf id
-      throw new Error "Object with ID #{id} not found" if not index
+      throw new Error "Object with ID #{id} not found" if not index?
       @removeItem index
 
     # ### `#deleteAll([ids])`
