@@ -24,7 +24,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, formErrorView, formExtraView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, statefulRouter, tabbedView, templateView;
+  var LocalStorage, LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, formErrorView, formExtraView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, statefulRouter, tabbedView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -47,6 +47,7 @@ define(function(require) {
   serializeObject = require('./utils/serializeobject');
   deserializeForm = require('./utils/deserializeform');
   randString = require('./utils/randstring');
+  LocalStorage = require('./utils/localstorage');
   LocalStore = require('./utils/localstore');
   return {
     models: {
@@ -108,6 +109,7 @@ define(function(require) {
       serializeObject: serializeObject,
       deserializeForm: deserializeForm,
       randString: randString,
+      LocalStorage: LocalStorage,
       LocalStore: LocalStore
     }
   };

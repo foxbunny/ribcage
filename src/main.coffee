@@ -65,6 +65,7 @@ define (require) ->
   serializeObject = require './utils/serializeobject'
   deserializeForm = require './utils/deserializeform'
   randString = require './utils/randstring'
+  LocalStorage = require './utils/localstorage'
   LocalStore = require './utils/localstore'
 
   # ## Models
@@ -72,10 +73,10 @@ define (require) ->
   # The models are accessible through the `ribcage.models` object. There are
   # two models that you can use:
   #
-  #  + `BaseModel` - Provides the base mode functionality common to all Ribcage
-  #    models (currently same as stock Backbone model).
-  #  + `LocalStorageModel` - Uses the browser's `localStorage` API to persist
-  #    the model data
+  #  + [`BaseModel`](models/base.mkd) - Provides the base mode functionality
+  #    common to all Ribcage models (currently same as stock Backbone model).
+  #  + [`LocalStorageModel`](models/localstorage.mkd) - Uses the browser's
+  #   `localStorage` API to persist the model data
   #
   models:
     BaseModel: baseModel.Model
@@ -86,8 +87,8 @@ define (require) ->
   # The `ribcage.collections` object exposes the Ribcage collections. These are
   # the available collections:
   #
-  #  + `BaseCollection` - Base collection functionality for all Ribcage
-  #    collections.
+  #  + [`BaseCollection`](collections/base.mkd) - Base collection functionality
+  #    for all Ribcage collections.
   #
   collections:
     BaseCollection: baseCollection.Collection
@@ -97,22 +98,28 @@ define (require) ->
   # All view constructors are accessible through the `ribcage.views` object.
   # These include:
   #
-  #  + `BaseView` - A view that provides the base functionality of all Ribcage
-  #    views
-  #  + `FormErrorView` - Provides hooks for displaying and clearing form error
-  #    messages
-  #  + `FormExtraView` - Provides utitlities for manipulating form behavior.
-  #  + `BaseFormView` - Provides basic form manipulation and error handling
-  #  + `ModelFormView` - Provides model-specific form behavior such as
-  #    data-binding
-  #  + `CreateView` - Simplifies creation of new model instances server-side
-  #  + `CollectionCreateView` - Create view that uses the collection object to
-  #    crate a new model.
-  #  + `TemplateView` - Simplifies rendering of templates
-  #  + `ModelView` - Augments `TemplateView` by passing model data to templates
-  #  + `RedirectView` - Simply redirects to a specified path
-  #  + `LoadingView` - Displays an AJAX loading spinner
-  #  + `TabbedView` - Subview container with tabbed navigation.
+  #  + [`BaseView`](views/base.mkd) - A view that provides the base
+  #    functionality of all Ribcage views
+  #  + [`FormErrorView`](views/formerror.mkd) - Provides hooks for displaying
+  #    and clearing form error messages
+  #  + [`FormExtraView`](views/formextra.mkd) - Provides utitlities for
+  #    manipulating form behavior.
+  #  + [`BaseFormView`](views/form.mkd) - Provides
+  #    basic form manipulation and error handling
+  #  + [`ModelFormView`](views/modelform.mkd) - Provides model-specific form
+  #    behavior such as data-binding
+  #  + [`CreateView`](views/create.mkd) - Simplifies creation of new model
+  #    instances server-side
+  #  + [`CollectionCreateView`](views/collectioncreate.mkd) - Create view that
+  #    uses the collection object to crate a new model.
+  #  + [`TemplateView`](views/template.mkd) - Simplifies rendering of templates
+  #  + [`ModelView`](views/model.mkd) - Augments `TemplateView` by passing
+  #    model data to templates
+  #  + [`RedirectView`](views/redirect.mkd) - Simply redirects to a specified
+  #    path
+  #  + [`LoadingView`](views/loading.mkd) - Displays an AJAX loading spinner
+  #  + [`TabbedView`](views/tabbed.mkd) - Subview container with tabbed
+  #    navigation.
   #
   views:
     BaseView: baseView.View
@@ -133,10 +140,10 @@ define (require) ->
   # All router constructors are accessible thorugh `ribcage.routers` object.
   # These include:
   #
-  #  + `BaseRouter` - A simple router with view registration and cleanup
-  #    logic.
-  #  + `StatefulRouter` - Router that adds support for application state
-  #    persistence using localStorage API
+  #  + [`BaseRouter`](routers/base.mkd) - A simple router with view
+  #    registration and cleanup logic.
+  #  + [`StatefulRouter`](routers/stateful.mkd) - Router that adds support for
+  #    application state persistence using localStorage API
   #
   routers:
     BaseRouter: baseRouter.Router
@@ -195,7 +202,7 @@ define (require) ->
   #
   # The validation tools are accessible through `ribcage.validators` object.
   # The object contains validation methods (functions that perform
-  # validation), and two validator mixins:
+  # validation), and two [validator mixins](validators/mixins.mkd):
   #
   #  + `ValidatingMixin` - Generic mixin that can be used on views.
   #  + `ModelValidatingMixin` - A mixin specific to models.
@@ -215,14 +222,19 @@ define (require) ->
   #
   # The `ribcage.utils` object gives you access to utility methods. Those are:
   #
-  #  + `serializeObject` - Serializes form data into an object
-  #  + `deserializeForm` - Deserializes an object into a form (fills in the
-  #    form)
-  #  + `randString` - Random string generator
+  #  + [`serializeObject`](utils/serializeobject.mkd) - Serializes form data
+  #    into an object
+  #  + [`deserializeForm`](utils/deserializeform.mkd) - Deserializes an object
+  #    into a form (fills in the form)
+  #  + [`randString`](utils/randstring.mkd) - Random string generator
+  #  + [`LocalStorage`](utils/localstorage.mkd) - Wrapper for localStorage API
+  #  + [`LocalStore`](utils/localstore.mkd) - REST-like interface for
+  #    localStorage API that provides `jQuery.ajax`-compatible interface
+  #
   #
   utils:
     serializeObject: serializeObject
     deserializeForm: deserializeForm
     randString: randString
+    LocalStorage: LocalStorage
     LocalStore: LocalStore
-
