@@ -27,7 +27,8 @@
     "dependencies": {
       "jquery": "jquery",
       "underscore": "underscore",
-      "backbone": "backbone"
+      "backbone": "backbone",
+      "dahelpers": "foxbunny/dahelpers/>=0.2.6"
     },
     "ignore": [
       "package.json",
@@ -41,5 +42,5 @@
       "tools"
     ]
   },
-  "version" : "0.4.0"
+  "version" : "0.4.1"
 }

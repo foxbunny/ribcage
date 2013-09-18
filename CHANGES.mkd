@@ -3,6 +3,13 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## 0.4.1
+
+### Added missing dependency
+
+DaHelpers have been added to list of volo dependencies. If you are using
+Ribcage with volo, update to 0.4.1 to avoid dependency problems.
+
 ## 0.4.0
 
 ### Migration to DaHelpers
