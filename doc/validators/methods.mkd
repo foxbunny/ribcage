@@ -1,4 +1,4 @@
-# Ribcage validation methods <a name="ribcage-validation-methods"></a>
+# <a name="ribcage-validation-methods">Ribcage validation methods</a>
 
 This module defines a few validator methods that can be used to validate input.
 
@@ -13,18 +13,18 @@ This module depends on `ribcage.validators.helpers`
  + [`integer`](#integer)
 
 
-## `required` <a name="required"></a>
+## <a name="required">`required`</a>
 
 Ensures that value is not an empty string, undefined, or null.
 
-## `email` <a name="email"></a>
+## <a name="email">`email`</a>
 
 Ensures that the value is a valid email address.
 
-## `numeric` <a name="numeric"></a>
+## <a name="numeric">`numeric`</a>
 
 Ensures that value is a number.
 
-## `integer` <a name="integer"></a>
+## <a name="integer">`integer`</a>
 
 Ensures that value is an integer.

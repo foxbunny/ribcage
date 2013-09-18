@@ -1,4 +1,4 @@
-# Documenting source code <a name="documenting-source-code"></a>
+# <a name="documenting-source-code">Documenting source code</a>
 
 Documentation is as important as the actual code. Even if the code is not going
 to be used by anyone other than you, you should still invest time in properly
@@ -25,7 +25,7 @@ sanity check for your implementation.
    - [Using JSDoc](#using-jsdoc)
 
 
-## `extract_docs` script <a name="extract_docs-script"></a>
+## <a name="extract_docs-script">`extract_docs` script</a>
 
 This code base uses the `extract_docs` script to extract documentation from the
 inline comments.
@@ -38,19 +38,19 @@ To run the script use NodeJS:
 The `SOURCE` argument is the directory of the source code. The `DOCS` directory
 is where you want the output Markdown files to end up.
 
-## Formatting conventions <a name="formatting-conventions"></a>
+## <a name="formatting-conventions">Formatting conventions</a>
 
 Because this script is somewhat crude and quirky, there are some formatting
 rules that you need to follow in order to generate readable documentation.
 
-### Markdown <a name="markdown"></a>
+### <a name="markdown">Markdown</a>
 
 The files will be written out as `.mkd` files, and some of the generated
 markups such as references and table of contents will use the Markdown syntax.
 Format all your comments as Markdown unless you have a better idea or wish to
 hack the script.
 
-### Use multiline comments <a name="use-multiline-comments"></a>
+### <a name="use-multiline-comments">Use multiline comments</a>
 
 All inline comments must use the multiline comment style, and not block
 comments. Block comments are completely ignored.
@@ -69,7 +69,7 @@ comments. Block comments are completely ignored.
     ###
 
 
-### Leave a blank line under paragraphs and headings <a name="leave-a-blank-line-under-paragraphs-and-headings"></a>
+### <a name="leave-a-blank-line-under-paragraphs-and-headings">Leave a blank line under paragraphs and headings</a>
 
 You must always have a blank line under all headings, paragraphs and code
 blocks. For example:
@@ -82,7 +82,7 @@ Becuase the script first extracts all comments from the code, and then merges
 them into paragraphs, it will merge any lines that are not separated by a blank
 line, even if there is code between them in your file.
 
-### Add an extra space before bulletted lists <a name="add-an-extra-space-before-bulletted-lists"></a>
+### <a name="add-an-extra-space-before-bulletted-lists">Add an extra space before bulletted lists</a>
 
 When using bulletted lists, add two spaces between the first-level bullet and
 the comment character.
@@ -94,12 +94,12 @@ the comment character.
 
 As with paragraphs and headings, you need to leave a blank line after the list.
 
-### Word-wrapping <a name="word-wrapping"></a>
+### <a name="word-wrapping">Word-wrapping</a>
 
 The length of line and word-wrapping does not really matter. All paragraphs
 will be merged an re-wrapped to 79-character lines.
 
-### Cross refrences <a name="cross-refrences"></a>
+### <a name="cross-refrences">Cross refrences</a>
 
 All headers in the generated document will have an anchor tag. The anchor's
 name is generated using [DaHelpers](https://github.com/foxbunny/dahelpers/)
@@ -121,7 +121,7 @@ shouldn't happen in a code base that has a sane naming convention (e.g., name
 for attributes, verbs for method names), but there is no solution for this
 problem other than renaming the sections.
 
-### Comments that should be ignored <a name="comments-that-should-be-ignored"></a>
+### <a name="comments-that-should-be-ignored">Comments that should be ignored</a>
 
 Sometimes we like to leave notes to ourselves that appear as comments but
 should not be included in the documentation. There are a few ways to mark up
@@ -135,7 +135,7 @@ can use double-hash comments:
 Note that some editors (Vim for example) may get confused by the double-hash
 comments.
 
-### Table of comments <a name="table-of-comments"></a>
+### <a name="table-of-comments">Table of comments</a>
 
 If you want to include the table of comments in the generated document, simply
 add a paragraph to your inline comments that says `::TOC::`. Here's an example:
@@ -146,19 +146,19 @@ add a paragraph to your inline comments that says `::TOC::`. Here's an example:
 
 Note that, again, you must leave a blank line after the `::TOC::` paragraph.
 
-## General guidelines <a name="general-guidelines"></a>
+## <a name="general-guidelines">General guidelines</a>
 
 These guidelines apply to code that I write, which are mostly AMD modules with
 UMD wrappers. Some of the things mentioned here may not apply to the code you
 write.
 
-### Include an introduction at the top of the file. <a name="include-an-introduction-at-the-top-of-the-file"></a>
+### <a name="include-an-introduction-at-the-top-of-the-file">Include an introduction at the top of the file.</a>
 
 Start your source file with an introduction. Use the level 1 heading to give
 the file a proper title suggestive of what the user will find in it. Also give
 a one- or two-paragraph summary of the purpose of the code.
 
-### Note about module exports <a name="note-about-module-exports"></a>
+### <a name="note-about-module-exports">Note about module exports</a>
 
 Add a short summary of the module's exports just above the UMD wrapper. This
 helps developers not only understand what the module exports, but also how to
@@ -184,7 +184,7 @@ exports to global object. For example:
        @ribcage.viewMixins.BaseView = module.mixin
 
 
-### Note about module dependencies <a name="note-about-module-dependencies"></a>
+### <a name="note-about-module-dependencies">Note about module dependencies</a>
 
 Group all module dependency `require`s at the top of the module definition, and
 add notes about dependencies just above the list. For example:
@@ -195,13 +195,13 @@ add notes about dependencies just above the list. For example:
     _ = require 'underscore'
 
 
-### Use headings to outline the structure of your code <a name="use-headings-to-outline-the-structure-of-your-code"></a>
+### <a name="use-headings-to-outline-the-structure-of-your-code">Use headings to outline the structure of your code</a>
 
 This might sound obvious but use heading levels to show the relationship
 between different parts of your code. For example, a class may have a level 2
 heading, while its methods have level 3.
 
-### Using JSDoc <a name="using-jsdoc"></a>
+### <a name="using-jsdoc">Using JSDoc</a>
 
 Should you use [JSDoc](http://usejsdoc.org/)? That's completely up to you. This
 script will not do anything special with them, though.

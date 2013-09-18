@@ -1,4 +1,4 @@
-# Tabbed view <a name="tabbed-view"></a>
+# <a name="tabbed-view">Tabbed view</a>
 
 This view implements a container view with tabbed navigation. It extends the
 `TemplateView` constructor and simplifies rendering of tabbed layout. Each
@@ -14,7 +14,7 @@ used with an AMD loader such as RequrieJS.
 
 This module depends on `ribcage.views.TemplateView`.
 
-## `tabbedViewMixin` <a name="tabbedviewmixin"></a>
+## <a name="tabbedviewmixin">`tabbedViewMixin`</a>
 
 This mixin implements the API for the `TabbedView`. To has a few attributes
 that define the HTML for the various moving parts, and renders each subview
@@ -24,7 +24,7 @@ Since this view's job is to handle tabbed navigation and not manage the actual
 subviews, you should generally not try to add event handlers to this view, but
 instead handle everything in your subviews.
 
-### `#MAIN_TEMPLATE` <a name="main_template"></a>
+### <a name="main_template">`#MAIN_TEMPLATE`</a>
 
 Main container template. By default it renders a single `<ul>` that will
 contain the navigation, and a single `<div>` that will contain the tab
@@ -35,7 +35,7 @@ the content container element must have a class of `tabnav-container`.
 
 The template must have `TABS` and `TCONTENTS` placeholders.
 
-### `#TAB_TEMPLATE` <a name="tab_template"></a>
+### <a name="tab_template">`#TAB_TEMPLATE`</a>
 
 Template for a single item in the tab navigation list. By default this is a
 `<li>` item.
@@ -46,7 +46,7 @@ The outermost element must also have a class attribute of `tabnav-tab`. The
 outermost element must also have an `id` attribute with the value of `ID_tab`,
 where `ID` is the placeholder that will be replaced by actual tab id.
 
-### `#CONTENT_TEMPLATE` <a name="content_template"></a>
+### <a name="content_template">`#CONTENT_TEMPLATE`</a>
 
 The template for single tab content container. By default it is a `<div>`
 element.
@@ -58,7 +58,7 @@ The container must have a class of `tabnav-content` and must have an `id`
 attribute with value of `ID` (which is the placeholder that will be replaced by
 the actual content id.
 
-### `#tabs` <a name="tabs"></a>
+### <a name="tabs">`#tabs`</a>
 
 Array of tab meta data. Each tab meta data item should be an object that looks
 like this:
@@ -83,7 +83,7 @@ hidden. These callbacks are passed this object. If you wish to include any
 extra information that should be available to `show` and `hide` callbacks, you
 can add it to this object.
 
-### `#views` <a name="views"></a>
+### <a name="views">`#views`</a>
 
 A mapping of views for each tab. The key in the `#views` object should be the
 tab ID, and the value should be a view instance (not constructor).
@@ -91,37 +91,37 @@ tab ID, and the value should be a view instance (not constructor).
 Views are optional. If they are specified, they will be rendered into
 designated areas.
 
-### `#contentPlaceholder` <a name="contentplaceholder"></a>
+### <a name="contentplaceholder">`#contentPlaceholder`</a>
 
 Static HTML to be used as content placeholder. Usually this is some sort of
 spinner icon to let users know that something will be loaded into the tab. By
 default, this is an empty string.
 
-### `#getContentPlaceholder()` <a name="getcontentplaceholder"></a>
+### <a name="getcontentplaceholder">`#getContentPlaceholder()`</a>
 
 Returns HTML to be used as content placeholder. The default implementation
 simply returns the `#contentPlaceholder` property.
 
-### `initialize(settings)` <a name="initialize-settings"></a>
+### <a name="initialize-settings">`initialize(settings)`</a>
 
 The settings should contain a `views` key which will be assigned to the
 `#views` property.
 
-### `#template()` <a name="template"></a>
+### <a name="template">`#template()`</a>
 
 Renders the tabs and tab content containers (but does not insert any content
 into them.
 
-### `#afterRender()` <a name="afterrender"></a>
+### <a name="afterrender">`#afterRender()`</a>
 
 After rendering the tabs and content containers, caches necessary selectors and
 renders any views into their containers.
 
-### `#onTabClick()` <a name="ontabclick"></a>
+### <a name="ontabclick">`#onTabClick()`</a>
 
 Tab click handler. Deactivates active tabs and shows the selected tab.
 
-## `TabbedView` <a name="tabbedview"></a>
+## <a name="tabbedview">`TabbedView`</a>
 
 Please see the documentation on [`tabbedViewMixin`](#tabbedviewmixin) for more
 information about this view's API.

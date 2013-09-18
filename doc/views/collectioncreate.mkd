@@ -1,4 +1,4 @@
-# Collection create view <a name="collection-create-view"></a>
+# <a name="collection-create-view">Collection create view</a>
 
 This is an extension of the `CreateView` that uses a collection to create a new
 model, rather than saving a model object.
@@ -19,7 +19,7 @@ This module depends on `ribcage.views.CreateView`.
  + [`CollectionCreateView`](#collectioncreateview)
 
 
-## `collectionCreateViewMixin` <a name="collectioncreateviewmixin"></a>
+## <a name="collectioncreateviewmixin">`collectionCreateViewMixin`</a>
 
 This mixin implements the API of the
 [`CollectionCreateView`](#collectioncreateview).
@@ -27,11 +27,11 @@ This mixin implements the API of the
 It will perform validation using model's `#validate()` method and will crate
 the model using collection's `#create()` shortcut method.
 
-### `#validate()` <a name="validate"></a>
+### <a name="validate">`#validate()`</a>
 
 Validates the form data using the model stored in `this.model` property.
 
-### `#initialize(settings)` <a name="initialize-settings"></a>
+### <a name="initialize-settings">`#initialize(settings)`</a>
 
 The settings may contain a `model` key which will be used as the model
 constructor. The constructor will not be used to instantiate a new model
@@ -46,7 +46,7 @@ attribute.
 If neither collection's `model` attribute nor the `model` setting are defined,
 an exception will be thrown.
 
-### `#getModelData(data)` <a name="getmodeldata-data"></a>
+### <a name="getmodeldata-data">`#getModelData(data)`</a>
 
 Returns the attributes that will be used to create the model. This method can
 be used to clean the data before it is finally passed to collection's
@@ -56,17 +56,17 @@ the form data is enough.
 
 Default implementation of this method simply returns the input.
 
-### `#formValid(data)` <a name="formvalid-data"></a>
+### <a name="formvalid-data">`#formValid(data)`</a>
 
 Crates the model by calling the collection's `#create()`.
 
-### `#inputChange(e)` <a name="inputchange-e"></a>
+### <a name="inputchange-e">`#inputChange(e)`</a>
 
 Overloads the `ModelView`'s `#inputChange()` handler and removes the model
 update hoook. Since this view is not tied to a model instance, there is no need
 to update the model on input change.
 
-## `CollectionCreateView` <a name="collectioncreateview"></a>
+## <a name="collectioncreateview">`CollectionCreateView`</a>
 
 Please see the documentation on
 [`collectionCreateViewMixin`](#collectioncreateviewmixin) for more information

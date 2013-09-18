@@ -1,4 +1,4 @@
-# Redirect View <a name="redirect-view"></a>
+# <a name="redirect-view">Redirect View</a>
 
 This view simply redirects to another location and provides hooks for executing
 code while doing so.
@@ -18,35 +18,35 @@ This module depends on `ribcage.views.BaseView`
  + [`RedirectView`](#redirectview)
 
 
-## `redirectViewMixin` <a name="redirectviewmixin"></a>
+## <a name="redirectviewmixin">`redirectViewMixin`</a>
 
 This mixin implements the API for the `RedirectView`.
 
-### `#redirectPath` <a name="redirectpath"></a>
+### <a name="redirectpath">`#redirectPath`</a>
 
 The redirect path. Default value is an empty string, which will cause a
 redirect to '#' fragment identifier.
 
-### `#getRedirectPath()` <a name="getredirectpath"></a>
+### <a name="getredirectpath">`#getRedirectPath()`</a>
 
 Returns the path to which view will redirect. By default, it returns the value
 of [`#redirectPath`](#redirectpath).
 
-### `#beforeRedirect()` <a name="beforeredirect"></a>
+### <a name="beforeredirect">`#beforeRedirect()`</a>
 
 Called before the redirect is performed. Has no arguments and return value is
 not used.
 
-### `#redirect()` <a name="redirect"></a>
+### <a name="redirect">`#redirect()`</a>
 
 Performs the actual redirect. By default, it simply assigns to
 `window.location.hash`.
 
-### `redirectViewMixin,render()` <a name="redirectviewmixin-render"></a>
+### <a name="redirectviewmixin-render">`redirectViewMixin,render()`</a>
 
 This overrides the default `#render()` method to immediately redirect.
 
-## `RedirectView` <a name="redirectview"></a>
+## <a name="redirectview">`RedirectView`</a>
 
 Please see the documentation for the [`redirectViewMixin`](#redirectviewmixin)
 for more information on the API this view provides.

@@ -1,4 +1,4 @@
-# Serialize form to object <a name="serialize-form-to-object"></a>
+# <a name="serialize-form-to-object">Serialize form to object</a>
 
 This module provides a helper method to serialize form into an object. The
 helper method is also attached to jQuery as both a `jQuery.serializeForm`
@@ -13,7 +13,7 @@ This module depends on jQuery and Underscore.
  + [`.serializeObject()`](#serializeobject)
 
 
-## `jQuery.serializeObject(form)` <a name="jquery-serializeobject-form"></a>
+## <a name="jquery-serializeobject-form">`jQuery.serializeObject(form)`</a>
 
 Returns an object containing form data for a form represented by `form`
 selector or jQuery object.
@@ -33,7 +33,7 @@ Example:
     // returns {name: 'John Doe', age: '12'}
 
 
-## `.serializeObject()` <a name="serializeobject"></a>
+## <a name="serializeobject">`.serializeObject()`</a>
 
 Serializes the selected form into an object. This is a wrapper around
 `$.serializeForm()`.

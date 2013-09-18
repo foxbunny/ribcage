@@ -1,4 +1,4 @@
-# Ribcage <a name="ribcage"></a>
+# <a name="ribcage">Ribcage</a>
 
 This module is a one-stop-shop for all the Ribcage modules. It imports all
 modules in the `ribcage` directory and makes them available through a single
@@ -20,7 +20,7 @@ loader such as RequireJS. Please load it _before_ any other Ribcage modules.
  + [Utilities](#utilities)
 
 
-## Models <a name="models"></a>
+## <a name="models">Models</a>
 
 The models are accessible through the `ribcage.models` object. There are two
 models that you can use:
@@ -31,7 +31,7 @@ models that you can use:
    the model data
 
 
-## Collections <a name="collections"></a>
+## <a name="collections">Collections</a>
 
 The `ribcage.collections` object exposes the Ribcage collections. These are the
 available collections:
@@ -40,7 +40,7 @@ available collections:
    collections.
 
 
-## Views <a name="views"></a>
+## <a name="views">Views</a>
 
 All view constructors are accessible through the `ribcage.views` object. These
 include:
@@ -63,7 +63,7 @@ include:
  + `TabbedView` - Subview container with tabbed navigation.
 
 
-## Routers <a name="routers"></a>
+## <a name="routers">Routers</a>
 
 All router constructors are accessible thorugh `ribcage.routers` object. These
 include:
@@ -74,31 +74,31 @@ include:
    persistence using localStorage API
 
 
-## Model mixins <a name="model-mixins"></a>
+## <a name="model-mixins">Model mixins</a>
 
 The `ribcage.modelMixins` object provides access to model mixins. These mixins
 implement the APIs for matching models, and allow you to easily add their
 features to other models in your application.
 
-## Collection mixins <a name="collection-mixins"></a>
+## <a name="collection-mixins">Collection mixins</a>
 
 The `ribcage.collectionMixins` object contains collection mixins. These mixins
 implement the APIs of matching collections, and you can use them to add their
 features to your own collections.
 
-## View mixins <a name="view-mixins"></a>
+## <a name="view-mixins">View mixins</a>
 
 The `ribcage.viewMixins` object provides access to view mixins. The mixins
 implement the core APIs for all of the views, and mixins allow you to combine
 such functionality with your own custom views.
 
-## Router mixins <a name="router-mixins"></a>
+## <a name="router-mixins">Router mixins</a>
 
 The `ribcage.routerMixins` object contains router mixins. The mixins implement
 the base APIs for respective Ribcage routers. You can use them to create your
 own routers with features from different built-in routers.
 
-## Validators <a name="validators"></a>
+## <a name="validators">Validators</a>
 
 The validation tools are accessible through `ribcage.validators` object. The
 object contains validation methods (functions that perform validation), and two
@@ -113,7 +113,7 @@ since they return the data in the format that validator expect it to be in. For
 example, a `numeric` validator will return a number, regardless of the input
 value, if the input value can be successfully converted to a number.
 
-## Utilities <a name="utilities"></a>
+## <a name="utilities">Utilities</a>
 
 The `ribcage.utils` object gives you access to utility methods. Those are:
 

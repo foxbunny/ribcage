@@ -1,4 +1,4 @@
-# Model form view <a name="model-form-view"></a>
+# <a name="model-form-view">Model form view</a>
 
 Extends the BaseFormView to add support for model handling. It updates the
 model automatically when form is updated, and also validates the model using
@@ -18,11 +18,11 @@ This module depends on jQuery, Underscore, and `ribcage.views.BaseFormView`.
  + [`ModelFormView`](#modelformview)
 
 
-## `modelFormViewMixin` <a name="modelformviewmixin"></a>
+## <a name="modelformviewmixin">`modelFormViewMixin`</a>
 
 This mixin implements the API for the `ModelFormView` view.
 
-### `#validate()` <a name="validate"></a>
+### <a name="validate">`#validate()`</a>
 
 Validates the model.
 
@@ -31,20 +31,20 @@ The model's validate method should return an error object that conforms to the
 
 The method should return and array in `[errorObject, data]` format.
 
-### `#events` <a name="events"></a>
+### <a name="events">`#events`</a>
 
 Maps events to event handlers.
 
-### `#inputChange(e)` <a name="inputchange-e"></a>
+### <a name="inputchange-e">`#inputChange(e)`</a>
 
 Wrapper function to call the change and input events handlers for form inputs
 on both this model and the `BaseFormView`.
 
-### `#updateModel(e)` <a name="updatemodel-e"></a>
+### <a name="updatemodel-e">`#updateModel(e)`</a>
 
 Update the model by setting serialized form data.
 
-## `ModelFormView` <a name="modelformview"></a>
+## <a name="modelformview">`ModelFormView`</a>
 
 Please see the documentation for the
 [`modelFormViewMixin`](#modelformviewmixin) for more information on the API

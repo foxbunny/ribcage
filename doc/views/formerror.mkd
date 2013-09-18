@@ -1,4 +1,4 @@
-# Form error view <a name="form-error-view"></a>
+# <a name="form-error-view">Form error view</a>
 
 This view provides the basic error display in your view's forms. It doesn't do
 much by itself other than providing methods that perofrm the grunt work of
@@ -26,30 +26,30 @@ This module depends on DaHelpers, `ribcage.views.BaseView`.
  + [`FormErrorView`](#formerrorview)
 
 
-## `formErrorViewMixin` <a name="formerrorviewmixin"></a>
+## <a name="formerrorviewmixin">`formErrorViewMixin`</a>
 
 This mixin implements the API for the [`FormErrorView`](#formerrorview).
 
 The format of the error objects that are passed to this mixin's methods are
 expected to follow the Ribcage's validation output.
 
-### `#errorClass` <a name="errorclass"></a>
+### <a name="errorclass">`#errorClass`</a>
 
 This is a HTML class added to all form and field errors displayed in the form.
 
-### `#formErrorClass` <a name="formerrorclass"></a>
+### <a name="formerrorclass">`#formErrorClass`</a>
 
 This is a HTML class that is added to all form errors.
 
-### `#fieldErrorClass` <a name="fielderrorclass"></a>
+### <a name="fielderrorclass">`#fieldErrorClass`</a>
 
 This is a HTML class added to all field errors.
 
-### `#inputErrorClass` <a name="inputerrorclass"></a>
+### <a name="inputerrorclass">`#inputErrorClass`</a>
 
 This is a HTML class added to individual inputs that have errors.
 
-### `#errorMessage(data)` <a name="errormessage-data"></a>
+### <a name="errormessage-data">`#errorMessage(data)`</a>
 
 Generates HTML to be inserted as error message. The `data` argument should be
 an object with three keys: `id`, `msg`, and `cls`. The `id` and `cls` keys are
@@ -62,20 +62,20 @@ with compiled Underscore.js templates. Naturally, you can override this method
 with an actual template if you prefer. Keep in mind that the default will no
 longer be used if you do so, unless you've specified defaults in your template.
 
-### `#clearErrors(form)` <a name="clearerrors-form"></a>
+### <a name="clearerrors-form">`#clearErrors(form)`</a>
 
 Remove all errors from the `form`. It is assumed that all error messages have a
 wrapper element wit the class matching `this.errorClass`.
 
 It also removes the error class from inputs.
 
-### `#clearFieldErrors(input)` <a name="clearfielderrors-input"></a>
+### <a name="clearfielderrors-input">`#clearFieldErrors(input)`</a>
 
 Removes all errors that are siblings of a given input. This doesn't work if all
 inputs and all errors are siblings. Please be sure to add appropriate structure
 to your form.
 
-### `#insertErrorMessage(input, [msgs])` <a name="inserterrormessage-input-msgs"></a>
+### <a name="inserterrormessage-input-msgs">`#insertErrorMessage(input, [msgs])`</a>
 
 Insert a list of error messages after the specified input. The `msgs` argument
 is optional, and defaults to ['Invalid value']. Otherwise, it should be an
@@ -83,7 +83,7 @@ array of error messages for the field.
 
 The `msgs` argument can also be a single string.
 
-### `#insertFormErrors(form, msgs)` <a name="insertformerrors-form-msgs"></a>
+### <a name="insertformerrors-form-msgs">`#insertFormErrors(form, msgs)`</a>
 
 Insert a list of error messages after the specified input.
 
@@ -92,7 +92,7 @@ Insert a list of error messages after the specified input.
 `msgs` is required, and should be an array of messages. If it is not an array,
 it will be converted to one.
 
-### `#insertErrorMessages(form, err)` <a name="inserterrormessages-form-err"></a>
+### <a name="inserterrormessages-form-err">`#insertErrorMessages(form, err)`</a>
 
 `forms` is required, and should be a valid jQuery selector or object.
 
@@ -103,7 +103,7 @@ The `err` object is expected to map field names to an array of error messages.
 A special `__all` key can be used to specify messages that apply to the entire
 form.
 
-## `FormErrorView` <a name="formerrorview"></a>
+## <a name="formerrorview">`FormErrorView`</a>
 
 Please see the documentation for the [`formErrorMixin`](#formerrormixin) for
 more information on the API that this view provides.

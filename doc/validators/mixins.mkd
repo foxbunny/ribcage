@@ -1,4 +1,4 @@
-# Validating mixins for views and models <a name="validating-mixins-for-views-and-models"></a>
+# <a name="validating-mixins-for-views-and-models">Validating mixins for views and models</a>
 
 This module defines two mixin objects that expose the validation methods and
 provide a simplified API for their consumption in views and models.
@@ -16,7 +16,7 @@ Underscore and `ribcage.validators.methods`.
    - [`#validate(attributes)`](#validate-attributes)
 
 
-## `validatingMixin` <a name="validatingmixin"></a>
+## <a name="validatingmixin">`validatingMixin`</a>
 
 This mixin adds validation logic to constructors such as view and model
 constructors. Note that adding this mixin to a model does not automatically
@@ -24,7 +24,7 @@ cause it to be used. This is because the mixin does not provide the
 `#validate()` method. A mixin that adds that method on top of this mixin is the
 [`modelValidatingMixin`](#modelvalidatingmixin).
 
-### `#validators` <a name="validators"></a>
+### <a name="validators">`#validators`</a>
 
 An object containig name-method pairs of validators. You can add your custom
 validators here. It defaults to validators found in
@@ -42,7 +42,7 @@ array containing the cleaned value (value converted to appropraite format
 usable by your application) and and status. The status is a boolean value which
 should be `true` if the value is valid, or `false` if it's not.
 
-### `#rules` <a name="rules"></a>
+### <a name="rules">`#rules`</a>
 
 This object describes the validation rules. Each rule maps an attribute name to
 an object that contains validation mappings. For example:
@@ -89,16 +89,16 @@ be sure to add your own validators if you want to validate sets of data. ###
 Applies validators to a single value. The errors are either `null` if value is
 valid, or an array of messages for invalid value.
 
-### `#cleanFields(dada)` <a name="cleanfields-dada"></a>
+### <a name="cleanfields-dada">`#cleanFields(dada)`</a>
 
 Validates fields using given rules in the `#rules` object. The return value
 maps attribute names to an Array of error messages.
 
-### `#clean(data)` <a name="clean-data"></a>
+### <a name="clean-data">`#clean(data)`</a>
 
 Cleans fields and entire data set.
 
-## `modelValidatingMixin` <a name="modelvalidatingmixin"></a>
+## <a name="modelvalidatingmixin">`modelValidatingMixin`</a>
 
 This mixin enhances [`validatingMixin`](#validatingmixin) and adds the
 `#validate()` method which takes over the taks of validatnig model data.
@@ -108,7 +108,7 @@ _directly_ without causing any events. If that is not what you want, you should
 use the plain [`validatingMixin`](#validatingmixin) and add your own
 `#validate()` method instead.
 
-### `#validate(attributes)` <a name="validate-attributes"></a>
+### <a name="validate-attributes">`#validate(attributes)`</a>
 
 Validates and cleans the model attributes and resets the `this.attributes` to
 cleaned data.

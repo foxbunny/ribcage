@@ -1,4 +1,4 @@
-# Local storage model <a name="local-storage-model"></a>
+# <a name="local-storage-model">Local storage model</a>
 
 Model with localStorage support.
 
@@ -25,27 +25,27 @@ abstraction layer for `localStorage` API.
  + [Exports](#exports)
 
 
-## `localStorageModelmixin` <a name="localstoragemodelmixin"></a>
+## <a name="localstoragemodelmixin">`localStorageModelmixin`</a>
 
 This mixin implements the API of the `LocalStorageModel`.
 
-### `#store` <a name="store"></a>
+### <a name="store">`#store`</a>
 
 The storage object is accessible through the storage property. It will be
 initialized when model is initialized, so overriding this property does
 nothing.
 
-### `#storageKey` <a name="storagekey"></a>
+### <a name="storagekey">`#storageKey`</a>
 
 The `localStorage` key for this model.
 
-### `#persistent` <a name="persistent"></a>
+### <a name="persistent">`#persistent`</a>
 
 A flag that tells the model to persist its data in the storage when `#sync()`
 is called. If this flag is set to `false`, syncing will be disabled for all
 operations except reads.
 
-### `#initialize()` <a name="initialize"></a>
+### <a name="initialize">`#initialize()`</a>
 
 It is extremely important to remember not to overload this method, or to call
 the original one if you are overloading it. This method sets up a store that
@@ -72,7 +72,7 @@ And same in CoffeeScript:
 For more information on the low-level API of the store, look at the
 documentation for `ribcage.utils.LocalStore`.
 
-### `#sync(method, model, options)` <a name="sync-method-model-options"></a>
+### <a name="sync-method-model-options">`#sync(method, model, options)`</a>
 
 This is a customized version of `Backbone.sync()` which stores the data in the
 localStorage. Internally, it communicates with the `#store` object.
@@ -91,26 +91,26 @@ or not (it doesn't matter whether it is new).
 Note that the current implementation does not trigger any events. This will be
 fixed in future releases.
 
-### `#makePersistent()` <a name="makepersistent"></a>
+### <a name="makepersistent">`#makePersistent()`</a>
 
 Makes the model persistent by setting its `#persistent` flag, and saving it
 immediately afterwards.
 
 Note that calling this method does _not_ trigger the 'change' event.
 
-### `#unpersist()` <a name="unpersist"></a>
+### <a name="unpersist">`#unpersist()`</a>
 
 Makes the model non-persistent by setting its `#persistent` flag to `false`,
 and by removing the entire store (along with any previously stored data).
 
 Note that calling this method does _not_ trigger the 'change' event.
 
-## `LocalStorageModel` <a name="localstoragemodel"></a>
+## <a name="localstoragemodel">`LocalStorageModel`</a>
 
 Please see the documentation on the
 [`localStorageModelMixin`](#localstoragemodelmixin) for more information about
 this model's API.
 
-## Exports <a name="exports"></a>
+## <a name="exports">Exports</a>
 
 This module exports `mixin` and `Model` properties.

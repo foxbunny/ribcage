@@ -1,4 +1,4 @@
-# BaseRouter <a name="baserouter"></a>
+# <a name="baserouter">BaseRouter</a>
 
 This is a basic router that handles the most traditional case of routing
 different routes to matching handlers.
@@ -25,26 +25,26 @@ This module depends on DaHelpers and Backbone.
  + [`BaseRouter`](#baserouter)
 
 
-## `baseRouterMixin` <a name="baseroutermixin"></a>
+## <a name="baseroutermixin">`baseRouterMixin`</a>
 
 This mixin implements the API of the `BaseRouter`.
 
-### `#_activeViews` <a name="activeviews"></a>
+### <a name="activeviews">`#_activeViews`</a>
 
 An array containing currently registered views.
 
-### `#autoCleanup` <a name="autocleanup"></a>
+### <a name="autocleanup">`#autoCleanup`</a>
 
 Whether cleanup should be performed automatically. Default is `false`.
 
-### `#init(jQuery)` <a name="init-jquery"></a>
+### <a name="init-jquery">`#init(jQuery)`</a>
 
 Called when router is starting. Use this to perform initialization. jQuery is
 passed to init for convenience.
 
 Default implementation does not do anything.
 
-### `#initialize(settings)` <a name="initialize-settings"></a>
+### <a name="initialize-settings">`#initialize(settings)`</a>
 
 During initialization, router sets up event handlers and calls the `#init()`
 method. You generally don't want to overload this method. Instead, use
@@ -53,7 +53,7 @@ method. You generally don't want to overload this method. Instead, use
 The settings may include an `autoCleanup` key which will override the
 `#autoCleanup` property given a non-null value.
 
-### `#giveAccess(view)` <a name="giveaccess-view"></a>
+### <a name="giveaccess-view">`#giveAccess(view)`</a>
 
 During view registration, this method is called to give the view access to
 anything that view may need.
@@ -66,14 +66,14 @@ needed.
 You should generally consider overloading this method to give views just enough
 access to get the job done.
 
-### `#register(view)` <a name="register-view"></a>
+### <a name="register-view">`#register(view)`</a>
 
 Registers a view object as active view.
 
 This method can be used to register your views. All registered views can be
 accessed by the router to perform such tasks as cleanup when changing routes.
 
-### `#cleanup()` <a name="cleanup"></a>
+### <a name="cleanup">`#cleanup()`</a>
 
 Cleans up all registered views. Returns the router instance for chaining. You
 should generally call this whenever you are setting up a blank page from
@@ -87,16 +87,16 @@ Model cleanup Collection cleanup ### `#go(hash)`
 
 Simple wrapper for Router.navigate that also passes `{trigger: true}`.
 
-### `#back()` <a name="back"></a>
+### <a name="back">`#back()`</a>
 
 Simple alias for `window.history.back()`.
 
-### `#start()` <a name="start"></a>
+### <a name="start">`#start()`</a>
 
 Shortcut for `Backbone.history.start()`. Any arguments are passed to
 `Backbone.history.start()` method.
 
-## `BaseRouter` <a name="baserouter"></a>
+## <a name="baserouter">`BaseRouter`</a>
 
 Please see the documentation on [`simpleRouterMixin`](#simpleroutermixin) for
 more information about this router's API.

@@ -1,4 +1,4 @@
-# Deserialize object to form <a name="deserialize-object-to-form"></a>
+# <a name="deserialize-object-to-form">Deserialize object to form</a>
 
 This module provides a helper method to deserialize an object into a form. The
 helper method is also attached to jQuery as both a `jQuery.deserializeForm`
@@ -14,7 +14,7 @@ This module depends on jQuery.
  + [Exports](#exports)
 
 
-## `jQuery.deserializeForm(form, data)` <a name="jquery-deserializeform-form-data"></a>
+## <a name="jquery-deserializeform-form-data">`jQuery.deserializeForm(form, data)`</a>
 
 Uses `data` object to fill a form found under `form` selector or jQuery object.
 
@@ -32,7 +32,7 @@ Example:
     });
 
 
-## `.deserializeForm(data)` <a name="deserializeform-data"></a>
+## <a name="deserializeform-data">`.deserializeForm(data)`</a>
 
 Uses data object to fill all inputs found under the selected element. This is a
 wrapper around `jQuery.deserializeForm()`.
@@ -51,6 +51,6 @@ Example:
     });
 
 
-## Exports <a name="exports"></a>
+## <a name="exports">Exports</a>
 
 This module exports the `jQuery.deserializeForm` method.

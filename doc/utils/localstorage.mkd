@@ -1,4 +1,4 @@
-# Local storage interface <a name="local-storage-interface"></a>
+# <a name="local-storage-interface">Local storage interface</a>
 
 This is a simple `localStorage` API interface that falls back on memory
 storage.
@@ -15,7 +15,7 @@ This module has no external dependencies.
  + [Exports](#exports)
 
 
-## `LocalStorage` <a name="localstorage"></a>
+## <a name="localstorage">`LocalStorage`</a>
 
 This constructor implements the `localStorage` API that wraps around native
 `localStorage` object with fallback on in-memory storage. It implements only a
@@ -34,24 +34,24 @@ Example:
     ls.getItem('foo', true);  // returns '{"a": 12, "b": "bar"}'
 
 
-### `#getItem(key, [raw]) <a name="getitem-key-raw"></a>
+### <a name="getitem-key-raw">`#getItem(key, [raw])</a>
 
 Gets data with given key.
 
 The `raw` argument is a boolean and data is returned raw without
 deserialization if it's set to `true`.
 
-### `#setItem(key, value, [raw])` <a name="setitem-key-value-raw"></a>
+### <a name="setitem-key-value-raw">`#setItem(key, value, [raw])`</a>
 
 Sets `val` as data for given key.
 
 The `raw` argument is a boolean and data is set raw without serialization if
 it's set to `true`.
 
-### `#removeItem(key)` <a name="removeitem-key"></a>
+### <a name="removeitem-key">`#removeItem(key)`</a>
 
 Removes data with given key from local storage.
 
-## Exports <a name="exports"></a>
+## <a name="exports">Exports</a>
 
 This module exports the `LocalStorage` constructor.

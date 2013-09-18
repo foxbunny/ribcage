@@ -1,4 +1,4 @@
-# AJAX loder mixin <a name="ajax-loder-mixin"></a>
+# <a name="ajax-loder-mixin">AJAX loder mixin</a>
 
 This module implements a simple view that provides methods for displaying a
 spinning loader icon. This view is best used as an omni-present view whose
@@ -22,7 +22,7 @@ This module depends on jQuery, Underscore, and `ribcage.views.baseView`.
  + [`LoadingView`](#loadingview)
 
 
-## `loadingMixin` <a name="loadingmixin"></a>
+## <a name="loadingmixin">`loadingMixin`</a>
 
 This mixin implements the API for displaying and hiding the loader.
 
@@ -34,46 +34,46 @@ want to toggle the loader using events, you will have to add the functionality
 yourself. Events will be added in a later version, but weren't needed thus far,
 so they are a low-priority target.
 
-### `#fadeTime`` <a name="fadetime"></a>
+### <a name="fadetime">`#fadeTime``</a>
 
 The overlay fade speed is controlled by this constant. It is set to 225ms by
 default.
 
-### `#spinner` <a name="spinner"></a>
+### <a name="spinner">`#spinner`</a>
 
 Defines the HTML for the spinner. By default, it's a FontAewsome spinning
 spinner icon. If you leave this property as `null`, it will retain the default
 spinner.
 
-### `#loadingLabel` <a name="loadinglabel"></a>
+### <a name="loadinglabel">`#loadingLabel`</a>
 
 Defines the text to use as the loading label. By default, it's 'loading...'.
 Leave this as `null` to keep it. You can also set it to a function which would
 be evaluated to obtain the label (e.g., if you need i18n support.
 
-### `#initialize(settings)` <a name="initialize-settings"></a>
+### <a name="initialize-settings">`#initialize(settings)`</a>
 
 Sets `spinner` and `loadingLabel` properties from the same-named keys passed in
 through the `settings` argument.
 
-### `#render()` <a name="render"></a>
+### <a name="render">`#render()`</a>
 
 Renders the loader HTML and customizes the spinner and label, and hides the
 loader.
 
-### `#showLoader()` <a name="showloader"></a>
+### <a name="showloader">`#showLoader()`</a>
 
 Shows the loader
 
-### `#hideLoader()` <a name="hideloader"></a>
+### <a name="hideloader">`#hideLoader()`</a>
 
 Hides the loader.
 
-### `#toggleLoader()` <a name="toggleloader"></a>
+### <a name="toggleloader">`#toggleLoader()`</a>
 
 Toggles the loader.
 
-## `LoadingView` <a name="loadingview"></a>
+## <a name="loadingview">`LoadingView`</a>
 
 For details of this view's API, see the documentation for
 [`loadingMixin`](#loadingmixin).

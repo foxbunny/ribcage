@@ -1,4 +1,4 @@
-# Ribcage validator helper functions <a name="ribcage-validator-helper-functions"></a>
+# <a name="ribcage-validator-helper-functions">Ribcage validator helper functions</a>
 
 This module defines a few functions used to simplify code in the validator
 methods.
@@ -12,12 +12,12 @@ This module has no external dependencies.
  + [`mustPass(fn)`](#mustpass-fn)
 
 
-## `notRequired(fn)` <a name="notrequired-fn"></a>
+## <a name="notrequired-fn">`notRequired(fn)`</a>
 
 Returns a wrapped validator function which returns a positive result if the
 value is undefined or an empty string.
 
-## `mustPass(fn)` <a name="mustpass-fn"></a>
+## <a name="mustpass-fn">`mustPass(fn)`</a>
 
 Returns a function that takes the output of `fn` and returns a properly
 formatted validator result.

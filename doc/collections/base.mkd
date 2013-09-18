@@ -1,4 +1,4 @@
-# Base collection <a name="base-collection"></a>
+# <a name="base-collection">Base collection</a>
 
 This module implements the common API for all Ribcage collections. All Ribcage
 collections should extend this collection.
@@ -15,18 +15,18 @@ This module depends on Backbone
  + [Exports](#exports)
 
 
-## `baseCollectionMixin` <a name="basecollectionmixin"></a>
+## <a name="basecollectionmixin">`baseCollectionMixin`</a>
 
 Mixin that implements the functionality of the `BaseCollection` constructor.
 
 It is currently just a stub, but you should generally extend `BaseCollection`
 constructor to build all Ribcage constructors.
 
-## `BaseCollection` <a name="basecollection"></a>
+## <a name="basecollection">`BaseCollection`</a>
 
 Please see the documentation on [`baseCollectionMixin`](#basecollectionmixin)
 for more information about this collection.
 
-## Exports <a name="exports"></a>
+## <a name="exports">Exports</a>
 
 This module exports `mixin` and `Collection` properties.

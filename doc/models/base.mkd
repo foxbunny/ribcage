@@ -1,4 +1,4 @@
-# Base model <a name="base-model"></a>
+# <a name="base-model">Base model</a>
 
 This module implements common API for all Ribcage models. All ribcage models
 should extend this model.
@@ -16,24 +16,24 @@ This module depends on Backbone.
  + [Exports](#exports)
 
 
-## `baseModelMixin` <a name="basemodelmixin"></a>
+## <a name="basemodelmixin">`baseModelMixin`</a>
 
 Mixin that implements the common functionality of all Ribcage models.
 
-### `#expose(attr)` <a name="expose-attr"></a>
+### <a name="expose-attr">`#expose(attr)`</a>
 
 Create an accessor for the `attr` attribute.
 
-### `#exposeReadOnly(attr)` <a name="exposereadonly-attr"></a>
+### <a name="exposereadonly-attr">`#exposeReadOnly(attr)`</a>
 
 Create an accessor for `attr` attribute that only allows reading and throws an
 exception on set.
 
-## `BaseModel` <a name="basemodel"></a>
+## <a name="basemodel">`BaseModel`</a>
 
 Please see the documentation on [`baseModelMixin`](#basemodelmixin) for more
 information about this model.
 
-## Exports <a name="exports"></a>
+## <a name="exports">Exports</a>
 
 This module exports `mixin` and `Model` properties.
