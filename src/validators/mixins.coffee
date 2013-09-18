@@ -10,6 +10,7 @@
 #
 # This module is in UMD format, and will create a `ribcage.validators.mixins`
 # global if not used with an AMD loader such as RequireJS.
+#
 
 if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
@@ -101,6 +102,7 @@ define (require) ->
     # Note that none of the default validator methods work with entire data
     # sets, so be sure to add your own validators if you want to validate sets
     # of data.
+    #
     rules: {}
 
     # ### `#applyValidators(name, val)`
