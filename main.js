@@ -24,7 +24,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, tabbedView, templateView;
+  var LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, formErrorView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, satefulRouter, serializeObject, tabbedView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -40,6 +40,7 @@ define(function(require) {
   loadingView = require('./views/loading');
   tabbedView = require('./views/tabbed');
   baseRouter = require('./routers/base');
+  satefulRouter = require('./routers/stateful');
   methods = require('./validators/methods');
   mixins = require('./validators/mixins');
   serializeObject = require('./utils/serializeobject');
@@ -68,7 +69,8 @@ define(function(require) {
       TabbedView: tabbedView.View
     },
     routers: {
-      BaseRouter: baseRouter.Router
+      BaseRouter: baseRouter.Router,
+      StatefulRouter: statefulRouter.Router
     },
     modelMixins: {
       BaseModel: baseModel.mixin,
@@ -91,7 +93,8 @@ define(function(require) {
       TabbedView: tabbedView.mixin
     },
     routerMixins: {
-      BaseRouter: baseRouter.mixin
+      BaseRouter: baseRouter.mixin,
+      StatefulRouter: statefulRouter.mixin
     },
     validators: {
       methods: methods,

@@ -54,6 +54,7 @@ define (require) ->
 
   ## Routers
   baseRouter = require './routers/base'
+  satefulRouter = require './routers/stateful'
 
   ## Validators
   methods = require './validators/methods'
@@ -131,9 +132,12 @@ define (require) ->
   #
   #  + `BaseRouter` - A simple router with view registration and cleanup
   #    logic.
+  #  + `StatefulRouter` - Router that adds support for application state
+  #    persistence using localStorage API
   #
   routers:
     BaseRouter: baseRouter.Router
+    StatefulRouter: statefulRouter.Router
 
   # ## Model mixins
   #
@@ -181,6 +185,7 @@ define (require) ->
   #
   routerMixins:
     BaseRouter: baseRouter.mixin
+    StatefulRouter: statefulRouter.mixin
 
   # ## Validators
   #
