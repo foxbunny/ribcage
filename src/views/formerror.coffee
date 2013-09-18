@@ -20,7 +20,6 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'jquery' then @$
         when 'dahelpers' then @dahelpers
         when './template' then @ribcage.views.templateView
         else null
@@ -32,23 +31,22 @@ if typeof define isnt 'function' or not define.amd
 
 define (require) ->
 
-  # This module depends on jQuery, DaHelpers, `ribcage.views.BaseView`.
+  # This module depends on DaHelpers, `ribcage.views.BaseView`.
   #
-  $ = require 'jquery'
   {toArray} = require 'dahelpers'
   {View: BaseView} = require './base'
 
   # ::TOC::
   #
 
-  # ## `formErrorMixin`
+  # ## `formErrorViewMixin`
   #
   # This mixin implements the API for the [`FormErrorView`](#formerrorview).
   #
   # The format of the error objects that are passed to this mixin's methods are
   # expected to follow the Ribcage's validation output.
   #
-  formErrorMixin =
+  formErrorViewMixin =
     # ### `#errorClass`
     #
     # This is a HTML class added to all form and field errors displayed in the
@@ -102,7 +100,7 @@ define (require) ->
     # It also removes the error class from inputs.
     #
     clearErrors: (form) ->
-      form = $ form
+      form = @$ form
       form.find(".#{@errorClass}").remove()
       form.find(".#{@inputErrorClass}").removeClass @inputErrorClass
       form
@@ -114,7 +112,7 @@ define (require) ->
     # appropriate structure to your form.
     #
     cleanFieldErrors: (input) ->
-      input = $ input
+      input = @$ input
       input.siblings(".#{errorClass}").remove()
 
     # ### `#insertErrorMessage(input, [msgs])`
@@ -127,7 +125,7 @@ define (require) ->
     #
     insertErrorMessage: (input, msgs=['Invalid value']) ->
       msgs = toArray msgs
-      input = $ input
+      input = @$ input
 
       ## We need to iterate the reversed array because each message is rendered
       ## right below the input, and therefore ends up at the top.
@@ -148,7 +146,7 @@ define (require) ->
     # array, it will be converted to one.
     #
     insertFormErrors: (form, msgs) ->
-      form = $ form
+      form = @$ form
       msgs = toArray msgs
 
       ## We need to iterate the reversed array because each message is rendered
@@ -170,7 +168,7 @@ define (require) ->
     # apply to the entire form.
     #
     insertErrorMessages: (form, err) ->
-      form = $ form
+      form = @$ form
 
       @clearErrors form
 
@@ -194,5 +192,5 @@ define (require) ->
   #
   FormErrorView = BaseView.extend formErrorMixin
 
-  mixin: formErrorMixin
+  mixin: formErrorViewMixin
   View: FormErrorView

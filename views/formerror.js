@@ -10,8 +10,6 @@ if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
-        case 'jquery':
-          return _this.$;
         case 'dahelpers':
           return _this.dahelpers;
         case './template':
@@ -32,11 +30,10 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var $, BaseView, FormErrorView, formErrorMixin, toArray;
-  $ = require('jquery');
+  var BaseView, FormErrorView, formErrorViewMixin, toArray;
   toArray = require('dahelpers').toArray;
   BaseView = require('./base').View;
-  formErrorMixin = {
+  formErrorViewMixin = {
     errorClass: 'error',
     formErrorClass: 'error-form',
     fieldErrorClass: 'error-field',
@@ -52,13 +49,13 @@ define(function(require) {
       return s + (" class=\"" + cls + "\">" + msg + "</span>");
     },
     clearErrors: function(form) {
-      form = $(form);
+      form = this.$(form);
       form.find("." + this.errorClass).remove();
       form.find("." + this.inputErrorClass).removeClass(this.inputErrorClass);
       return form;
     },
     cleanFieldErrors: function(input) {
-      input = $(input);
+      input = this.$(input);
       return input.siblings("." + errorClass).remove();
     },
     insertErrorMessage: function(input, msgs) {
@@ -67,7 +64,7 @@ define(function(require) {
         msgs = ['Invalid value'];
       }
       msgs = toArray(msgs);
-      input = $(input);
+      input = this.$(input);
       _ref = msgs.reverse();
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -82,7 +79,7 @@ define(function(require) {
     },
     insertFormErrors: function(form, msgs) {
       var msg, _i, _len, _ref, _results;
-      form = $(form);
+      form = this.$(form);
       msgs = toArray(msgs);
       _ref = msgs.reverse();
       _results = [];
@@ -97,7 +94,7 @@ define(function(require) {
     },
     insertErrorMessages: function(form, err) {
       var _this = this;
-      form = $(form);
+      form = this.$(form);
       this.clearErrors(form);
       if (err == null) {
         return;
@@ -118,7 +115,7 @@ define(function(require) {
   };
   FormErrorView = BaseView.extend(formErrorMixin);
   return {
-    mixin: formErrorMixin,
+    mixin: formErrorViewMixin,
     View: FormErrorView
   };
 });
