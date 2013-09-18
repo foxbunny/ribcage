@@ -39,6 +39,22 @@ define(function(require) {
   Backbone = require('backbone');
   baseRouterMixin = {
     _activeViews: [],
+    autoCleanup: false,
+    init: function() {},
+    initialize: function(_arg) {
+      var autoCleanup,
+        _this = this;
+      autoCleanup = _arg.autoCleanup;
+      if (autoCleanup != null) {
+        this.autoCleanup = autoCleanup;
+      }
+      if (this.autoCleanup) {
+        this.on('route', function() {
+          return _this.cleanup();
+        });
+      }
+      return this.init(Backbone.$);
+    },
     giveAccess: function(view) {
       return view.router = this;
     },

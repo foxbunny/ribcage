@@ -54,6 +54,40 @@ define (require) ->
     #
     _activeViews: []
 
+    # ### `#autoCleanup`
+    #
+    # Whether cleanup should be performed automatically. Default is `false`.
+    #
+    autoCleanup: false
+
+    # ### `#init(jQuery)`
+    #
+    # Called when router is starting. Use this to perform initialization.
+    # jQuery is passed to init for convenience.
+    #
+    # Default implementation does not do anything.
+    #
+    init: () ->
+
+    # ### `#initialize(settings)`
+    #
+    # During initialization, router sets up event handlers and calls the
+    # `#init()` method. You generally don't want to overload this method.
+    # Instead, use `#init()`.
+    #
+    # The settings may include an `autoCleanup` key which will override the
+    # `#autoCleanup` property given a non-null value.
+    #
+    initialize: ({autoCleanup}) ->
+      @autoCleanup = autoCleanup if autoCleanup?
+
+      if @autoCleanup
+        ## Set up the event handler for the `route` event and perofrm cleanup.
+        @on 'route', () =>
+          @cleanup()
+
+      @init Backbone.$
+
     # ### `#giveAccess(view)`
     #
     # During view registration, this method is called to give the view access
