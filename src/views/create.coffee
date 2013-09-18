@@ -128,7 +128,7 @@ define (require) ->
     # Also, it is called after both a successful and unsuccessful request.
     #
     afterRequest: () ->
-      @enableButtons()
+      @enableButtons @getForm()
 
     # ### `#formInvalid(err)`
     #

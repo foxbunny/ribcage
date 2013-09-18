@@ -52,7 +52,7 @@ define(function(require) {
       return this;
     },
     afterRequest: function() {
-      return this.enableButtons();
+      return this.enableButtons(this.getForm());
     },
     formInvalid: function(err) {
       this.afterRequest();
