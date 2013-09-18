@@ -1,0 +1,51 @@
+# Form extras view <a name="form-extras-view"></a>
+
+This view provides methods for manipulating the forms' behavior. This includes
+such things as disabling and enabling submit buttons and similar.
+
+This module is in UMD format and will create `ribcage.views.formExtraView`,
+`ribcage.views.FormExtraView`, and `ribcage.viewMixins.FormExtraView` globals
+if not used with an AMD loader such as RequireJS.
+
+## `formExtraViewMixin` <a name="formextraviewmixin"></a>
+
+This mixin implements the API for [`FormExtraView`](#formextraview).
+
+### `#FOCUSABLE_INPUTS` <a name="focusable_inputs"></a>
+
+Defines the jQuery selector for focusable inputs. These are the inputs that can
+be safely focused without the focus even affecting their value (provided that
+the input is visible).
+
+The default includes the following inputs:
+
+ + `input[type=text]`
+ + `input[type=date]`
+ + `input[type=number]`
+ + `input[type=email]`
+ + `textarea`
+ + `select`
+
+
+### `#focusFirst(form)` <a name="focusfirst-form"></a>
+
+Focus the first input in a form.
+
+The `form` argument should be a valid jQuery selector or object.
+
+### `#disableButtons(form)` <a name="disablebuttons-form"></a>
+
+Disables form buttons (both button and input elements of type 'submit').
+
+The `form` argument should be a valid jQuery selector or object.
+
+### `#enableButtons(form)` <a name="enablebuttons-form"></a>
+
+Enables form buttons (both button and input elements of type 'submit').
+
+The `form` argument should be a valid jQuery selector or object.
+
+## `FormExtraView` <a name="formextraview"></a>
+
+Please see the documentation on [`formExtraViewMixin`](#formextraviewmixin) for
+more information about this view's API.

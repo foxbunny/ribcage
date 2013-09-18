@@ -49,6 +49,7 @@ include:
    views
  + `FormErrorView` - Provides hooks for displaying and clearing form error
    messages
+ + `FormExtraView` - Provides utitlities for manipulating form behavior.
  + `BaseFormView` - Provides basic form manipulation and error handling
  + `ModelFormView` - Provides model-specific form behavior such as
    data-binding

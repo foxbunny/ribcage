@@ -22,8 +22,6 @@ This module depends on jQuery, DaHelpers, `ribcage.utils.serializeobject`,
    - [`#validateField(input, name, value, data)`](#validatefield-input-name-value-data)
    - [`#formInvalid(err)`](#forminvalid-err)
    - [`#formValid(form, data)`](#formvalid-form-data)
-   - [`#disableButtons()`](#disablebuttons)
-   - [`#enableButtons()`](#enablebuttons)
    - [`#beforeSubmit()`](#beforesubmit)
    - [`#afterSubmit()`](#aftersubmit)
    - [`#events`](#events)
@@ -94,21 +92,10 @@ Handles the valid form submission. Does nothing by default.
 
 You need to overload this method to make this entire view useful.
 
-### `#disableButtons()` <a name="disablebuttons"></a>
-
-Disables form buttons (both button and input elements of type 'submit').
-
-### `#enableButtons()` <a name="enablebuttons"></a>
-
-Enables form buttons (both button and input elements of type 'submit').
-
 ### `#beforeSubmit()` <a name="beforesubmit"></a>
 
 Called before form is submitted. Has no arguments, and return value is not used
 by the view.
-
-Default implementation disables the submit button by calling
-[`#disableButtons()`](#disablebuttons)
 
 ### `#afterSubmit()` <a name="aftersubmit"></a>
 
@@ -121,9 +108,6 @@ is by no means a guarantee that any asynchronous operations in the callback
 have finished. For example, if you are doing an AJAX request in
 [`#formValid()`](#formvalid-data), this method will likely be invoked well
 before the AJAX request has completed.
-
-Default implementation enables the submit button by calling
-[`#enableButtons()`](#enablebuttons).
 
 ### `#events` <a name="events"></a>
 
