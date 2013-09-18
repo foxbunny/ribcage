@@ -3,7 +3,7 @@
 @license MIT
 ###
 
-# # SimpleRouter
+# # BaseRouter
 #
 # This is a basic router that handles the most traditional case of routing
 # different routes to matching handlers.
@@ -42,11 +42,11 @@ define (require) ->
   # ::TOC::
   #
 
-  # ## `simpleRouterMixin`
+  # ## `baseRouterMixin`
   #
-  # This mixin implements the API of the `SimpleRouter`.
+  # This mixin implements the API of the `BaseRouter`.
   #
-  simpleRouterMixin =
+  baseRouterMixin =
 
     # ### `#_activeViews`
     #
@@ -146,12 +146,12 @@ define (require) ->
     start: () ->
       Backbone.history.start arguments...
 
-  # ## `SimpleRouter`
+  # ## `BaseRouter`
   #
   # Please see the documentation on [`simpleRouterMixin`](#simpleroutermixin)
   # for more information about this router's API.
   #
-  SimpleRouter = Backbone.Router.extend simpleRouterMixin
+  BaseRouter = Backbone.Router.extend simpleRouterMixin
 
-  mixin: simpleRouterMixin
-  Router: SimpleRouter
+  mixin: baseRouterMixin
+  Router: BaseRouter

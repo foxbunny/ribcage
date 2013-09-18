@@ -35,9 +35,9 @@ define = (function(root) {
 })(this);
 
 define(function(require) {
-  var Backbone, SimpleRouter, simpleRouterMixin;
+  var Backbone, BaseRouter, baseRouterMixin;
   Backbone = require('backbone');
-  simpleRouterMixin = {
+  baseRouterMixin = {
     _activeViews: [],
     giveAccess: function(view) {
       return view.router = this;
@@ -92,9 +92,9 @@ define(function(require) {
       return (_ref = Backbone.history).start.apply(_ref, arguments);
     }
   };
-  SimpleRouter = Backbone.Router.extend(simpleRouterMixin);
+  BaseRouter = Backbone.Router.extend(simpleRouterMixin);
   return {
-    mixin: simpleRouterMixin,
-    Router: SimpleRouter
+    mixin: baseRouterMixin,
+    Router: BaseRouter
   };
 });

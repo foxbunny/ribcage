@@ -53,7 +53,7 @@ define (require) ->
   tabbedView = require './views/tabbed'
 
   ## Routers
-  simpleRouter = require './routers/simple'
+  baseRouter = require './routers/base'
 
   ## Validators
   methods = require './validators/methods'
@@ -129,11 +129,11 @@ define (require) ->
   # All router constructors are accessible thorugh `ribcage.routers` object.
   # These include:
   #
-  #  + `SimpleRouter` - A simple router with view registration and cleanup
+  #  + `BaseRouter` - A simple router with view registration and cleanup
   #    logic.
   #
   routers:
-    SimpleRouter: simpleRouter.Router
+    BaseRouter: baseRouter.Router
 
   # ## Model mixins
   #
@@ -180,7 +180,7 @@ define (require) ->
   # create your own routers with features from different built-in routers.
   #
   routerMixins:
-    SimpleRouter: simpleRouter.mixin
+    BaseRouter: baseRouter.mixin
 
   # ## Validators
   #

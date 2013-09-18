@@ -30,7 +30,7 @@ The new `TabbedView` superview that managed subviews with tabbed navigation.
 A view that simplifies creation of models from form data using the collection's
 `#create` method.
 
-### `SimpleRouter` added
+### `BaseRouter` added
 
 A simple router that has view registration and cleanup logic and a few
 navigation shortcuts.
