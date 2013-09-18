@@ -68,7 +68,7 @@ define(function(require) {
         defaults: extend({}, this.defaultState, data)
       });
       state = new State({
-        id: this.getStateId
+        id: this.getStateId()
       });
       state.save(null, {
         forceCreate: true

@@ -131,7 +131,7 @@ define (require) ->
       State = Model.extend
         storageKey: @storageKey
         defaults: extend {}, @defaultState, data
-      state = new State id: @getStateId
+      state = new State id: @getStateId()
       state.save null, forceCreate: true
       state.on 'change', () => @state.save()
       state
