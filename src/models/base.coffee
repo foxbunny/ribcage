@@ -38,10 +38,26 @@ define (require) ->
   #
   # Mixin that implements the common functionality of all Ribcage models.
   #
-  # It is currently a stub, but you should generally extend the `BaseModel`
-  # constructor to build all Ribcage models.
-  #
-  baseModelMixin = {}
+  baseModelMixin =
+    # ### `#expose(attr)`
+    #
+    # Create an accessor for the `attr` attribute.
+    #
+    expose: (attr) ->
+      Object.defineProperty this, attr,
+        get: () -> @get attr
+        set: (v) -> @set attr, v
+
+    # ### `#exposeReadOnly(attr)`
+    #
+    # Create an accessor for `attr` attribute that only allows reading and
+    # throws an exception on set.
+    #
+    exposeReadOnly: (attr) ->
+      Object.defineProperty this, attr,
+        get: () -> @get attr
+        set: () -> throw new Error "Attribute #{attr} cannot be set."
+
 
   # ## `BaseModel`
   #

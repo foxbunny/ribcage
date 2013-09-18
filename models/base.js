@@ -30,7 +30,28 @@ if (typeof define !== 'function' || !define.amd) {
 define(function(require) {
   var Backbone, BaseModel, baseModelMixin;
   Backbone = require('backbone');
-  baseModelMixin = {};
+  baseModelMixin = {
+    expose: function(attr) {
+      return Object.defineProperty(this, attr, {
+        get: function() {
+          return this.get(attr);
+        },
+        set: function(v) {
+          return this.set(attr, v);
+        }
+      });
+    },
+    exposeReadOnly: function(attr) {
+      return Object.defineProperty(this, attr, {
+        get: function() {
+          return this.get(attr);
+        },
+        set: function() {
+          throw new Error("Attribute " + attr + " cannot be set.");
+        }
+      });
+    }
+  };
   BaseModel = Backbone.Model.extend(baseModelMixin);
   return {
     mixin: baseModelMixin,
