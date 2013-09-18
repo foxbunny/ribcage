@@ -4,12 +4,14 @@ This module defines two mixin objects that expose the validation methods and
 provide a simplified API for their consumption in views and models.
 
 This module is in UMD format, and will create a `ribcage.validators.mixins`
-global if not used with an AMD loader such as RequireJS. This module depends on
-Underscore and `ribcage.validators.methods`.
+global if not used with an AMD loader such as RequireJS.
+
+This module depends on Underscore and `ribcage.validators.methods`.
 
  + [`validatingMixin`](#validatingmixin)
    - [`#validators`](#validators)
    - [`#rules`](#rules)
+   - [`#applyValidators(name, val)`](#applyvalidators-name-val)
    - [`#cleanFields(dada)`](#cleanfields-dada)
    - [`#clean(data)`](#clean-data)
  + [`modelValidatingMixin`](#modelvalidatingmixin)
@@ -83,8 +85,9 @@ Valid methods are:
 
 
 Note that none of the default validator methods work with entire data sets, so
-be sure to add your own validators if you want to validate sets of data. ###
-`#applyValidators(name, val)`
+be sure to add your own validators if you want to validate sets of data.
+
+### <a name="applyvalidators-name-val">`#applyValidators(name, val)`</a>
 
 Applies validators to a single value. The errors are either `null` if value is
 valid, or an array of messages for invalid value.
