@@ -83,8 +83,7 @@ define (require) ->
 
       if @autoCleanup
         ## Set up the event handler for the `route` event and perofrm cleanup.
-        @on 'route', () =>
-          @cleanup()
+        @on 'route', () => @cleanup()
 
       @init Backbone.$
 
