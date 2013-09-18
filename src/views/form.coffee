@@ -17,8 +17,9 @@ if typeof define isnt 'function' or not define.amd
   @require = (dep) =>
     (() =>
       switch dep
-        when 'jquery' then @$
         when 'dahelpers' then @dahelpers
+        when './formerror' then @ribcage.views.formErrorView
+        when './formextra' then @ribcage.views.formExtraView
         when '../utils/searializeobject' then @ribcage.utils.serializeObject
         when '../utils/deserializeform' then @ribcage.utils.deserializeForm
         when '../validation/mixins' then @ribcage.validation.mixins
@@ -36,12 +37,12 @@ define (require) ->
   # `ribcage.utils.deserializeform`, `ribcage.validators.mixins`, and
   # `ribcage.views.TemplateView`.
   #
-  $ = require 'jquery'
   {extend} = require 'dahelpers'
   serializeObject = require '../utils/serializeobject'
   deserializeForm = require '../utils/deserializeform'
   {validatingMixin} = require '../validators/mixins'
   {mixin: formErrorMixin} = require './formerror'
+  {mixin: formExtraMixin} = require './formextra'
   {View: TemplateView} = require './template'
 
   # ::TOC::
@@ -52,7 +53,11 @@ define (require) ->
   # This mixin implements the [`BaseFormView`](#baseformview) view's API. It
   # mixes in the `validatingMixin` to provide input validation facilities.
   #
-  baseFormViewMixin = extend {}, validatingMixin, formErrorMixin,
+  baseFormViewMixin = extend {},
+    validatingMixin,
+    formErrorMixin,
+    formExtraMixin,
+
     # ### `#validateOnInput`
     #
     # Whether to perform validation immediately on field change. Defaults to
@@ -142,32 +147,13 @@ define (require) ->
     formValid: (data) ->
       return
 
-    # ### `#disableButtons()`
-    #
-    # Disables form buttons (both button and input elements of type 'submit').
-    #
-    disableButtons: () ->
-      @$('button[type=submit]').prop 'disabled', true
-      @$('input[type=submit]').prop 'disabled', true
-
-    # ### `#enableButtons()`
-    #
-    # Enables form buttons (both button and input elements of type 'submit').
-    #
-    enableButtons: () ->
-      @$('button[type=submit]').prop 'disabled', false
-      @$('input[type=submit]').prop 'disabled', false
-
     # ### `#beforeSubmit()`
     #
     # Called before form is submitted. Has no arguments, and return value is
     # not used by the view.
     #
-    # Default implementation disables the submit button by calling
-    # [`#disableButtons()`](#disablebuttons)
-    #
     beforeSubmit: () ->
-      @disableButtons()
+      @disableButtons @getForm()
 
     # ### `#afterSubmit()`
     #
@@ -181,11 +167,8 @@ define (require) ->
     # [`#formValid()`](#formvalid-data), this method will likely be invoked
     # well before the AJAX request has completed.
     #
-    # Default implementation enables the submit button by calling
-    # [`#enableButtons()`](#enablebuttons).
-    #
     afterSubmit: () ->
-      @enableButtons()
+      @enableButtons @getForm()
 
     # ### `#events`
     #

@@ -42,6 +42,7 @@ define (require) ->
   ## Views
   baseView = require './views/base'
   formErrorView = require './views/formerror'
+  formExtraView = require './views/formextra'
   baseFormView = require './views/form'
   modelFormView = require './views/modelform'
   createView = require './views/create'
@@ -100,6 +101,7 @@ define (require) ->
   #    views
   #  + `FormErrorView` - Provides hooks for displaying and clearing form error
   #    messages
+  #  + `FormExtraView` - Provides utitlities for manipulating form behavior.
   #  + `BaseFormView` - Provides basic form manipulation and error handling
   #  + `ModelFormView` - Provides model-specific form behavior such as
   #    data-binding
@@ -115,6 +117,7 @@ define (require) ->
   views:
     BaseView: baseView.View
     FormError: formErrorView.View
+    FormExtraView: formExtraView.View
     BaseFormView: baseFormView.View
     ModelFormView: modelFormView.View
     CreateView: createView.View
@@ -167,6 +170,7 @@ define (require) ->
   viewMixins:
     BaseView: baseView.mixin
     FormErrorView: formErrorView.mixin
+    FormExtraView: formExtraView.mixin
     BaseFormView: baseFormView.mixin
     ModelFormView: modelFormView.mixin
     CreateView: createView.mixin

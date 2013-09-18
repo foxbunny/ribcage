@@ -10,10 +10,12 @@ if (typeof define !== 'function' || !define.amd) {
   this.require = function(dep) {
     return (function() {
       switch (dep) {
-        case 'jquery':
-          return _this.$;
         case 'dahelpers':
           return _this.dahelpers;
+        case './formerror':
+          return _this.ribcage.views.formErrorView;
+        case './formextra':
+          return _this.ribcage.views.formExtraView;
         case '../utils/searializeobject':
           return _this.ribcage.utils.serializeObject;
         case '../utils/deserializeform':
@@ -38,15 +40,15 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var $, BaseFormView, TemplateView, baseFormViewMixin, deserializeForm, extend, formErrorMixin, serializeObject, validatingMixin;
-  $ = require('jquery');
+  var BaseFormView, TemplateView, baseFormViewMixin, deserializeForm, extend, formErrorMixin, formExtraMixin, serializeObject, validatingMixin;
   extend = require('dahelpers').extend;
   serializeObject = require('../utils/serializeobject');
   deserializeForm = require('../utils/deserializeform');
   validatingMixin = require('../validators/mixins').validatingMixin;
   formErrorMixin = require('./formerror').mixin;
+  formExtraMixin = require('./formextra').mixin;
   TemplateView = require('./template').View;
-  baseFormViewMixin = extend({}, validatingMixin, formErrorMixin, {
+  baseFormViewMixin = extend({}, validatingMixin, formErrorMixin, formExtraMixin, {
     validateOnInput: false,
     __form: null,
     getForm: function() {
@@ -76,19 +78,11 @@ define(function(require) {
       return this.insertErrorMessages(this.getForm(), err);
     },
     formValid: function(data) {},
-    disableButtons: function() {
-      this.$('button[type=submit]').prop('disabled', true);
-      return this.$('input[type=submit]').prop('disabled', true);
-    },
-    enableButtons: function() {
-      this.$('button[type=submit]').prop('disabled', false);
-      return this.$('input[type=submit]').prop('disabled', false);
-    },
     beforeSubmit: function() {
-      return this.disableButtons();
+      return this.disableButtons(this.getForm());
     },
     afterSubmit: function() {
-      return this.enableButtons();
+      return this.enableButtons(this.getForm());
     },
     events: {
       'submit form': 'submit',
