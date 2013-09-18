@@ -113,7 +113,7 @@ define(function(require) {
       return this;
     }
   };
-  FormErrorView = BaseView.extend(formErrorMixin);
+  FormErrorView = BaseView.extend(formErrorViewMixin);
   return {
     mixin: formErrorViewMixin,
     View: FormErrorView

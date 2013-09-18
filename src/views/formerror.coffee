@@ -190,7 +190,7 @@ define (require) ->
   # Please see the documentation for the [`formErrorMixin`](#formerrormixin)
   # for more information on the API that this view provides.
   #
-  FormErrorView = BaseView.extend formErrorMixin
+  FormErrorView = BaseView.extend formErrorViewMixin
 
   mixin: formErrorViewMixin
   View: FormErrorView
