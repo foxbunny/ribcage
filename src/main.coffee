@@ -55,7 +55,7 @@ define (require) ->
 
   ## Routers
   baseRouter = require './routers/base'
-  satefulRouter = require './routers/stateful'
+  statefulRouter = require './routers/stateful'
 
   ## Validators
   methods = require './validators/methods'
