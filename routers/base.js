@@ -108,7 +108,7 @@ define(function(require) {
       return (_ref = Backbone.history).start.apply(_ref, arguments);
     }
   };
-  BaseRouter = Backbone.Router.extend(simpleRouterMixin);
+  BaseRouter = Backbone.Router.extend(baseRouterMixin);
   return {
     mixin: baseRouterMixin,
     Router: BaseRouter

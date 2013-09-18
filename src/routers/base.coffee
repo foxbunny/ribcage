@@ -184,7 +184,7 @@ define (require) ->
   # Please see the documentation on [`simpleRouterMixin`](#simpleroutermixin)
   # for more information about this router's API.
   #
-  BaseRouter = Backbone.Router.extend simpleRouterMixin
+  BaseRouter = Backbone.Router.extend baseRouterMixin
 
   mixin: baseRouterMixin
   Router: BaseRouter
