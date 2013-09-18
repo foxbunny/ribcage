@@ -16,10 +16,11 @@ useful.
 
 ### `BaseFormView` refactor
 
-The `BaseFormView` has been refactored, and the new `FormErrorView` and its
-mixin are now in a separate module. Views that need to show error messages in
-forms, but don't need any of the other `BaseFormView` functionality will now be
-able to take advantage of this change.
+The `BaseFormView` has been refactored, and the new `FormErrorView` and
+`FormExtraView` and their mixins separate modules. Views that need to show
+error messages in forms, or need to manipulate the form behavior, but don't 
+need any of the other `BaseFormView` functionality will now be able to take
+advantage of this change.
 
 ### `TabbedView` added
 
