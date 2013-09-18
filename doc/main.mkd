@@ -67,8 +67,10 @@ include:
 All router constructors are accessible thorugh `ribcage.routers` object. These
 include:
 
- + `SimpleRouter` - A simple router with view registration and cleanup
+ + `BaseRouter` - A simple router with view registration and cleanup
    logic.
+ + `StatefulRouter` - Router that adds support for application state
+   persistence using localStorage API
 
 
 ## Model mixins <a name="model-mixins"></a>

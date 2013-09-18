@@ -1,0 +1,95 @@
+# Stateful router <a name="stateful-router"></a>
+
+This is a router that extends the `BaseRouter` adding application state
+management facilities. The application state is persisted using local storage.
+
+This module is in UMD format and will create `ribcage.routers.statefulRouter`,
+`ribcage.routers.StatefulRouter`, and `ribcage.routerMixins.StatefulRouter`
+globals if not used with an AMD loader such as RequireJS.
+
+This module depends on DaHelpers, `ribcage.routers.BaseRouter` and
+`ribcage.models.LocalStorageModel`.
+
+ + [`statefulRouterMixin`](#statefulroutermixin)
+   - [`#defaultState`](#defaultstate)
+   - [`#stateStorageKey`](#statestoragekey)
+   - [`#stateModel`](#statemodel)
+   - [`#getStateModel()`](#getstatemodel)
+   - [`#stateId`](#stateid)
+   - [`#getStateId()`](#getstateid)
+   - [`initState([data])`](#initstate-data)
+   - [`initialize(settings)`](#initialize-settings)
+ + [`StatefulRouter`](#statefulrouter)
+
+
+## `statefulRouterMixin` <a name="statefulroutermixin"></a>
+
+This mixin implements the API for the `StatefulRouter`. During initialization
+it creates a state model instance which is then assigned to the `state`
+property.
+
+### `#defaultState` <a name="defaultstate"></a>
+
+The default application state. This property should be an object that contains
+the default state of the application.
+
+The default value is `{started: false}`.
+
+### `#stateStorageKey` <a name="statestoragekey"></a>
+
+The storage key used to store the application state. The default value is
+'appState'.
+
+### `#stateModel` <a name="statemodel"></a>
+
+The constructor used to create the application state. Default is
+`ribcage.models.LocalStorageModel`.
+
+### `#getStateModel()` <a name="getstatemodel"></a>
+
+Returns the model constructor that that will be used to create the application
+state.
+
+The default implementation returns the `#stateModel` property.
+
+The return value must have an API compatible with that of LocalStorageModel. If
+you wish to use an incompatible model constructor, overload the `#initState()`
+method instad of this one.
+
+### `#stateId` <a name="stateid"></a>
+
+The `id` attribute of the application state model object. Default value is
+`state`.
+
+### `#getStateId()` <a name="getstateid"></a>
+
+Returns the `id` attribute to be used in the application state model object.
+
+The default implementation returns the `#stateId` property.
+
+You can overload this attribute to provide a different `id` for each instance
+of this router. Keep in mind that application state cannot be restored from the
+storage unless it uses the same `id` that was used to persist it.
+
+### `initState([data])` <a name="initstate-data"></a>
+
+Initializes the application state. If the `data` argument is supplied, it is
+added to the default state.
+
+Note that if application already has a state persisted by the state model, and
+the state model is the default `LocalStorageModel`, the default and additional
+data supplied to this method will not be added to the stored state.
+
+This method should return the created state model object.
+
+### `initialize(settings)` <a name="initialize-settings"></a>
+
+Initializes the application state and calls the `BaseRouter`'s `#initialize()`
+method.
+
+The same settings can be passed as for the `BaseRouter`.
+
+## `StatefulRouter` <a name="statefulrouter"></a>
+
+Please see the documentation on [`statefulRouterMixin`](#statefulroutermixin)
+for more information on this router's API.
