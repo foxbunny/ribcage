@@ -10,9 +10,9 @@ This module is in UMD format and will create `ribcage.views.formErrorView`,
 `ribcage.views.FormErrorView` and `ribacage.mixins.formErrorView` global if not
 used with an AMD loader such as RequireJS.
 
-This module depends on jQuery, DaHelpers, `ribcage.views.BaseView`.
+This module depends on DaHelpers, `ribcage.views.BaseView`.
 
- + [`formErrorMixin`](#formerrormixin)
+ + [`formErrorViewMixin`](#formerrorviewmixin)
    - [`#errorClass`](#errorclass)
    - [`#formErrorClass`](#formerrorclass)
    - [`#fieldErrorClass`](#fielderrorclass)
@@ -26,7 +26,7 @@ This module depends on jQuery, DaHelpers, `ribcage.views.BaseView`.
  + [`FormErrorView`](#formerrorview)
 
 
-## `formErrorMixin` <a name="formerrormixin"></a>
+## `formErrorViewMixin` <a name="formerrorviewmixin"></a>
 
 This mixin implements the API for the [`FormErrorView`](#formerrorview).
 

@@ -7,6 +7,8 @@ This module is in UMD format and will create `ribcage.views.formExtraView`,
 `ribcage.views.FormExtraView`, and `ribcage.viewMixins.FormExtraView` globals
 if not used with an AMD loader such as RequireJS.
 
+This module depends on `ribcage.views.BaseView`.
+
 ## `formExtraViewMixin` <a name="formextraviewmixin"></a>
 
 This mixin implements the API for [`FormExtraView`](#formextraview).

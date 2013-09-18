@@ -10,6 +10,8 @@ used with with an AMD loader such as RequireJS.
 This module depends on Backbone.
 
  + [`baseModelMixin`](#basemodelmixin)
+   - [`#expose(attr)`](#expose-attr)
+   - [`#exposeReadOnly(attr)`](#exposereadonly-attr)
  + [`BaseModel`](#basemodel)
  + [Exports](#exports)
 
@@ -18,8 +20,14 @@ This module depends on Backbone.
 
 Mixin that implements the common functionality of all Ribcage models.
 
-It is currently a stub, but you should generally extend the `BaseModel`
-constructor to build all Ribcage models.
+### `#expose(attr)` <a name="expose-attr"></a>
+
+Create an accessor for the `attr` attribute.
+
+### `#exposeReadOnly(attr)` <a name="exposereadonly-attr"></a>
+
+Create an accessor for `attr` attribute that only allows reading and throws an
+exception on set.
 
 ## `BaseModel` <a name="basemodel"></a>
 

@@ -19,6 +19,7 @@ This module depends on DaHelpers, `ribcage.routers.BaseRouter` and
    - [`#getStateId()`](#getstateid)
    - [`initState([data])`](#initstate-data)
    - [`initialize(settings)`](#initialize-settings)
+   - [`#start()`](#start)
  + [`StatefulRouter`](#statefulrouter)
 
 
@@ -88,6 +89,10 @@ Initializes the application state and calls the `BaseRouter`'s `#initialize()`
 method.
 
 The same settings can be passed as for the `BaseRouter`.
+
+### `#start()` <a name="start"></a>
+
+Starts the router and sets the `started` state to true.
 
 ## `StatefulRouter` <a name="statefulrouter"></a>
 

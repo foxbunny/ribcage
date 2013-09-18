@@ -10,7 +10,7 @@ This module is in UMD format and will create `ribcage.routers.simpleRouter`,
 `ribcage.routers.SimpleRouter`, and `ribcage.routerMixins.SimpleRouter` globals
 if not used with an AMD loader such as RequireJS.
 
-This module depends on Backbone.
+This module depends on DaHelpers and Backbone.
 
  + [`baseRouterMixin`](#baseroutermixin)
    - [`#_activeViews`](#activeviews)
