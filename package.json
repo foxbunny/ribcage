@@ -32,9 +32,10 @@
     },
     "ignore": [
       "package.json",
+      "node_modules",
       ".gitignore",
-      "CHANGES.md",
-      "README.md",
+      "CHANGES.mkd",
+      "README.mkd",
       "LICENSE",
       "volofile",
       "src",
