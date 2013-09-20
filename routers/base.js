@@ -101,7 +101,7 @@ define(function(require) {
         trigger: true
       });
     },
-    changePath: function(hash) {
+    swapPath: function(hash) {
       return this.navigate(hash, {
         trigger: true,
         replace: true

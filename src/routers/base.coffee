@@ -166,13 +166,13 @@ define (require) ->
     go: (hash) ->
       @navigate hash, trigger: true
 
-    # ### `#changePath(hash)`
+    # ### `#swapPath(hash)`
     #
     # Replace the current path with `hash` without updating history. This is
     # another wrapper for Router.navigate which passes `{trigger:true,
     # replace:true}`.
     #
-    changePath: (hash) ->
+    swapPath: (hash) ->
       @navigate hash,
         trigger: true
         replace: true
