@@ -101,6 +101,12 @@ define(function(require) {
         trigger: true
       });
     },
+    changePath: function(hash) {
+      return this.navigate(hash, {
+        trigger: true,
+        replace: true
+      });
+    },
     back: function() {
       return window.history.back();
     },
