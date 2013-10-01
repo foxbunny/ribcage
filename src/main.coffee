@@ -47,7 +47,9 @@ define (require) ->
   modelFormView = require './views/modelform'
   createView = require './views/create'
   collectionCreateView = require './views/collectioncreate'
+  templateBaseView = require './views/templatebase'
   templateView = require './views/template'
+  modalView = require './views/modal'
   modelView = require './views/model'
   redirectView = require './views/redirect'
   loadingView = require './views/loading'
@@ -112,7 +114,10 @@ define (require) ->
   #    instances server-side
   #  + [`CollectionCreateView`](views/collectioncreate.mkd) - Create view that
   #    uses the collection object to crate a new model.
+  #  + [`TempalteBaseView`](views/templatebase.mkd) - Base template view that
+  #    provides basic template-handling and nothing else
   #  + [`TemplateView`](views/template.mkd) - Simplifies rendering of templates
+  #  + [`ModalView`](views/modal.mkd) - Modal dialog view
   #  + [`ModelView`](views/model.mkd) - Augments `TemplateView` by passing
   #    model data to templates
   #  + [`RedirectView`](views/redirect.mkd) - Simply redirects to a specified
@@ -129,7 +134,9 @@ define (require) ->
     ModelFormView: modelFormView.View
     CreateView: createView.View
     CollectionCreateView: collectionCreateView.View
+    TemplateBaseView: templateBaseView.View
     TemplateView: templateView.View
+    ModalView: modalView.View
     ModelView: modelView.View
     RedirectView: redirectView.View
     LoadingView: loadingView.View
@@ -182,7 +189,9 @@ define (require) ->
     ModelFormView: modelFormView.mixin
     CreateView: createView.mixin
     CollectionCreateView: collectionCreateView.mixin
+    TemplateBase: templateBaseView.mixin
     TemplateView: templateView.mixin
+    ModalView: modalView.mixin
     ModelView: modelView.mixin
     RedirectView: redirectView.mixin
     LoadingView: loadingView.mixin

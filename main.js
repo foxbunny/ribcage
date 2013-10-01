@@ -24,7 +24,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStorage, LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, formErrorView, formExtraView, loadingView, localStorageModel, methods, mixins, modelFormView, modelView, randString, redirectView, serializeObject, statefulRouter, tabbedView, templateView;
+  var LocalStorage, LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, formErrorView, formExtraView, loadingView, localStorageModel, methods, mixins, modalView, modelFormView, modelView, randString, redirectView, serializeObject, statefulRouter, tabbedView, templateBaseView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -35,7 +35,9 @@ define(function(require) {
   modelFormView = require('./views/modelform');
   createView = require('./views/create');
   collectionCreateView = require('./views/collectioncreate');
+  templateBaseView = require('./views/templatebase');
   templateView = require('./views/template');
+  modalView = require('./views/modal');
   modelView = require('./views/model');
   redirectView = require('./views/redirect');
   loadingView = require('./views/loading');
@@ -65,7 +67,9 @@ define(function(require) {
       ModelFormView: modelFormView.View,
       CreateView: createView.View,
       CollectionCreateView: collectionCreateView.View,
+      TemplateBaseView: templateBaseView.View,
       TemplateView: templateView.View,
+      ModalView: modalView.View,
       ModelView: modelView.View,
       RedirectView: redirectView.View,
       LoadingView: loadingView.View,
@@ -90,7 +94,9 @@ define(function(require) {
       ModelFormView: modelFormView.mixin,
       CreateView: createView.mixin,
       CollectionCreateView: collectionCreateView.mixin,
+      TemplateBase: templateBaseView.mixin,
       TemplateView: templateView.mixin,
+      ModalView: modalView.mixin,
       ModelView: modelView.mixin,
       RedirectView: redirectView.mixin,
       LoadingView: loadingView.mixin,

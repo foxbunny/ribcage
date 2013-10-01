@@ -59,7 +59,10 @@ include:
    instances server-side
  + [`CollectionCreateView`](views/collectioncreate.mkd) - Create view that
    uses the collection object to crate a new model.
+ + [`TempalteBaseView`](views/templatebase.mkd) - Base template view that
+   provides basic template-handling and nothing else
  + [`TemplateView`](views/template.mkd) - Simplifies rendering of templates
+ + [`ModalView`](views/modal.mkd) - Modal dialog view
  + [`ModelView`](views/model.mkd) - Augments `TemplateView` by passing
    model data to templates
  + [`RedirectView`](views/redirect.mkd) - Simply redirects to a specified
