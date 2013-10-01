@@ -67,7 +67,17 @@ define(function(require) {
       background: 'rgba(0,0,0,0.5)',
       'z-index': 16777271
     },
-    modalTemplate: "<div class=\"modal-dialog\">\n  <h2 class=\"modal-title\">\n    <span class=\"modal-title-text\"><%= title %></span>\n    <span class=\"close\"></span>\n  </h2>\n  <div class=\"modal-content\"><%= content %></div>\n  <% if (buttons) { %>\n    <div class=\"modal-buttons\"><%= buttons %></div>\n  <% } %>\n</div>",
+    closeIcon: '<span class="icon-remove"></span>',
+    getCloseIcon: function() {
+      return this.closeIcon;
+    },
+    setCloseIcon: function(icon) {
+      this.closeIcon = icon;
+      if (this.closeIconElement != null) {
+        return this.closeIconElement.html(this.closeIcon);
+      }
+    },
+    modalTemplate: "<div class=\"modal-dialog\">\n  <h2 class=\"modal-title\">\n    <span class=\"modal-title-text\"><%= title %></span>\n    <span class=\"modal-title-close-icon close\"><%= closeIcon %></span>\n  </h2>\n  <div class=\"modal-content\"><%= content %></div>\n  <% if (buttons) { %>\n    <div class=\"modal-buttons\"><%= buttons %></div>\n  <% } %>\n</div>",
     buttons: '<button class="close">OK</button>',
     getButtons: function() {
       return this.buttons;
@@ -81,21 +91,37 @@ define(function(require) {
       return this;
     },
     dismiss: function(e) {
-      return this.$el.hide();
+      var callback;
+      this.$el.hide();
+      callback = this.onDismissed;
+      this.onDismissed = null;
+      if (callback) {
+        return callback();
+      }
     },
-    show: function() {
+    show: function(title, templateSource, callback) {
+      if (title != null) {
+        this.setTitle(title);
+      }
+      if (templateSource != null) {
+        this.setTemplate(templateSource);
+      }
+      if (callback != null) {
+        this.onDismissed = callback;
+      }
       return this.$el.show();
     },
-    createContent: function() {
+    onDismissed: null,
+    createContainer: function() {
       return _.template(this.modalTemplate, {
         title: this.getTitle(),
         content: this.template(this.getTemplateContext()),
-        buttons: this.getButtons()
+        buttons: this.getButtons(),
+        closeIcon: this.getCloseIcon()
       });
     },
     render: function() {
       this.modal = this.$el;
-      this.modal.addClass('modal-overlay close');
       if (this.overlayStyles != null) {
         this.modal.css(this.overlayStyles);
       }
@@ -104,6 +130,7 @@ define(function(require) {
       this.titleElement = this.modal.find('.modal-title-text');
       this.contentElement = this.modal.find('.modal-content');
       this.buttonsElement = this.modal.find('.modal-buttons');
+      this.closeIconElement = this.modal.find('.modal-title-close-icon');
       return this;
     },
     events: {

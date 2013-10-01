@@ -108,6 +108,31 @@ define (require) ->
       background: 'rgba(0,0,0,0.5)'
       'z-index': 16777271
 
+    # ## `#closeIcon`
+    #
+    # The HTML fragment to be used as close icon.
+    #
+    # Default is '<span class="icon-remove"></span>'.
+    #
+    closeIcon: '<span class="icon-remove"></span>'
+
+    # ## `#getCloseIcon()`
+    #
+    # Returns the HTML fragment to be used as close icon.
+    #
+    # Default implementation returns the value of `#closeIcon` property.
+    #
+    getCloseIcon: () ->
+      @closeIcon
+
+    # ## `#setCloseIcon(icon)`
+    #
+    # Sets the close icon HTML fragment.
+    #
+    setCloseIcon: (icon) ->
+      @closeIcon = icon
+      @closeIconElement.html(@closeIcon) if @closeIconElement?
+
     # ## `#modalTemplate`
     #
     # The main modal dialog container template. It defines an overlay,
@@ -116,7 +141,7 @@ define (require) ->
     <div class="modal-dialog">
       <h2 class="modal-title">
         <span class="modal-title-text"><%= title %></span>
-        <span class="close"></span>
+        <span class="modal-title-close-icon close"><%= closeIcon %></span>
       </h2>
       <div class="modal-content"><%= content %></div>
       <% if (buttons) { %>
@@ -161,23 +186,48 @@ define (require) ->
     #
     dismiss: (e) ->
       @$el.hide()
+      callback = @onDismissed
+      @onDismissed = null
+      callback() if callback
 
-    # ## `#show()`
+    # ## `#show([title, templateSource, callback])`
     #
     # Shows the dialog.
     #
-    show: () ->
+    # All arguments are optional. If supplied, they will set the appropraite
+    # properties of the modal dialog before showing.
+    #
+    show: (title, templateSource, callback) ->
+      @setTitle(title) if title?
+      @setTemplate(templateSource) if templateSource?
+      @onDismissed = callback if callback?
       @$el.show()
 
-    # ## `#createContent()`
+    # ## `#onDismissed`
     #
-    # Creates the modal overlay contents by rendering the `#modalTemplate`.
+    # Callback function that is executed once when the alert is dismissed.
     #
-    createContent: () ->
+    # The callback is dereferenced immediately after being called. Use the
+    # `#onDismiss()` function to set a new one.
+    #
+    # The callback needs to be used if you want 'blocking' behavior, because
+    # the blocking behavior of some of the native modal dialogs (e.g., `alert`,
+    # `prompt`) cannot be simulated.
+    #
+    # Default value is `null`.
+    #
+    onDismissed: null
+
+    # ## `#createContainer()`
+    #
+    # Creates the modal overlay container by rendering the `#modalTemplate`.
+    #
+    createContainer: () ->
       _.template @modalTemplate,
         title: @getTitle()
         content: @template @getTemplateContext()
         buttons: @getButtons()
+        closeIcon: @getCloseIcon()
 
     # ## `#render()`
     #
@@ -189,7 +239,6 @@ define (require) ->
     #
     render: () ->
       @modal = @$el
-      @modal.addClass 'modal-overlay close'
 
       if @overlayStyles?
         @modal.css @overlayStyles
@@ -203,7 +252,7 @@ define (require) ->
       @titleElement = @modal.find '.modal-title-text'
       @contentElement = @modal.find '.modal-content'
       @buttonsElement = @modal.find '.modal-buttons'
-
+      @closeIconElement = @modal.find '.modal-title-close-icon'
       @
 
     # ## `#events`
