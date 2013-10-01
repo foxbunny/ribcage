@@ -1,0 +1,58 @@
+# <a name="template-base-view">Template base view</a>
+
+This is a simple view that doesn't do anything on its own. It merely provides a
+standard interface for handling an underscore template with context data.
+
+This module is in UMD format and will create `ribcage.views.TemplateBaseView`,
+`ribcage.viewMixins.TemplateBaseView`, and `ribcage.views.templateBaseView`
+globals if not used with an AMD loader such as RequireJS.
+
+This module depends on Underscore and `ribacage.views.BaseView`.
+
+ + [`templateBaseViewMixin`](#templatebaseviewmixin)
+   - [`#templateSettings`](#templatesettings)
+   - [`#templateSource`](#templatesource)
+   - [`#template`](#template)
+   - [`#getContext()`](#getcontext)
+   - [`#renderTemplate()`](#rendertemplate)
+ + [`TemplateBaseView`](#templatebaseview)
+
+
+## <a name="templatebaseviewmixin">`templateBaseViewMixin`</a>
+
+This mixin implements the API of the TemplateBaseView.
+
+In addition to providing the API for the somewhat useless TemplateBaseView,
+this mixin is also used in many views that require template handlign such as
+`ribcage.views.TemplateView` and `ribcage.views.ModalView`.
+
+### <a name="templatesettings">`#templateSettings`</a>
+
+This property is passed in as template settings. The default value is `null`.
+If the template function you are using (default is Underscore template) takes
+extra settings, you can use this property to specify it.
+
+### <a name="templatesource">`#templateSource`</a>
+
+The template source to render. It provides a simple default for debugging
+purposes.
+
+### <a name="template">`#template`</a>
+
+Template to render. This method takes data and passes it to Underscore's
+`#template()` method. The default implementation renders the `#templateSource`
+property.
+
+### <a name="getcontext">`#getContext()`</a>
+
+Returns template context data. Should return an object whose keys will be used
+in the template's scope.
+
+### <a name="rendertemplate">`#renderTemplate()`</a>
+
+Render the template given a context.
+
+## <a name="templatebaseview">`TemplateBaseView`</a>
+
+Please see the documentation on [`templateBaseViewMixin`](#templateviewmixin)
+for more information about this view's API.

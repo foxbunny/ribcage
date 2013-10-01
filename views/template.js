@@ -4,55 +4,47 @@
 @license MIT
 */
 
-var _this = this;
+var define;
 
-if (typeof define !== 'function' || !define.amd) {
-  this.require = function(dep) {
-    return (function() {
-      switch (dep) {
-        case 'underscore':
-          return _this._;
-        case './base':
-          return _this.ribcage.views.baseView;
-        default:
-          return null;
-      }
-    })() || (function() {
-      throw new Error("Unmet dependency " + dep);
-    })();
-  };
-  this.define = function(factory) {
-    var module;
-    module = _this.ribcage.views.templateView = factory(_this.require);
-    _this.ribcage.views.TemplateView = module.View;
-    return _this.ribcage.viewMixins.TemplateView = module.mixin;
-  };
-}
+define = (function(root) {
+  var require;
+  if (typeof root.define === 'function' && define.amd) {
+    return root.define;
+  } else {
+    require = function(dep) {
+      return (function() {
+        switch (dep) {
+          case './templatebase':
+            return root.ribcage.views.templateBaseView;
+          default:
+            return null;
+        }
+      })() || (function() {
+        throw new Error("Unmet dependency " + dep);
+      })();
+    };
+    return function(factory) {
+      var module;
+      module = factory(require);
+      ribcage.views.templateView = module;
+      ribcage.views.TemplateView = module.View;
+      return ribcage.viewMixins.TemplateView = module.mixin;
+    };
+  }
+})(this);
 
 define(function(require) {
-  var TemplateView, baseView, templateViewMixin, _;
-  _ = require('underscore');
-  baseView = require('./base');
+  var TemplateBaseView, TemplateView, templateViewMixin;
+  TemplateBaseView = require('./templatebase').View;
   templateViewMixin = {
-    templateSettings: null,
-    templateSource: '<p>Please override me</p>',
-    template: function(data) {
-      return _.template(this.templateSource, data, this.templateSettings);
-    },
-    getTemplateContext: function() {
-      return {};
-    },
     beforeRender: function() {
       return this;
     },
-    renderTemplate: function(context) {
-      return this.template(context);
+    afterRender: function(context) {
+      return this;
     },
     insertTemplate: function(html) {
       return this.$el.html(html);
-    },
-    afterRender: function(context) {
-      return this;
     },
     render: function() {
       var context;
@@ -63,7 +55,7 @@ define(function(require) {
       return this;
     }
   };
-  TemplateView = baseView.View.extend(templateViewMixin);
+  TemplateView = TemplateBaseView.extend(templateViewMixin);
   return {
     mixin: templateViewMixin,
     View: TemplateView
