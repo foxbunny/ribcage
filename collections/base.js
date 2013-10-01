@@ -4,28 +4,35 @@
 @license MIT
 */
 
-var _this = this;
+var define;
 
-if (typeof define !== 'function' || !define.amd) {
-  this.require = function(dep) {
-    return (function() {
-      switch (dep) {
-        case 'backbone':
-          return _this.Backbone;
-        default:
-          return null;
-      }
-    })() || (function() {
-      throw new Error("Unmet dependency " + dep);
-    })();
-  };
-  this.define = function(factory) {
-    var module;
-    module = _this.ribcage.collections.baseCollection = factory(_this.require);
-    _this.ribcage.collections.BaseCollection = module.Collection;
-    return _this.ribcage.collectionMixins.BaseCollection = module.mixin;
-  };
-}
+define = (function(root) {
+  var require;
+  if (typeof root.define === 'function' && define.amd) {
+    return root.define;
+  } else {
+    require = function(dep) {
+      return ((function() {
+        (function() {});
+        switch (dep) {
+          case 'backbone':
+            return this.Backbone;
+          default:
+            return null;
+        }
+      }).call(this))() || (function() {
+        throw new Error("Unmet dependency " + dep);
+      })();
+    };
+    return function(factory) {
+      var module;
+      module = factory(require);
+      root.ribcage.collections.baseCollection = module;
+      root.ribcage.collections.BaseCollection = module.Collection;
+      return root.ribcage.collectionMixins.BaseCollection = module.mixin;
+    };
+  }
+})(this);
 
 define(function(require) {
   var Backbone, BaseCollection, baseCollectionMixin;

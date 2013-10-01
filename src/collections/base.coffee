@@ -14,17 +14,23 @@
 # loader such as RequireJS.
 #
 
-if typeof define isnt 'function' or not define.amd
-  @require = (dep) =>
-    (() =>
+define = ((root) ->
+  if typeof root.define is 'function' and define.amd
+    root.define
+  else
+    require = (dep) ->
+      (() ->
       switch dep
         when 'backbone' then @Backbone
         else null
-    )() or throw new Error "Unmet dependency #{dep}"
-  @define = (factory) =>
-    module = @ribcage.collections.baseCollection = factory @require
-    @ribcage.collections.BaseCollection = module.Collection
-    @ribcage.collectionMixins.BaseCollection = module.mixin
+      )() or throw new Error "Unmet dependency #{dep}"
+    (factory) ->
+      module = factory require
+      root.ribcage.collections.baseCollection = module
+      root.ribcage.collections.BaseCollection = module.Collection
+      root.ribcage.collectionMixins.BaseCollection = module.mixin
+)(this)
+
 
 define (require) ->
 

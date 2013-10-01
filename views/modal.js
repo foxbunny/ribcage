@@ -26,9 +26,9 @@ define = (function(root) {
     return function(factory) {
       var module;
       module = factory(require);
-      ribcage.views.modalView = module;
-      ribcage.views.ModalView = module.View;
-      return ribcage.viewMixins.ModalView = module.mixin;
+      root.ribcage.views.modalView = module;
+      root.ribcage.views.ModalView = module.View;
+      return root.ribcage.viewMixins.ModalView = module.mixin;
     };
   }
 })(this);

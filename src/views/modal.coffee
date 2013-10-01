@@ -23,10 +23,10 @@ define = ((root) ->
           else null
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) ->
-      module = factory(require)
-      ribcage.views.modalView = module
-      ribcage.views.ModalView = module.View
-      ribcage.viewMixins.ModalView = module.mixin
+      module = factory require
+      root.ribcage.views.modalView = module
+      root.ribcage.views.ModalView = module.View
+      root.ribcage.viewMixins.ModalView = module.mixin
 )(this)
 
 
