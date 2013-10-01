@@ -20,6 +20,7 @@ This module depends on DaHelpers and Backbone.
    - [`#giveAccess(view)`](#giveaccess-view)
    - [`#register(view)`](#register-view)
    - [`#cleanup()`](#cleanup)
+   - [`#swapPath(hash)`](#swappath-hash)
    - [`#back()`](#back)
    - [`#start()`](#start)
  + [`BaseRouter`](#baserouter)
@@ -86,6 +87,11 @@ router's cleanup.
 Model cleanup Collection cleanup ### `#go(hash)`
 
 Simple wrapper for Router.navigate that also passes `{trigger: true}`.
+
+### <a name="swappath-hash">`#swapPath(hash)`</a>
+
+Replace the current path with `hash` without updating history. This is another
+wrapper for Router.navigate which passes `{trigger:true, replace:true}`.
 
 ### <a name="back">`#back()`</a>
 
