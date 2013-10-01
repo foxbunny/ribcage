@@ -1,0 +1,110 @@
+# <a name="modal-view">Modal view</a>
+
+This view presents a modal window with an overlay that fills the container.
+
+This module is in UMD format and will create `ribcage.views.ModalView`,
+`ribcage.viewMixins.ModalView`, and `ribcage.views.modalView` globals if not
+used with an AMD loader such as RequireJS.
+
+This module depends on Underscore and `ribacage.views.BaseView`.
+
+## <a name="modalviewmixin">`modalViewMixin`</a>
+
+## <a name="settemplate-templatesource">`#setTemplate(templateSource)`</a>
+
+Sets the template source.
+
+Note that this does _not_ override the `#template()` function. Do that directly
+on the object.
+
+## <a name="title">`#title`</a>
+
+The dialog title.
+
+Default is ''.
+
+## <a name="gettitle">`#getTitle()`</a>
+
+Returns the dialog title.
+
+Default implementation returns the value of the `#title` property.
+
+## <a name="settitle-title">`#setTitle(title)`</a>
+
+Sets the title of the modal dialog.
+
+## <a name="overlaystyles">`#overlayStyles`</a>
+
+The styles to be used in the overlay element's `style` attribute. This is an
+object that defines the CSS rules to be applied.
+
+Default is equivalent of the following CSS:
+
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+
+
+Use jQuery-compatible style declarations.
+
+If you would rather set the overlay styles using CSS, simply create CSS rules
+for the `div.modal-overlay` element, and set this property to `null`.
+
+## <a name="modaloverlay">`#modalOverlay`</a>
+
+The container element for the modal.
+
+The element is treated as an overlay and the `#modalTemplate` is inserted into
+it.
+
+Default is '<div class="modal-overlay close">'.
+
+## <a name="modaltemplate">`#modalTemplate`</a>
+
+The main modal dialog container template. It defines an overlay,
+
+## <a name="buttons">`#buttons`</a>
+
+The buttons that appear in the button bar. Set this to `false` or other falsy
+value to suppress rendering of the button bar itself.
+
+Default is '<button class="close">OK</button>'.
+
+## <a name="getbuttons">`#getButtons()`</a>
+
+Returns the dialog buttons.
+
+Default implementation returns the value of the `#buttons` property.
+
+## <a name="setbuttons-buttons">`#setButtons(buttons)`</a>
+
+Sets the button bar buttons.
+
+## <a name="dismiss-e">`#dismiss(e)`</a>
+
+The event callback for close icon, overlay and button bar button click events.
+
+Default implementation simply closes the dialog.
+
+## <a name="createcontent">`#createContent()`</a>
+
+Creates the modal overlay contents by rendering the `#modalTemplate`.
+
+## <a name="render">`#render()`</a>
+
+Renders the overlay and sets the default content.
+
+## <a name="events">`#events`</a>
+
+The default mapping attaches the `#dismiss()` callback to `click` and
+`touchend` events triggered on elements with `close` class (overlay, close
+icon, and close button).
+
+## <a name="modalview">`ModalView`</a>
+
+Please see the documentation on [`modalViewMixin`](#modalviewmixin) for more
+information about this view's API.
