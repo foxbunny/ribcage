@@ -40,8 +40,8 @@ define = (function(root) {
 })(this);
 
 define(function(require) {
-  var BaseRouter, DeviceRouter, UAParser, deviceRouterMixin, extend, subset, uaParser, _ref;
-  _ref = require('dahelpers'), subset = _ref.subset, extend = _ref.extend;
+  var BaseRouter, DeviceRouter, UAParser, deviceRouterMixin, extend, subset, type, uaParser, _ref;
+  _ref = require('dahelpers'), type = _ref.type, subset = _ref.subset, extend = _ref.extend;
   UAParser = require('ua-parser');
   BaseRouter = require('./base').Router;
   uaParser = new UAParser();
@@ -49,15 +49,20 @@ define(function(require) {
     userAgent: {},
     deviceOverrides: {},
     remapOverrides: function(overrides, actualState) {
-      var alternative, alternatives, matcher, method;
+      var alternative, alternatives, cond, matcher, method;
       for (method in overrides) {
         alternatives = overrides[method];
         for (alternative in alternatives) {
           matcher = alternatives[alternative];
-          if (subset(matcher, actualState)) {
-            this[method] = this[alternative];
-            break;
+          if (type(matcher, 'function')) {
+            cond = matcher(actualState);
+          } else {
+            cond = subset(matcher, actualState);
           }
+          if (cond) {
+            this[method] = this[alternative];
+          }
+          break;
         }
       }
       return this;
@@ -66,10 +71,14 @@ define(function(require) {
       var _this = this;
       this.userAgent = uaParser.getResult();
       this.userAgent["native"] = false;
+      this.userAgent.standalone = false;
       document.addEventListener("deviceready", function() {
         return _this.userAgent["native"] = true;
       });
-      return this.remapOverrides(this.deviceOverrides, this.userAgent);
+      if ('standalone' in window.navigator) {
+        this.userAgent.standalone = window.navigator.standalone;
+      }
+      this.remapOverrides(this.deviceOverrides, this.userAgent);
     }
   };
   DeviceRouter = BaseRouter.extend(extend({}, deviceRouterMixin, {

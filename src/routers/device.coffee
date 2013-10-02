@@ -37,7 +37,7 @@ define (require) ->
   # This module depends on DaHelpers, UA-Parser and
   # `ribcage.routers.BaseRouter`.
   #
-  {subset, extend} = require 'dahelpers'
+  {type, subset, extend} = require 'dahelpers'
   UAParser = require 'ua-parser'
   {Router: BaseRouter} = require './base'
   uaParser = new UAParser()
@@ -64,9 +64,14 @@ define (require) ->
     # the return value of UA-Parser's [`#getResult()`
     # method](https://github.com/faisalman/ua-parser-js/blob/master/readme.md).
     #
-    # The `#initialize` method creates an additional key on this object,
+    # The `#initialize` method creates additional keys that are not part of the
+    # UA-Parser output.
+    #
     # `native`, which is currently set to `true` only in PhoneGap native
     # application.
+    #
+    # `standalone` which is only set to True on mobile Safari when the browser
+    # is in application/full-screen mode.
     #
     userAgent: {}
 
@@ -87,6 +92,9 @@ define (require) ->
     # keys exist in the parsing result, and the values of those keys match, the
     # alternative method will be considered a match.
     #
+    # The matcher can also be an object which takes the parsed UA string, and
+    # rerturns `true` if override should take place.
+    #
     # For practical reasons, only the _first_ matched method will be used.
     #
     # Example:
@@ -96,7 +104,10 @@ define (require) ->
     #       fooIOS7: function() { console.log('foo from iOS7'); }
     #       deviceOverrides: {
     #         foo: {
-    #           fooIOS7: {os: {name: 'iOS', version: '7'}}
+    #           fooIOS7: {os: {name: 'iOS', version: '7'}},
+    #           fooIOSlt7: function(ua) {
+    #             reurn ua.os.name === 'iOS' && parseInt(ua.os.version, 10) < 7
+    #           }
     #         }
     #       }
     #     });
@@ -117,6 +128,9 @@ define (require) ->
     # This method is normally used in conjunction with `#deviceOverrides`
     # mapping and `userAgent` object, but you can use it for other overrides as
     # well, with the descibed rules.
+    #
+    # The matcher object can also be a function which takes the `actualState`
+    # and returns `true` if the override should take place.
     #
     # Returns the router instance for further chaining.
     #
@@ -147,9 +161,12 @@ define (require) ->
     remapOverrides: (overrides, actualState) ->
       for method, alternatives of overrides
         for alternative, matcher of alternatives
-          if subset matcher, actualState
-            @[method] = @[alternative]
-            break
+          if type matcher, 'function'
+            cond = matcher actualState
+          else
+            cond = subset matcher, actualState
+          @[method] = @[alternative] if cond
+          break
       @
 
     # ### `#initialize()`
@@ -165,9 +182,13 @@ define (require) ->
     initialize: () ->
       @userAgent = uaParser.getResult()
       @userAgent.native = false
+      @userAgent.standalone = false
       document.addEventListener "deviceready", () =>
         @userAgent.native = true
+      if 'standalone' of window.navigator
+        @userAgent.standalone = window.navigator.standalone
       @remapOverrides @deviceOverrides, @userAgent
+      return
 
   # ## `DeviceRouter`
   #
