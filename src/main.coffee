@@ -58,6 +58,7 @@ define (require) ->
   ## Routers
   baseRouter = require './routers/base'
   statefulRouter = require './routers/stateful'
+  deviceRouter = require './routers/device'
 
   ## Validators
   methods = require './validators/methods'
@@ -151,10 +152,13 @@ define (require) ->
   #    registration and cleanup logic.
   #  + [`StatefulRouter`](routers/stateful.mkd) - Router that adds support for
   #    application state persistence using localStorage API
+  #  + [`DeviceRouter`](routers/device.mkd) - Router that specializes in the
+  #    evil art of device detection
   #
   routers:
     BaseRouter: baseRouter.Router
     StatefulRouter: statefulRouter.Router
+    DeviceRouter: deviceRouter.Router
 
   # ## Model mixins
   #
@@ -206,6 +210,7 @@ define (require) ->
   routerMixins:
     BaseRouter: baseRouter.mixin
     StatefulRouter: statefulRouter.mixin
+    DeviceRouter: deviceRouter.mixin
 
   # ## Validators
   #

@@ -40,13 +40,13 @@ object that defines the CSS rules to be applied.
 
 Default is equivalent of the following CSS:
 
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.5);
+    z-index: 16777271 (maximum allowed in older versions of Safari)
 
 
 Use jQuery-compatible style declarations.
@@ -54,14 +54,21 @@ Use jQuery-compatible style declarations.
 If you would rather set the overlay styles using CSS, simply create CSS rules
 for the `div.modal-overlay` element, and set this property to `null`.
 
-## <a name="modaloverlay">`#modalOverlay`</a>
+## <a name="closeicon">`#closeIcon`</a>
 
-The container element for the modal.
+The HTML fragment to be used as close icon.
 
-The element is treated as an overlay and the `#modalTemplate` is inserted into
-it.
+Default is '<span class="icon-remove"></span>'.
 
-Default is '<div class="modal-overlay close">'.
+## <a name="getcloseicon">`#getCloseIcon()`</a>
+
+Returns the HTML fragment to be used as close icon.
+
+Default implementation returns the value of `#closeIcon` property.
+
+## <a name="setcloseicon-icon">`#setCloseIcon(icon)`</a>
+
+Sets the close icon HTML fragment.
 
 ## <a name="modaltemplate">`#modalTemplate`</a>
 
@@ -90,13 +97,37 @@ The event callback for close icon, overlay and button bar button click events.
 
 Default implementation simply closes the dialog.
 
-## <a name="createcontent">`#createContent()`</a>
+## <a name="show-title-templatesource-callback">`#show([title, templateSource, callback])`</a>
 
-Creates the modal overlay contents by rendering the `#modalTemplate`.
+Shows the dialog.
+
+All arguments are optional. If supplied, they will set the appropraite
+properties of the modal dialog before showing.
+
+## <a name="ondismissed">`#onDismissed`</a>
+
+Callback function that is executed once when the alert is dismissed.
+
+The callback is dereferenced immediately after being called. Use the
+`#onDismiss()` function to set a new one.
+
+The callback needs to be used if you want 'blocking' behavior, because the
+blocking behavior of some of the native modal dialogs (e.g., `alert`, `prompt`)
+cannot be simulated.
+
+Default value is `null`.
+
+## <a name="createcontainer">`#createContainer()`</a>
+
+Creates the modal overlay container by rendering the `#modalTemplate`.
 
 ## <a name="render">`#render()`</a>
 
 Renders the overlay and sets the default content.
+
+Rendering _always_ hides the overlay, so please use another method to re-render
+if hiding the overlay is not what you want. Usually, setting the title and
+template should be enough for most use cases.
 
 ## <a name="events">`#events`</a>
 

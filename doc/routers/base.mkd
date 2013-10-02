@@ -6,9 +6,9 @@ different routes to matching handlers.
 Apart from standard Backbone router, this router also adds hooks for view
 registration and cleanup.
 
-This module is in UMD format and will create `ribcage.routers.simpleRouter`,
-`ribcage.routers.SimpleRouter`, and `ribcage.routerMixins.SimpleRouter` globals
-if not used with an AMD loader such as RequireJS.
+This module is in UMD format and will create `ribcage.routers.BaseRouter`,
+`ribcage.routers.BaseRouter`, and `ribcage.routerMixins.BaseRouter` globals if
+not used with an AMD loader such as RequireJS.
 
 This module depends on DaHelpers and Backbone.
 
@@ -17,9 +17,11 @@ This module depends on DaHelpers and Backbone.
    - [`#autoCleanup`](#autocleanup)
    - [`#init(jQuery)`](#init-jquery)
    - [`#initialize(settings)`](#initialize-settings)
+   - [`#beforeRoute(router, name)`](#beforeroute-router-name)
    - [`#giveAccess(view)`](#giveaccess-view)
    - [`#register(view)`](#register-view)
    - [`#cleanup()`](#cleanup)
+   - [`#back()`](#back)
    - [`#swapPath(hash)`](#swappath-hash)
    - [`#back()`](#back)
    - [`#start()`](#start)
@@ -54,6 +56,16 @@ method. You generally don't want to overload this method. Instead, use
 The settings may include an `autoCleanup` key which will override the
 `#autoCleanup` property given a non-null value.
 
+### <a name="beforeroute-router-name">`#beforeRoute(router, name)`</a>
+
+This method is called before each route handler is invoked.
+
+The method takes `router` and `name` arguments which corresponds to the
+`Router` instance, and route's name. The name may be an empty string if the
+routing is done by mapping functions directly.
+
+Default implementation doesn't do anything.
+
 ### <a name="giveaccess-view">`#giveAccess(view)`</a>
 
 During view registration, this method is called to give the view access to
@@ -87,6 +99,12 @@ router's cleanup.
 Model cleanup Collection cleanup ### `#go(hash)`
 
 Simple wrapper for Router.navigate that also passes `{trigger: true}`.
+
+### <a name="back">`#back()`</a>
+
+Go back one step in browser history.
+
+This is just a wrapper around the `window.history.back()` method.
 
 ### <a name="swappath-hash">`#swapPath(hash)`</a>
 
