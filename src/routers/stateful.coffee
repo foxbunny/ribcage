@@ -147,7 +147,6 @@ define (require) ->
     #
     initialize: () ->
       @state = @initState()
-      BaseRouter::initialize.apply this, arguments
 
     # ### `#start()`
     #
@@ -163,7 +162,10 @@ define (require) ->
   # [`statefulRouterMixin`](#statefulroutermixin) for more information on this
   # router's API.
   #
-  StatefulRouter = BaseRouter.extend statefulRouterMixin
+  StatefulRouter = BaseRouter.extend extend {}, statefulRouterMixin,
+    initialize: () ->
+      statefulRouterMixin.initialize.apply this, arguments
+      BaseRouter::initialize.apply @, arguments
 
   mixin: statefulRouterMixin
   Router: StatefulRouter

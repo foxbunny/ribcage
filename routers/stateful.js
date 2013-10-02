@@ -82,8 +82,7 @@ define(function(require) {
       return state;
     },
     initialize: function() {
-      this.state = this.initState();
-      return BaseRouter.prototype.initialize.apply(this, arguments);
+      return this.state = this.initState();
     },
     start: function() {
       this.state.set({
@@ -92,7 +91,12 @@ define(function(require) {
       return BaseRouter.prototype.start.call(this);
     }
   };
-  StatefulRouter = BaseRouter.extend(statefulRouterMixin);
+  StatefulRouter = BaseRouter.extend(extend({}, statefulRouterMixin, {
+    initialize: function() {
+      statefulRouterMixin.initialize.apply(this, arguments);
+      return BaseRouter.prototype.initialize.apply(this, arguments);
+    }
+  }));
   return {
     mixin: statefulRouterMixin,
     Router: StatefulRouter
