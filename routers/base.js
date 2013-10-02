@@ -4,7 +4,8 @@
 @license MIT
 */
 
-var define;
+var define,
+  __slice = [].slice;
 
 define = (function(root) {
   var require,
@@ -29,17 +30,17 @@ define = (function(root) {
     return function(factory) {
       var module;
       module = factory(require);
-      root.ribcage.routers.simpleRouter = module;
-      root.ribcage.routers.SimpleRouter = module.Router;
-      return root.ribcage.routerMixins.SimpleRouter = module.mixin;
+      root.ribcage.routers.baseRouter = module;
+      root.ribcage.routers.BaesRouter = module.Router;
+      return root.ribcage.routerMixins.BaseRouter = module.mixin;
     };
   }
 })(this);
 
 define(function(require) {
-  var Backbone, BaseRouter, baseRouterMixin, type;
+  var BaseRouter, Router, baseRouterMixin, type;
   type = require('dahelpers').type;
-  Backbone = require('backbone');
+  Router = require('backbone').Router;
   baseRouterMixin = {
     _activeViews: [],
     autoCleanup: false,
@@ -50,11 +51,28 @@ define(function(require) {
         this.autoCleanup = autoCleanup;
       }
       if (this.autoCleanup) {
-        this.on('route', function() {
+        this.on('beforeRoute', function() {
           return _this.cleanup();
         });
       }
       return this.init(Backbone.$);
+    },
+    beforeRoute: function(router, name) {},
+    route: function(route, name, callback) {
+      var wrapped,
+        _this = this;
+      if (arguments.length === 2) {
+        callback = name;
+        name = '';
+      }
+      wrapped = function() {
+        var args;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        _this.beforeRoute(_this, name);
+        _this.trigger('beforeRoute', _this, name);
+        return callback.apply(_this, args);
+      };
+      return Router.prototype.route.call(this, route, name, wrapped);
     },
     giveAccess: function(view) {
       return view.router = this;
@@ -91,6 +109,7 @@ define(function(require) {
           view.collection = null;
         }
         view.off();
+        view.stopListening();
         view.remove();
       }
       this._activeViews = [];
@@ -100,6 +119,10 @@ define(function(require) {
       return this.navigate(hash, {
         trigger: true
       });
+    },
+    back: function() {
+      var _ref;
+      return (_ref = window.history) != null ? _ref.back() : void 0;
     },
     swapPath: function(hash) {
       return this.navigate(hash, {
@@ -115,7 +138,7 @@ define(function(require) {
       return (_ref = Backbone.history).start.apply(_ref, arguments);
     }
   };
-  BaseRouter = Backbone.Router.extend(baseRouterMixin);
+  BaseRouter = Router.extend(baseRouterMixin);
   return {
     mixin: baseRouterMixin,
     Router: BaseRouter

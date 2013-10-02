@@ -11,8 +11,8 @@
 # Apart from standard Backbone router, this router also adds hooks for view
 # registration and cleanup.
 #
-# This module is in UMD format and will create `ribcage.routers.simpleRouter`,
-# `ribcage.routers.SimpleRouter`, and `ribcage.routerMixins.SimpleRouter`
+# This module is in UMD format and will create `ribcage.routers.BaseRouter`,
+# `ribcage.routers.BaseRouter`, and `ribcage.routerMixins.BaseRouter`
 # globals if not used with an AMD loader such as RequireJS.
 #
 
@@ -29,9 +29,9 @@ define = ((root) ->
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) =>
       module = factory require
-      root.ribcage.routers.simpleRouter = module
-      root.ribcage.routers.SimpleRouter = module.Router
-      root.ribcage.routerMixins.SimpleRouter = module.mixin
+      root.ribcage.routers.baseRouter = module
+      root.ribcage.routers.BaesRouter = module.Router
+      root.ribcage.routerMixins.BaseRouter = module.mixin
 ) this
 
 define (require) ->
@@ -39,7 +39,7 @@ define (require) ->
   # This module depends on DaHelpers and Backbone.
   #
   {type} = require 'dahelpers'
-  Backbone = require 'backbone'
+  {Router} = require 'backbone'
 
   # ::TOC::
   #
@@ -70,6 +70,7 @@ define (require) ->
     # Default implementation does not do anything.
     #
     init: () ->
+      return
 
     # ### `#initialize(settings)`
     #
@@ -85,9 +86,36 @@ define (require) ->
 
       if @autoCleanup
         ## Set up the event handler for the `route` event and perofrm cleanup.
-        @on 'route', () => @cleanup()
+        @on 'beforeRoute', () => @cleanup()
 
       @init Backbone.$
+
+    # ### `#beforeRoute(router, name)`
+    #
+    # This method is called before each route handler is invoked.
+    #
+    # The method takes `router` and `name` arguments which corresponds to the
+    # `Router` instance, and route's name. The name may be an empty string if
+    # the routing is done by mapping functions directly.
+    #
+    # Default implementation doesn't do anything.
+    #
+    beforeRoute: (router, name) ->
+      return
+
+    route: (route, name, callback) ->
+      if arguments.length is 2
+        callback = name
+        name = ''
+
+      ## Wrap the callback to trigger the 'beforeRoute' event
+      wrapped = (args...) =>
+        @beforeRoute(@, name)
+        @trigger('beforeRoute', @, name)
+        callback.apply @, args
+
+      ## Now call the superclass' `route` method with wrapped callback
+      Router::route.call @, route, name, wrapped
 
     # ### `#giveAccess(view)`
     #
@@ -135,7 +163,7 @@ define (require) ->
 
         # Model cleanup
         if view.model and type view.model.off, 'function'
-          view.model.off();
+          view.model.off()
 
         view.model = null  # Dereference just in case
 
@@ -144,7 +172,7 @@ define (require) ->
 
           for model in view.collection.models
             if type model.off, 'function'
-              model.off();
+              model.off()
 
           if type view.collection.off, 'function'
             view.collection.off()
@@ -153,6 +181,7 @@ define (require) ->
           view.collection = null  # Dereference just in case
 
         view.off()
+        view.stopListening()
         view.remove()
 
       @_activeViews = []  # Dereference all views
@@ -165,6 +194,15 @@ define (require) ->
     #
     go: (hash) ->
       @navigate hash, trigger: true
+
+    # ### `#back()`
+    #
+    # Go back one step in browser history.
+    #
+    # This is just a wrapper around the `window.history.back()` method.
+    #
+    back: () ->
+      window.history?.back()
 
     # ### `#swapPath(hash)`
     #
@@ -197,7 +235,7 @@ define (require) ->
   # Please see the documentation on [`simpleRouterMixin`](#simpleroutermixin)
   # for more information about this router's API.
   #
-  BaseRouter = Backbone.Router.extend baseRouterMixin
+  BaseRouter = Router.extend baseRouterMixin
 
   mixin: baseRouterMixin
   Router: BaseRouter
