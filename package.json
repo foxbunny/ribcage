@@ -28,7 +28,8 @@
       "jquery": "jquery",
       "underscore": "underscore",
       "backbone": "backbone",
-      "dahelpers": "foxbunny/dahelpers/>=0.2.6"
+      "dahelpers": "foxbunny/dahelpers/>=0.2.6",
+      "ua-parser-js": "faisalman/ua-parser-js/v0.6.2"
     },
     "ignore": [
       "package.json",
