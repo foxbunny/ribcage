@@ -3,6 +3,13 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## 0.5.2
+
+### Fixed dependency name in DeviceRouter
+
+The UAParser has been referenced by wrong module name incompatible with its
+package name.
+
 ## 0.5.1
 
 ### Added `DeviceRouter`
