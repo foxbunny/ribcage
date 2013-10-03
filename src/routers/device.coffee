@@ -19,7 +19,7 @@ define = ((root) ->
       (() =>
         switch dep
           when 'dahelpers' then root.dahelpers
-          when 'uaparser' then root.UAParser
+          when 'ua-parser-js' then root.UAParser
           when './base' then root.ribcage.baseRouter
           else null
       )() or throw new Error "Unmet dependency #{dep}"
@@ -38,7 +38,7 @@ define (require) ->
   # `ribcage.routers.BaseRouter`.
   #
   {type, subset, extend} = require 'dahelpers'
-  UAParser = require 'ua-parser'
+  UAParser = require 'ua-parser-js'
   {Router: BaseRouter} = require './base'
   uaParser = new UAParser()
 

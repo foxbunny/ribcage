@@ -17,7 +17,7 @@ define = (function(root) {
         switch (dep) {
           case 'dahelpers':
             return root.dahelpers;
-          case 'uaparser':
+          case 'ua-parser-js':
             return root.UAParser;
           case './base':
             return root.ribcage.baseRouter;
@@ -42,7 +42,7 @@ define = (function(root) {
 define(function(require) {
   var BaseRouter, DeviceRouter, UAParser, deviceRouterMixin, extend, subset, type, uaParser, _ref;
   _ref = require('dahelpers'), type = _ref.type, subset = _ref.subset, extend = _ref.extend;
-  UAParser = require('ua-parser');
+  UAParser = require('ua-parser-js');
   BaseRouter = require('./base').Router;
   uaParser = new UAParser();
   deviceRouterMixin = {
