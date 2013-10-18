@@ -3,6 +3,14 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## 0.5.3
+
+### Fixed `destroy()` call on non-peristed LocalStorageModel instance
+
+The `destroy()` call on non-persistent LocalStorageModel instance would cause
+an error. This has been fixed now and `destroy()` call doesn't do anything when
+called on a non-persisted model.
+
 ## 0.5.2
 
 ### Fixed dependency name in DeviceRouter
