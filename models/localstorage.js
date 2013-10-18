@@ -76,6 +76,9 @@ define(function(require) {
       return this.store.query(url, options);
     },
     destroy: function() {
+      if (!this.persistent) {
+        return;
+      }
       return this.sync('delete', this);
     },
     makePersistent: function() {

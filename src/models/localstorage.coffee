@@ -151,6 +151,7 @@ define (require) ->
     # will be fixed in future releases.
     #
     destroy: () ->
+      return if not @persistent
       @sync 'delete', this
 
     # ### `#makePersistent()`
