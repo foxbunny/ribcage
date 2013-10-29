@@ -88,7 +88,7 @@ define(function(require) {
       this.state.set({
         started: true
       });
-      return BaseRouter.prototype.start.call(this);
+      return BaseRouter.prototype.start.apply(this, arguments);
     }
   };
   StatefulRouter = BaseRouter.extend(extend({}, statefulRouterMixin, {

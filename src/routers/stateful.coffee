@@ -154,7 +154,7 @@ define (require) ->
     #
     start: () ->
       @state.set started: true
-      BaseRouter::start.call this
+      BaseRouter::start.apply @, arguments
 
   # ## `StatefulRouter`
   #
