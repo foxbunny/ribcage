@@ -54,6 +54,7 @@ define (require) ->
   redirectView = require './views/redirect'
   loadingView = require './views/loading'
   tabbedView = require './views/tabbed'
+  listView = require './views/list'
 
   ## Routers
   baseRouter = require './routers/base'
@@ -126,6 +127,8 @@ define (require) ->
   #  + [`LoadingView`](views/loading.mkd) - Displays an AJAX loading spinner
   #  + [`TabbedView`](views/tabbed.mkd) - Subview container with tabbed
   #    navigation.
+  #  + [`ListView`](views/list.mkd) - Renders a list of collection models using
+  #    two templates
   #
   views:
     BaseView: baseView.View
@@ -142,6 +145,7 @@ define (require) ->
     RedirectView: redirectView.View
     LoadingView: loadingView.View
     TabbedView: tabbedView.View
+    ListView: listView.View
 
   # ## Routers
   #
@@ -200,6 +204,7 @@ define (require) ->
     RedirectView: redirectView.mixin
     LoadingView: loadingView.mixin
     TabbedView: tabbedView.mixin
+    ListView: listView.mixin
 
   # ## Router mixins
   #

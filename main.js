@@ -24,7 +24,7 @@ if (typeof define !== 'function' || !define.amd) {
 }
 
 define(function(require) {
-  var LocalStorage, LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, deviceRouter, formErrorView, formExtraView, loadingView, localStorageModel, methods, mixins, modalView, modelFormView, modelView, randString, redirectView, serializeObject, statefulRouter, tabbedView, templateBaseView, templateView;
+  var LocalStorage, LocalStore, baseCollection, baseFormView, baseModel, baseRouter, baseView, collectionCreateView, createView, deserializeForm, deviceRouter, formErrorView, formExtraView, listView, loadingView, localStorageModel, methods, mixins, modalView, modelFormView, modelView, randString, redirectView, serializeObject, statefulRouter, tabbedView, templateBaseView, templateView;
   baseModel = require('./models/base');
   localStorageModel = require('./models/localstorage');
   baseCollection = require('./collections/base');
@@ -42,6 +42,7 @@ define(function(require) {
   redirectView = require('./views/redirect');
   loadingView = require('./views/loading');
   tabbedView = require('./views/tabbed');
+  listView = require('./views/list');
   baseRouter = require('./routers/base');
   statefulRouter = require('./routers/stateful');
   deviceRouter = require('./routers/device');
@@ -74,7 +75,8 @@ define(function(require) {
       ModelView: modelView.View,
       RedirectView: redirectView.View,
       LoadingView: loadingView.View,
-      TabbedView: tabbedView.View
+      TabbedView: tabbedView.View,
+      ListView: listView.View
     },
     routers: {
       BaseRouter: baseRouter.Router,
@@ -102,7 +104,8 @@ define(function(require) {
       ModelView: modelView.mixin,
       RedirectView: redirectView.mixin,
       LoadingView: loadingView.mixin,
-      TabbedView: tabbedView.mixin
+      TabbedView: tabbedView.mixin,
+      ListView: listView.mixin
     },
     routerMixins: {
       BaseRouter: baseRouter.mixin,
