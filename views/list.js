@@ -52,7 +52,9 @@ define(function(require) {
       },
       getItemData: function(model) {
         if (this.useRawModel) {
-          return model;
+          return {
+            item: model
+          };
         } else {
           return model.toJSON();
         }

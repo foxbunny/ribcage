@@ -82,8 +82,11 @@ define (require) ->
     # Takes a model and returns the data to be used as template context for
     # list item template. This is either pass-through or conversion of the
     # model to an object depending on [`#useRawModel`](#userawmodel) setting.
+    #
+    # Raw object will be named `item` in the context. Otherwise, model fields
+    # will be added as context variables.
     getItemData: (model) ->
-      if @useRawModel then model else model.toJSON()
+      if @useRawModel then {item: model} else model.toJSON()
 
     # ### `#getTemplateContext()`
     #
