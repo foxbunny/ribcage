@@ -3,6 +3,13 @@
 This changelog logs all changes in the Ribcage API that may (and usually will)
 affect your code.
 
+## Dev
+
+### Ported `ListView`
+
+The list view allows the user to render models from a collection using list
+template and list item template.
+
 ## 0.5.3
 
 ### Fixed `destroy()` call on non-peristed LocalStorageModel instance
