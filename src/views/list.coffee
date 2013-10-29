@@ -20,7 +20,7 @@ define = ((root) ->
       (() ->
         switch dep
           when 'underscore' then root._
-          when 'ribcage/views/template' then ribcage.views.templateView
+          when 'ribcage/views/templatebase' then ribcage.views.templateBaseView
           else null
       )() or throw new Error "Unmet dependency #{dep}"
     (factory) ->
@@ -35,7 +35,7 @@ define (require) ->
   # This module depends on Underscore and `ribcage.views.TemplateView`
   #
   _ = require 'underscore'
-  {View: TemplateView} = require 'ribcage/views/template'
+  {View: TemplateBaseView} = require 'ribcage/views/templatebase'
 
   # ::TOC::
   #
@@ -95,5 +95,5 @@ define (require) ->
     getTemplateContext: () ->
       items: (@itemTemplate @getItemData(item) for item in @getModels())
 
-  View: ListView = TemplateView.extend listViewMixin
+  View: ListView = TemplateBaseView.extend listViewMixin
 

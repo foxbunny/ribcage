@@ -16,8 +16,8 @@ define = (function(root) {
         switch (dep) {
           case 'underscore':
             return root._;
-          case 'ribcage/views/template':
-            return ribcage.views.templateView;
+          case 'ribcage/views/templatebase':
+            return ribcage.views.templateBaseView;
           default:
             return null;
         }
@@ -36,9 +36,9 @@ define = (function(root) {
 })(this);
 
 define(function(require) {
-  var ListView, TemplateView, listViewMixin, _;
+  var ListView, TemplateBaseView, listViewMixin, _;
   _ = require('underscore');
-  TemplateView = require('ribcage/views/template').View;
+  TemplateBaseView = require('ribcage/views/templatebase').View;
   return {
     mixin: listViewMixin = {
       templateSource: "<ul><%= items.join('') %></ul>",
@@ -75,6 +75,6 @@ define(function(require) {
         };
       }
     },
-    View: ListView = TemplateView.extend(listViewMixin)
+    View: ListView = TemplateBaseView.extend(listViewMixin)
   };
 });
