@@ -33,8 +33,13 @@ Stores the parsed User-Agent string. The object is in the same format as the
 return value of UA-Parser's [`#getResult()`
 method](https://github.com/faisalman/ua-parser-js/blob/master/readme.md).
 
-The `#initialize` method creates an additional key on this object, `native`,
-which is currently set to `true` only in PhoneGap native application.
+The `#initialize` method creates additional keys that are not part of the
+UA-Parser output.
+
+`native`, which is currently set to `true` only in PhoneGap native application.
+
+`standalone` which is only set to True on mobile Safari when the browser is in
+application/full-screen mode.
 
 ### <a name="deviceoverrides">`#deviceOverrides`</a>
 
@@ -51,6 +56,9 @@ only the keys of interest are specified. As long as the specified keys exist in
 the parsing result, and the values of those keys match, the alternative method
 will be considered a match.
 
+The matcher can also be an object which takes the parsed UA string, and
+rerturns `true` if override should take place.
+
 For practical reasons, only the _first_ matched method will be used.
 
 Example:
@@ -60,7 +68,10 @@ Example:
       fooIOS7: function() { console.log('foo from iOS7'); }
       deviceOverrides: {
         foo: {
-          fooIOS7: {os: {name: 'iOS', version: '7'}}
+          fooIOS7: {os: {name: 'iOS', version: '7'}},
+          fooIOSlt7: function(ua) {
+            reurn ua.os.name === 'iOS' && parseInt(ua.os.version, 10) < 7
+          }
         }
       }
     });
@@ -79,6 +90,9 @@ be a subset of the actual state for the override to take place.
 This method is normally used in conjunction with `#deviceOverrides` mapping and
 `userAgent` object, but you can use it for other overrides as well, with the
 descibed rules.
+
+The matcher object can also be a function which takes the `actualState` and
+returns `true` if the override should take place.
 
 Returns the router instance for further chaining.
 

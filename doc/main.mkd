@@ -70,6 +70,8 @@ include:
  + [`LoadingView`](views/loading.mkd) - Displays an AJAX loading spinner
  + [`TabbedView`](views/tabbed.mkd) - Subview container with tabbed
    navigation.
+ + [`ListView`](views/list.mkd) - Renders a list of collection models using
+   two templates
 
 
 ## <a name="routers">Routers</a>
