@@ -44,6 +44,12 @@ define (require) ->
   #
   # This mixin implements the API for the `ListView`
   mixin: listViewMixin =
+    # ### `#templateSource`
+    #
+    # Default list template. This template is a `<ul>` tag that contains all
+    # list items.
+    templateSource: "<ul><%= items.join('') %></ul>"
+
     # ### `#useRawModel`
     #
     # Whether to use raw model object instead of converting it to JSON. Default

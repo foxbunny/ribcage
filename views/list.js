@@ -41,6 +41,7 @@ define(function(require) {
   TemplateView = require('ribcage/views/template').View;
   return {
     mixin: listViewMixin = {
+      templateSource: "<ul><%= items.join('') %></ul>",
       useRawModel: false,
       itemTemplateSource: '',
       itemTemplate: function(data) {
