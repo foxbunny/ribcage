@@ -88,7 +88,52 @@ define (require) ->
         ## Set up the event handler for the `route` event and perofrm cleanup.
         @on 'beforeRoute', () => @cleanup()
 
+      if @routing
+        for routeName, route of @routing
+          @route route.re, routeName, route.fn
+
       @init Backbone.$
+
+    # ### `#routing`
+    #
+    # Object that maps route names to regexes and callback functions. This is
+    # an alternative to `routes` object.
+    #
+    # In general, try to keep the route regexps as simple as possible. The
+    # parameters that will be passed to route handlers are those that are in
+    # the capture groups. Try to avoid using regexp features outside them as
+    # much as possible, if you plant to use the `#reverse()` feature.
+    #
+    # Example:
+    #
+    #     var MyRouter = BaseRouter.extend({
+    #       routing: {
+    #         'route1': {re: /^home$/, fn: myCallback},
+    #         'route2': {re: /^about$/, fn: myOtherCallback}
+    #       }
+    #     });
+    #
+
+    # ### `#reverse(route, [param...])`
+    #
+    # Interpolates 0 or more parameters into the regexp matching the route name
+    # provided as `route` argument, and returns the resulting path.
+    #
+    # Code is based on [one of the StackOverflow
+    # answers](http://stackoverflow.com/questions/17325690/javascript-reverse-match-process).
+    #
+    # Note that this only works for routes that are listed in `routing`
+    # property.
+    #
+    reverse: (route, params...) ->
+      re = @routing[route].re
+      re = ('' + re).slice 1, -1
+      components = re.split(/\([^)]\)/)
+      components = (c.replace(/\\\//g, '/') for c in components)
+      results = components[0]
+      for param, i in params
+        results += "#{param}#{components[i + 1]}"
+      return results
 
     # ### `#beforeRoute(router, name)`
     #

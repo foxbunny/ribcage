@@ -46,7 +46,8 @@ define(function(require) {
     autoCleanup: false,
     init: function() {},
     initialize: function(settings) {
-      var _this = this;
+      var route, routeName, _ref,
+        _this = this;
       if ((settings != null ? settings.autoCleanup : void 0) != null) {
         this.autoCleanup = autoCleanup;
       }
@@ -55,7 +56,36 @@ define(function(require) {
           return _this.cleanup();
         });
       }
+      if (this.routing) {
+        _ref = this.routing;
+        for (routeName in _ref) {
+          route = _ref[routeName];
+          this.route(route.re, routeName, route.fn);
+        }
+      }
       return this.init(Backbone.$);
+    },
+    reverse: function() {
+      var c, components, i, param, params, re, results, route, _i, _len;
+      route = arguments[0], params = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      re = this.routing[route].re;
+      re = ('' + re).slice(1, -1);
+      components = re.split(/\([^)]\)/);
+      components = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = components.length; _i < _len; _i++) {
+          c = components[_i];
+          _results.push(c.replace(/\\\//g, '/'));
+        }
+        return _results;
+      })();
+      results = components[0];
+      for (i = _i = 0, _len = params.length; _i < _len; i = ++_i) {
+        param = params[i];
+        results += "" + param + components[i + 1];
+      }
+      return results;
     },
     beforeRoute: function(router, name) {},
     route: function(route, name, callback) {

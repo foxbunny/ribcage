@@ -5,6 +5,18 @@ affect your code.
 
 ## Dev
 
+### Alternative routing
+
+The base router now supports a `routing` key which takes mapping between route
+names and objects in the following format:
+
+    {re: /regexp/, fn: callbackFunction}
+
+### `reverse()` router method
+
+The `reverse()` method can be used to interpolate parameters into a regexp used
+in `routing` routes and return a path.
+
 ### Ported `ListView`
 
 The list view allows the user to render models from a collection using list
