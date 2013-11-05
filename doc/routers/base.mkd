@@ -17,6 +17,8 @@ This module depends on DaHelpers and Backbone.
    - [`#autoCleanup`](#autocleanup)
    - [`#init(jQuery)`](#init-jquery)
    - [`#initialize(settings)`](#initialize-settings)
+   - [`#routing`](#routing)
+   - [`#reverse(route, [param...])`](#reverse-route-param)
    - [`#beforeRoute(router, name)`](#beforeroute-router-name)
    - [`#giveAccess(view)`](#giveaccess-view)
    - [`#register(view)`](#register-view)
@@ -55,6 +57,36 @@ method. You generally don't want to overload this method. Instead, use
 
 The settings may include an `autoCleanup` key which will override the
 `#autoCleanup` property given a non-null value.
+
+### <a name="routing">`#routing`</a>
+
+Object that maps route names to regexes and callback functions. This is an
+alternative to `routes` object.
+
+In general, try to keep the route regexps as simple as possible. The parameters
+that will be passed to route handlers are those that are in the capture groups.
+Try to avoid using regexp features outside them as much as possible, if you
+plant to use the `#reverse()` feature.
+
+Example:
+
+    var MyRouter = BaseRouter.extend({
+      routing: {
+        'route1': {re: /^home$/, fn: myCallback},
+        'route2': {re: /^about$/, fn: myOtherCallback}
+      }
+    });
+
+
+### <a name="reverse-route-param">`#reverse(route, [param...])`</a>
+
+Interpolates 0 or more parameters into the regexp matching the route name
+provided as `route` argument, and returns the resulting path.
+
+Code is based on [one of the StackOverflow
+(http://stackoverflow.com/questions/17325690/javascript-reverse-match-process).
+
+Note that this only works for routes that are listed in `routing` property.
 
 ### <a name="beforeroute-router-name">`#beforeRoute(router, name)`</a>
 
