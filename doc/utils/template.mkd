@@ -35,11 +35,19 @@ The uncompiled version of the template which caused this error is stored in
 
    - [`TemplateError`](#templateerror)
    - [`CompileError`](#compileerror)
-   - [`#escaped`](#escaped)
-   - [`#literal`](#literal)
-   - [`#code`](#code)
-   - [`#partial`](#partial)
-   - [`#comment`](#comment)
+   - [`#syntaxSet`](#syntaxset)
+   - [`#syntaxSets`](#syntaxsets)
+     + [Underscore set](#underscore-set)
+       - [Literal](#literal)
+       - [Code](#code)
+       - [Partial template](#partial-template)
+       - [Comment](#comment)
+     + [Ribcage set](#ribcage-set)
+       - [Escaped](#escaped)
+       - [Literal](#literal)
+       - [Code](#code)
+       - [Partial](#partial)
+       - [Comment](#comment)
    - [`#partials`](#partials)
    - [`registerPartial(name, template)`](#registerpartial-name-template)
    - [`#makeLocal`](#makelocal)
@@ -49,28 +57,85 @@ The uncompiled version of the template which caused this error is stored in
    - [`template(template, [data])`](#template-template-data)
 
 
-### <a name="escaped">`#escaped`</a>
+### <a name="syntaxset">`#syntaxSet`</a>
 
-Regexp for matching the escaped insertion token.
+Syntax set to use for rendering. Default is 'underscore'.
 
-Default matches `{{ foo }}`.
+### <a name="syntaxsets">`#syntaxSets`</a>
+
+Predefined token regexps that provide syntax like other template engines.
+
+You can use the `#syntaxSet` property to choose the set you want to use.
+
+#### <a name="underscore-set">Underscore set</a>
+
+Use `'underscore'` in `#syntaxSet`.
+
+These are Underscore-compatible tokens. Since Ribcage template engine supports
+more features than Underscore counterpart, there are additional tokens that do
+not appear in the original Underscore templates. ##### Escaped
+
+    <%- expr %>
+
+
+Escapes the output of the expression.
+
+##### <a name="literal">Literal</a>
+
+    <%= expr %>
+
+
+Outputs the expression unaltered including any HTML tags if present.
+
+##### <a name="code">Code</a>
+
+    <% code %>
+
+
+Outputs literal JavaScript code (and blocks thereof).
+
+##### <a name="partial-template">Partial template</a>
+
+    <: name :>
+    <: name context :>
+
+
+Includes a registered partial template with optional context object which
+overrides the current template's context.
+
+##### <a name="comment">Comment</a>
+
+    <# comment #>
+
+
+Inserts a JavaScript comment into the compiled source.
+
+#### <a name="ribcage-set">Ribcage set</a>
+
+Use `'ribcage'` in `#syntaxSet`.
+
+Ribcage tokens are very similar to template languages like Django and
+Moustache, but don't really conform to any spec.
+
+##### <a name="escaped">Escaped</a>
+
+    {{ foo }}
+
 
 This token outputs the expression it contains as HTML-escaped string.
 
-### <a name="literal">`#literal`</a>
+##### <a name="literal">Literal</a>
 
-Regexp for matching the literal insertion token.
+    {{= foo }}
 
-Default matches `{{= foo }}`.
 
 This token outputs the expression it contains as literal string which may or
 may not contain HTML markup.
 
-### <a name="code">`#code`</a>
+##### <a name="code">Code</a>
 
-Regexp that matches code evaluation token.
+    {% foo %}
 
-Default matches `{% foo %}`.
 
 This token is treated as literal JavaScript. Note that you can use the full
 range of JavaScript including any variables defined in the global scope.
@@ -85,11 +150,11 @@ For example, it's possible to do
 
 You should generally insert trailing semi-colons wherever applicable.
 
-### <a name="partial">`#partial`</a>
+##### <a name="partial">Partial</a>
 
-Regexp that matches template partial token.
+    {: name :}
+    {: name context :}
 
-Default matches `{:partialName args:}` or `{:partialName:}`
 
 Registered partials can be inserted into the template by using this token.
 
@@ -107,11 +172,10 @@ context of the current template verbatim, simply omit the argument:
     {: articles :}
 
 
-### <a name="comment">`#comment`</a>
+##### <a name="comment">Comment</a>
 
-Regexp that matches template comments token.
+    {# comment #}
 
-Default matches `{# comment #}`
 
 This token is fairly useless under normal circumstances. It inserts a plain
 JavaScript comment into the compiled template's code.
