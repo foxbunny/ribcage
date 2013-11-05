@@ -64,82 +64,144 @@ define (require) ->
   # ::TOC::
   #
 
-  # ### `#escaped`
+  # ### `#syntaxSet`
   #
-  # Regexp for matching the escaped insertion token.
+  # Syntax set to use for rendering. Default is 'underscore'.
   #
-  # Default matches `{{ foo }}`.
-  #
-  # This token outputs the expression it contains as HTML-escaped string.
-  #
-  escaped: /\{\{([^=][\s\S]*?)\}\}/
+  syntaxSet: 'underscore'
 
-  # ### `#literal`
+  # ### `#syntaxSets`
   #
-  # Regexp for matching the literal insertion token.
+  # Predefined token regexps that provide syntax like other template engines.
   #
-  # Default matches `{{= foo }}`.
+  # You can use the `#syntaxSet` property to choose the set you want to use.
   #
-  # This token outputs the expression it contains as literal string which may
-  # or may not contain HTML markup.
-  #
-  literal: /\{{=([\s\S]+?)\}\}/
+  syntaxSets:
+    # #### Underscore set
+    #
+    # Use `'underscore'` in `#syntaxSet`.
+    #
+    # These are Underscore-compatible tokens. Since Ribcage template engine
+    # supports more features than Underscore counterpart, there are additional
+    # tokens that do not appear in the original Underscore templates.
+    underscore:
+      # ##### Escaped
+      #
+      #     <%- expr %>
+      #
+      # Escapes the output of the expression.
+      #
+      escaped: /<%-([\s\S]+?)%>/
 
-  # ### `#code`
-  #
-  # Regexp that matches code evaluation token.
-  #
-  # Default matches `{% foo %}`.
-  #
-  # This token is treated as literal JavaScript. Note that you can use the full
-  # range of JavaScript including any variables defined in the global scope.
-  #
-  # For example, it's possible to do
-  #
-  #     {% articles.forEach(function (article) { %}
-  #       <h2>{{ article.title }}</h2>
-  #       <div class="body">{{= article.body }}</div>
-  #     {% }); %}
-  #
-  # You should generally insert trailing semi-colons wherever applicable.
-  #
-  code: /\{%([\s\S]+?)%\}/
+      # ##### Literal
+      #
+      #     <%= expr %>
+      #
+      # Outputs the expression unaltered including any HTML tags if present.
+      #
+      literal: /<%=([\s\S]+?)%>/
 
-  # ### `#partial`
-  #
-  # Regexp that matches template partial token.
-  #
-  # Default matches `{:partialName args:}` or `{:partialName:}`
-  #
-  # Registered partials can be inserted into the template by using this token.
-  #
-  # For example:
-  #
-  #     {% articles.forEach(function(article) { %}
-  #     {: article {article: article} :}
-  #     {% }); %}
-  #
-  # Note that the template's context is completely overridden for the chosen
-  # partial by the argument passed into this token. If you wish to relay the
-  # context of the current template verbatim, simply omit the argument:
-  #
-  #     {: articles :}
-  #
-  partial: /\{: *([a-zA-Z0-9_$]+(?: (?:[$a-zA-Z0-9_$]+|\{[\s\S]+?\}))?) *:\}/
+      # ##### Code
+      #
+      #     <% code %>
+      #
+      # Outputs literal JavaScript code (and blocks thereof).
+      #
+      code: /<%([^-=][\s\S]*?)%>/
 
-  # ### `#comment`
-  #
-  # Regexp that matches template comments token.
-  #
-  # Default matches `{# comment #}`
-  #
-  # This token is fairly useless under normal circumstances. It inserts a plain
-  # JavaScript comment into the compiled template's code.
-  #
-  # It can be used to leave comments that won't appear in the output HTML or
-  # to provide some helpful clues when debugging compiled template source.
-  #
-  comment: /\{#([\s\S]+?)#\}/
+      # ##### Partial template
+      #
+      #     <: name :>
+      #     <: name context :>
+      #
+      # Includes a registered partial template with optional context object
+      # which overrides the current template's context.
+      #
+      partial: /<: *([a-zA-Z0-9_$]+(?: (?:[$a-zA-Z0-9_$]+|\{[\s\S]+?\}))?) *:>/
+
+      # ##### Comment
+      #
+      #     <# comment #>
+      #
+      # Inserts a JavaScript comment into the compiled source.
+      #
+      comment: /<#([\s\S]+?)#>/
+
+    # #### Ribcage set
+    #
+    # Use `'ribcage'` in `#syntaxSet`.
+    #
+    # Ribcage tokens are very similar to template languages like Django and
+    # Moustache, but don't really conform to any spec.
+    #
+    ribcage:
+      # ##### Escaped
+      #
+      #     {{ foo }}
+      #
+      # This token outputs the expression it contains as HTML-escaped string.
+      #
+      escaped: /\{\{([^=][\s\S]*?)\}\}/
+
+      # ##### Literal
+      #
+      #     {{= foo }}
+      #
+      # This token outputs the expression it contains as literal string which may
+      # or may not contain HTML markup.
+      #
+      literal: /\{{=([\s\S]+?)\}\}/
+
+      # ##### Code
+      #
+      #     {% foo %}
+      #
+      # This token is treated as literal JavaScript. Note that you can use the full
+      # range of JavaScript including any variables defined in the global scope.
+      #
+      # For example, it's possible to do
+      #
+      #     {% articles.forEach(function (article) { %}
+      #       <h2>{{ article.title }}</h2>
+      #       <div class="body">{{= article.body }}</div>
+      #     {% }); %}
+      #
+      # You should generally insert trailing semi-colons wherever applicable.
+      #
+      code: /\{%([\s\S]+?)%\}/
+
+      # ##### Partial
+      #
+      #     {: name :}
+      #     {: name context :}
+      #
+      # Registered partials can be inserted into the template by using this token.
+      #
+      # For example:
+      #
+      #     {% articles.forEach(function(article) { %}
+      #     {: article {article: article} :}
+      #     {% }); %}
+      #
+      # Note that the template's context is completely overridden for the chosen
+      # partial by the argument passed into this token. If you wish to relay the
+      # context of the current template verbatim, simply omit the argument:
+      #
+      #     {: articles :}
+      #
+      partial: /\{: *([a-zA-Z0-9_$]+(?: (?:[$a-zA-Z0-9_$]+|\{[\s\S]+?\}))?) *:\}/
+
+      # ##### Comment
+      #
+      #     {# comment #}
+      #
+      # This token is fairly useless under normal circumstances. It inserts a plain
+      # JavaScript comment into the compiled template's code.
+      #
+      # It can be used to leave comments that won't appear in the output HTML or
+      # to provide some helpful clues when debugging compiled template source.
+      #
+      comment: /\{#([\s\S]+?)#\}/
 
   # ### `#partials`
   #
@@ -225,12 +287,12 @@ define (require) ->
   #
   render: (template, data=null, settings={}) ->
     settings = dh.mixin {}, settings,
-      escaped: @escaped
-      literal: @literal
-      code: @code
-      partial: @partial
-      comment: @comment
-      partials: @partials
+      escaped: @syntaxSets[@syntaxSet].escaped
+      literal: @syntaxSets[@syntaxSet].literal
+      code: @syntaxSets[@syntaxSet].code
+      partial: @syntaxSets[@syntaxSet].partial
+      comment: @syntaxSets[@syntaxSet].comment
+      partials: @syntaxSets[@syntaxSet].partials
       makeLocal: @makeLocal
       htmlEscape: @htmlEsacpe
       extraArguments: @extraArguments

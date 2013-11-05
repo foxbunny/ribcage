@@ -61,11 +61,23 @@ define(function(require) {
 
   })(Error);
   return {
-    escaped: /\{\{([^=][\s\S]*?)\}\}/,
-    literal: /\{{=([\s\S]+?)\}\}/,
-    code: /\{%([\s\S]+?)%\}/,
-    partial: /\{: *([a-zA-Z0-9_$]+(?: (?:[$a-zA-Z0-9_$]+|\{[\s\S]+?\}))?) *:\}/,
-    comment: /\{#([\s\S]+?)#\}/,
+    syntaxSet: 'underscore',
+    syntaxSets: {
+      underscore: {
+        escaped: /<%-([\s\S]+?)%>/,
+        literal: /<%=([\s\S]+?)%>/,
+        code: /<%([^-=][\s\S]*?)%>/,
+        partial: /<: *([a-zA-Z0-9_$]+(?: (?:[$a-zA-Z0-9_$]+|\{[\s\S]+?\}))?) *:>/,
+        comment: /<#([\s\S]+?)#>/
+      },
+      ribcage: {
+        escaped: /\{\{([^=][\s\S]*?)\}\}/,
+        literal: /\{{=([\s\S]+?)\}\}/,
+        code: /\{%([\s\S]+?)%\}/,
+        partial: /\{: *([a-zA-Z0-9_$]+(?: (?:[$a-zA-Z0-9_$]+|\{[\s\S]+?\}))?) *:\}/,
+        comment: /\{#([\s\S]+?)#\}/
+      }
+    },
     partials: {},
     registerPartial: function(name, template) {
       if (typeof template === 'function') {
@@ -99,12 +111,12 @@ define(function(require) {
         settings = {};
       }
       settings = dh.mixin({}, settings, {
-        escaped: this.escaped,
-        literal: this.literal,
-        code: this.code,
-        partial: this.partial,
-        comment: this.comment,
-        partials: this.partials,
+        escaped: this.syntaxSets[this.syntaxSet].escaped,
+        literal: this.syntaxSets[this.syntaxSet].literal,
+        code: this.syntaxSets[this.syntaxSet].code,
+        partial: this.syntaxSets[this.syntaxSet].partial,
+        comment: this.syntaxSets[this.syntaxSet].comment,
+        partials: this.syntaxSets[this.syntaxSet].partials,
         makeLocal: this.makeLocal,
         htmlEscape: this.htmlEsacpe,
         extraArguments: this.extraArguments,
