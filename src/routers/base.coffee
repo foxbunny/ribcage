@@ -133,7 +133,7 @@ define (require) ->
       results = components[0]
       for param, i in params
         results += "#{param}#{components[i + 1]}"
-      return results
+      results.replace(/\$/g, '').replace(/\^/, '')
 
     # ### `#beforeRoute(router, name)`
     #

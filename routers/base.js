@@ -85,7 +85,7 @@ define(function(require) {
         param = params[i];
         results += "" + param + components[i + 1];
       }
-      return results;
+      return results.replace(/\$/g, '').replace(/\^/, '');
     },
     beforeRoute: function(router, name) {},
     route: function(route, name, callback) {
