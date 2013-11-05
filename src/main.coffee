@@ -71,6 +71,7 @@ define (require) ->
   randString = require './utils/randstring'
   LocalStorage = require './utils/localstorage'
   LocalStore = require './utils/localstore'
+  template = require './utils/template'
 
   # ## Models
   #
@@ -249,7 +250,7 @@ define (require) ->
   #  + [`LocalStorage`](utils/localstorage.mkd) - Wrapper for localStorage API
   #  + [`LocalStore`](utils/localstore.mkd) - REST-like interface for
   #    localStorage API that provides `jQuery.ajax`-compatible interface
-  #
+  #  + [`template`](utils/template.mkd) - Ribcage template engine
   #
   utils:
     serializeObject: serializeObject
@@ -257,3 +258,4 @@ define (require) ->
     randString: randString
     LocalStorage: LocalStorage
     LocalStore: LocalStore
+    template: template
