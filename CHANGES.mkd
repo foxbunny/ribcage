@@ -5,6 +5,16 @@ affect your code.
 
 ## Dev
 
+### Brand new template engine
+
+WARNING: This **will** break your code. The `TemplateBaseView` no longer uses
+Underscore templates. Instead, it now uses a Ribcage-specific template engine
+that is loosely based on Underscore code with many enhancements and alternative
+token syntax that is no longer compatible with Underscore's stock templates.
+
+The template system can be customized, though, so interested parties can
+restore the old token syntax with a bit of effort.
+
 ### Alternative routing
 
 The base router now supports a `routing` key which takes mapping between route

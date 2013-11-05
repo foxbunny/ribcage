@@ -37,8 +37,8 @@ define (require) ->
 
   # This module depends on Underscore and `ribacage.views.BaseView`.
   #
-  _ = require 'underscore'
   {View: BaseView} = require './base'
+  template = require '../utils/template'
 
   # ::TOC::
   #
@@ -74,7 +74,7 @@ define (require) ->
     # `#templateSource` property.
     #
     template: (data) ->
-      _.template @templateSource, data, @templateSettings
+      template.render @templateSource, data, @templateSettings
 
     # ### `#getContext()`
     #

@@ -36,14 +36,14 @@ define = (function(root) {
 })(this);
 
 define(function(require) {
-  var BaseView, TemplateBaseView, templateBaseViewMixin, _;
-  _ = require('underscore');
+  var BaseView, TemplateBaseView, template, templateBaseViewMixin;
   BaseView = require('./base').View;
+  template = require('../utils/template');
   templateBaseViewMixin = {
     templateSettings: null,
     templateSource: '<p>Please override me</p>',
     template: function(data) {
-      return _.template(this.templateSource, data, this.templateSettings);
+      return template.render(this.templateSource, data, this.templateSettings);
     },
     getTemplateContext: function() {
       return {};
