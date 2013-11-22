@@ -1,9 +1,16 @@
 {
-  "name" : "ribcage",
-  "description" : "Give your Backbone app some Ribcage with Models, Views and Validation.",
-  "homepage" : "https://github.com/foxbunny/ribcage/",
-  "keywords" : ["model", "view", "validation", "backbone", "client", "browser"],
-  "author" : "Branko Vukelic <branko@brankovukelic.com>",
+  "name": "ribcage",
+  "description": "Give your Backbone app some Ribcage with Models, Views and Validation.",
+  "homepage": "https://github.com/foxbunny/ribcage/",
+  "keywords": [
+    "model",
+    "view",
+    "validation",
+    "backbone",
+    "client",
+    "browser"
+  ],
+  "author": "Branko Vukelic <branko@brankovukelic.com>",
   "bugs": {
     "url": "https://github.com/foxbunny/ribcage/issues",
     "email": "branko@brankovukelic.com"
@@ -12,15 +19,16 @@
     "type": "MIT",
     "url": "https://github.com/foxbunny/ribcage/blob/master/LICENSE"
   },
-  "dependencies" : {
+  "dependencies": {
     "jquery": ">= 1.8.0",
-    "underscore" : ">=1.4.3",
+    "underscore": ">=1.4.3",
     "backbone": ">= 1.0.0"
   },
   "devDependencies": {
     "volo": "*",
-    "coffee-script": "1.6.3",
-    "dahelpers": "*"
+    "dahelpers": "*",
+    "shelljs": "~0.2.6",
+    "LiveScript": "~1.2.0"
   },
   "main": "main.js",
   "volo": {
@@ -44,5 +52,5 @@
       "tools"
     ]
   },
-  "version" : "0.5.3"
+  "version": "0.5.3"
 }
