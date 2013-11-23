@@ -9,6 +9,7 @@ target.compile = ->
 target.watch = ->
   run 'livescript -cbwo lib src'
   run 'livescript -cbwo tests/spec tests'
+  run 'karma start tests/karma.conf.js'
 
 function run cmd
   cmd = cmd.split ' '
