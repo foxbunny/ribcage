@@ -2,18 +2,18 @@
 
 define (require) ->
 
-  {Collection} = require 'ribcage/collections/base'
-  Backbone = require 'backbone'
+  require! 'ribcage/collections/base'.Collection
+  require! BackboneCollection: 'backbone'.Collection
 
   proto = Collection.prototype
 
   describe 'BaseCollection' !-> ``it``
 
     .. 'should inherit directly from Backbone.Collection' !->
-      for k, v of Backbone.Collection.prototype
-        assert.equal Collection.prototype[k], v
+      for k, v of BackboneCollection.prototype
+        expect proto[k] .to.equal v
 
     .. 'should have cleanup' !->
-      assert.typeOf proto.cleanup, 'function'
+      expect proto .to.have.property 'cleanup' .that.is.a 'function'
 
     ## TODO: Implement the model first, and then work on collection
