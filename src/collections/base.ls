@@ -77,9 +77,8 @@ define (require) ->
 
   # ## `Collection` (`BaseCollection`)
   #
-  # Please see the documentation on
-  # [`baseCollectionMixin`](#basecollectionmixin) for more information about
-  # this collection.
+  # Please see the documentation on the [`mixin`](#mixin) for more information
+  # about this collection.
   #
   Collection: class BaseCollection extends Collection
     implements BaseCollectionMixin
