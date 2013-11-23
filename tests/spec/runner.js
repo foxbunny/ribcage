@@ -11,7 +11,6 @@ for (f in window.__karma__.files) {
   }
 }
 TESTS = res$;
-console.log(TESTS);
 require.config({
   baseUrl: 'base/tests/vendor',
   paths: {
