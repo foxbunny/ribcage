@@ -30,10 +30,10 @@
     "karma-requirejs": "~0.2.0",
     "karma-phantomjs-launcher": "~0.1.0",
     "karma": "~0.10.5",
-    "karma-chai": "0.0.2",
     "cdoc": "*",
     "shelljs": "~0.2.6",
-    "LiveScript": "~1.2.0"
+    "LiveScript": "~1.2.0",
+    "karma-sinon-chai": "~0.1.1"
   },
   "main": "lib/main.js",
   "volo": {
