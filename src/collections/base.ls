@@ -37,7 +37,7 @@ define (require) ->
 
   # This module depends on Backbone
   #
-  {Collection} = require 'backbone'
+  require! backbone.Collection
 
   # ::TOC::
   #
