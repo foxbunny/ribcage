@@ -20,16 +20,16 @@ define = ((root) ->
   else
     require = (dep) ->
       do ->
-      switch dep
-      | 'backbone' => root.Backbone
-      | otherwise  => null
+        switch dep
+        | 'backbone' => root.Backbone
+        | otherwise  => null
       or throw new Error "Unmet dependency #{dep}"
     (factory) ->
       module = factory require
       r = root.{}ribcage
       r.{}collections.base-collection = module
       r.collections.BaseCollection = module.Collection
-      r.collection-mixins.BaseCollection = module.mixin
+      r.{}collection-mixins.BaseCollection = module.mixin
 ) this
 
 
