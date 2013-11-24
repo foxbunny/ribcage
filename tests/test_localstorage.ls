@@ -16,7 +16,7 @@ define (require) ->
       ms.remove-item 'foo'
       expect ms.get-item 'foo' .to.equal void
 
-    describe .only 'memory storage' !-> ``it``
+    describe 'memory storage' !-> ``it``
 
       class MemOnlyStorage extends LocalStorage
         ->
