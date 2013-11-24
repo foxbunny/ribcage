@@ -2,6 +2,11 @@ define (require) ->
 
   require! LocalStorage: 'ribcage/utils/localstorage'
 
+  class MemOnlyStorage extends LocalStorage
+    ->
+      @has-native = false
+      @local-storage = @@memory-storage!
+
   describe 'LocalStorage' !-> ``it``
 
     .. 'memory storage implements localStorage API' !->
@@ -17,11 +22,6 @@ define (require) ->
       expect ms.get-item 'foo' .to.equal void
 
     describe 'memory storage' !-> ``it``
-
-      class MemOnlyStorage extends LocalStorage
-        ->
-          @has-native = false
-          @local-storage = @@memory-storage!
 
       after-each ->
         LocalStorage.memory-storage!clear!
