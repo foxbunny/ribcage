@@ -134,8 +134,7 @@ define(function(require) {
       return this;
     },
     events: {
-      'click .close': 'dismiss',
-      'touchend .close': 'dismiss'
+      'click .close': 'dismiss'
     }
   };
   ModalView = TemplateBaseView.extend(modalViewMixin);

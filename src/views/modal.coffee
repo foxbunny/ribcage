@@ -263,7 +263,6 @@ define (require) ->
     #
     events:
       'click .close': 'dismiss'
-      'touchend .close': 'dismiss'
 
   # ## `ModalView`
   #
