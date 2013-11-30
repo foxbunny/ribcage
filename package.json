@@ -21,19 +21,20 @@
   },
   "devDependencies": {
     "karma-html2js-preprocessor": "~0.1.0",
-    "karma-chrome-launcher": "~0.1.0",
-    "karma-firefox-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.1",
+    "karma-firefox-launcher": "~0.1.2",
     "karma-script-launcher": "~0.1.0",
     "karma-jasmine": "~0.1.3",
-    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.1",
     "requirejs": "~2.1.9",
     "karma-requirejs": "~0.2.0",
-    "karma-phantomjs-launcher": "~0.1.0",
-    "karma": "~0.10.5",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.6",
     "cdoc": "*",
-    "shelljs": "~0.2.6",
     "LiveScript": "~1.2.0",
-    "karma-sinon-chai": "~0.1.1"
+    "karma-sinon-chai": "~0.1.1",
+    "mocha": "~1.14.0",
+    "karma-mocha": "~0.1.1"
   },
   "main": "lib/main.js",
   "volo": {
