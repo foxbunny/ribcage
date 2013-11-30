@@ -1,5 +1,6 @@
 *.swp
 *.swo
 node_modules
-tests/spec
+tests/*.js
+!tests/karma.conf.js
 -p
