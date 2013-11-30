@@ -9,11 +9,11 @@ console.log
 const node-path = 'node_modules/.bin'
 
 target.compile = ->
-  node 'livescript -cbo lib src'
+  node 'livescript -cbo lib src/lib'
 
 target.watch = ->
-  node 'livescript -cbwo lib src'
-  node 'livescript -cbwo tests/spec tests'
+  node 'livescript -cbwo lib src/lib'
+  node 'livescript -cbwo tests src/test'
   node 'karma start tests/karma.conf.js'
 
 ## Utility functions
