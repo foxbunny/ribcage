@@ -34,7 +34,8 @@
     "LiveScript": "~1.2.0",
     "karma-sinon-chai": "~0.1.1",
     "mocha": "~1.14.0",
-    "karma-mocha": "~0.1.1"
+    "karma-mocha": "~0.1.1",
+    "shelljs": "~0.2.6"
   },
   "main": "lib/main.js",
   "volo": {
