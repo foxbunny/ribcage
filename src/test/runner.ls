@@ -1,4 +1,4 @@
-SPEC_PFX = /^\/base\/tests\/spec/
+SPEC_PFX = /^\/base\/tests/
 
 amdify = (.replace SPEC_PFX, 'tests' .replace '.js', '')
 
@@ -9,7 +9,7 @@ require.config do
   paths:
     backbone: 'exoskeleton'
     ribcage: '../../lib'
-    tests: '../spec'
+    tests: '..'
   deps: TESTS
   callback: __karma__.start
 
