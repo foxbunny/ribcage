@@ -41,6 +41,14 @@ define (require) ->
         l.remove-item 'foo'
         expect l.get-item 'foo' .to.equal null
 
+      .. 'should empty storage' !->
+        l = new MemOnlyStorage!
+        l.set-item 'foo', foo: 'bar'
+        l.set-item 'bar', bar: 'baz'
+        l.empty!
+        expect l.get-item 'foo' .to.equal null
+        expect l.get-item 'bar' .to.equal null
+
     if window.local-storage?
 
       describe 'native local storage' !-> ``it``
@@ -76,3 +84,11 @@ define (require) ->
           l = new LocalStorage!
           local-storage.set-item 'foo', 'not JSON'
           expect l.get-item 'foo' .to.equal null
+
+        .. 'should empty storage' !->
+          l = new LocalStorage!
+          l.set-item 'foo', foo: 'bar'
+          l.set-item 'bar', bar: 'baz'
+          l.empty!
+          expect l.get-item 'foo' .to.equal null
+          expect l.get-item 'bar' .to.equal null

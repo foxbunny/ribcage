@@ -107,3 +107,13 @@ define ->
       @local-storage.remove-item key
       true
 
+    # ### `#empty()`
+    #
+    # Removes all keys in local storage.
+    #
+    empty: ->
+      if @has-native
+        for key of @local-storage
+          local-storage.remove-item key
+      else
+        @local-storage.clear!
